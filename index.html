@@ -1,769 +1,941 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
+
+<html lang="en" class="hydrated"><head>
+    <meta charset="utf-8"><style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Oto Kapanadze</title>
+    <title>Oto Kapanadze - Full Stack Developer</title>
+    <meta name="description" content="Full Stack Developer specializing in Laravel, PHP, JavaScript, and modern web technologies. Building scalable applications with clean, maintainable code.">
+    <meta name="keywords" content="Oto Kapanadze, Full Stack Developer, Laravel, PHP, JavaScript, Vue, React, Web Development">
+    <meta property="og:title" content="Oto Kapanadze - Full Stack Developer">
+    <meta property="og:description" content="Full Stack Developer specializing in Laravel, PHP, JavaScript, and modern web technologies.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/imcool.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Oto Kapanadze - Full Stack Developer">
+    <meta name="twitter:description" content="Full Stack Developer specializing in Laravel, PHP, JavaScript, and modern web technologies.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="tailwind.css">
-    <link rel="stylesheet" href="app.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8fafc;
+            --accent: #f59e0b;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            --border: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Figtree', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23f59e0b" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 4px solid var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--text);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--text);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        /* Skills Section */
+        .skills-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .skills-section .section-title {
+            color: white;
+        }
+        
+        .skills-section .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .skills-section .skill-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            border-radius: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Projects Section */
+        .projects-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .projects-section .section-title {
+            color: white;
+        }
+        
+        .projects-section .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .projects-section .project-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .projects-section .project-link {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .projects-section .project-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-link {
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: white;
+        }
+        
+        .testimonials-section .section-title {
+            color: white;
+        }
+        
+        .testimonials-section .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .testimonials-section .testimonial-content {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .testimonials-section .testimonial-info p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .testimonial-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        .contact-section .section-title {
+            color: white;
+        }
+        
+        .contact-section .contact-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-section .contact-link {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-section .contact-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-link:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Loading States */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+        }
+        
+        .load-more-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .load-more-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .load-more-btn:disabled {
+            background: var(--border);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .loading-more {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-top: 2px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+    </style>
 </head>
-<body>
-<main x-data="{
-page: 'about',
-albums: [],
-projects: [],
-currentPage: 1,
-itemsPerPage: 9,
-            loading: false,
+<body x-data="{
+    currentSection: 'about',
+    projects: [],
+    loading: false,
+    projectsLoading: false,
+    itemsPerPage: 9,
+    hasMoreProjects: true,
+    
+    async loadProjects() {
+        console.log('loadProjects function called');
+        this.loading = true;
+        try {
+            const response = await fetch('./projects.json');
+            const allProjects = await response.json();
+            console.log('Projects loaded:', allProjects.length);
+            this.projects = allProjects.slice(0, this.itemsPerPage);
+            this.hasMoreProjects = allProjects.length > this.itemsPerPage;
+        } catch (error) {
+            console.error('Error loading projects:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+    
+    async loadMoreProjects() {
+        if (this.projectsLoading) return;
+        
+        this.projectsLoading = true;
+        try {
+            const response = await fetch('./projects.json');
+            const allProjects = await response.json();
+            const currentCount = this.projects.length;
+            const newProjects = allProjects.slice(currentCount, currentCount + this.itemsPerPage);
+            
+            this.projects = [...this.projects, ...newProjects];
+            this.hasMoreProjects = this.projects.length < allProjects.length;
+        } catch (error) {
+            console.error('Error loading more projects:', error);
+        } finally {
+            this.projectsLoading = false;
+        }
+    }
 }">
-    <aside class="sidebar" data-sidebar>
-
-        <div class="sidebar-info">
-
-            <figure class="avatar-box">
-                <img src="assets/imcool.png" class="rounded-3xl" alt="Oto Kapanadze" width="80">
-            </figure>
-
-            <div class="info-content">
-                <h1 class="name" title="Richard hanrick">Oto Kapanadze</h1>
-            </div>
-
-            <button @click="toggle()" class="info_more-btn" data-sidebar-btn>
-                <span>Show Contacts</span>
-
-                <ion-icon name="chevron-down"></ion-icon>
-            </button>
-
-        </div>
-
-        <div class="sidebar-info_more">
-
-            <div class="separator"></div>
-
-            <ul class="contacts-list">
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="mail-outline"></ion-icon>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Email</p>
-
-                        <a href="mailto:info@otokapanadze.com" class="contact-link">info@otokapanadze.com</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <svg class="fill-current text-yellow-500" width="40" viewBox="0 0 512 153"
-                             xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
-                            <path d="M140.107 96.628c-8.321 0-16.118-3.523-23.202-9.258l1.725-8.096.075-.3c1.536-8.62 6.409-23.089 21.402-23.089 11.244 0 20.39 9.146 20.39 20.39-.038 11.207-9.183 20.353-20.39 20.353zm0-61.395c-19.154 0-33.996 12.444-40.03 32.909-9.221-13.831-16.193-30.435-20.278-44.416H59.184v53.636c0 10.57-8.621 19.19-19.191 19.19-10.57 0-19.19-8.62-19.19-19.19V23.726H.186v53.636c-.075 21.965 17.804 39.993 39.768 39.993 21.965 0 39.844-18.028 39.844-39.993v-8.995c4.01 8.358 8.92 16.791 14.88 24.288l-12.632 59.37h21.103l9.145-43.066c8.021 5.135 17.242 8.359 27.812 8.359 22.601 0 41.005-18.516 41.005-41.118 0-22.564-18.404-40.967-41.005-40.967z"
-                                  fill="#6FDA44"/>
-                            <path d="M244.043 37.557l13.306 53.636 14.656-53.636h17.466l-22.526 77.512h-17.467l-13.83-53.974-13.794 53.936h-17.466L181.86 37.52h17.467l14.655 53.636 13.306-53.636h16.754v.038zm87.22-2.324c-22.676 0-41.042 18.403-41.042 41.042 0 22.677 18.403 41.043 41.042 41.043 22.677 0 41.08-18.366 41.08-41.043 0-22.676-18.403-41.042-41.08-41.042zm0 65.218c-13.343 0-24.138-10.795-24.138-24.138 0-13.344 10.832-24.138 24.138-24.138 13.344 0 24.138 10.794 24.138 24.138 0 13.306-10.794 24.138-24.138 24.138zm90.968-45.54c-11.731 0-21.214 9.52-21.214 21.214v38.906h-17.58V37.557h17.58v11.919s7.496-11.957 22.901-11.957h5.397v17.392h-7.084zm58.997 18.366c12.48-7.047 20.952-20.428 20.952-35.758H484.6c0 12.931-10.494 23.426-23.425 23.426h-2.362V.15h-17.578V115.03h17.578V78.524h2.1c1.724 0 3.973 1.125 4.985 2.511l24.962 33.996h21.065l-30.697-41.754z"/>
-                        </svg>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Upwork</p>
-
-                        <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" class="contact-link"
-                           target="_blank">Oto Kapanadze</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="logo-github"/>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Github</p>
-
-                        <a href="https://github.com/otokapanadze" class="contact-link" target="_blank">otokapanadze</a>
-                    </div>
-
-                </li>
-
-                <li class="contact-item">
-
-                    <div class="icon-box">
-                        <ion-icon name="location-outline"></ion-icon>
-                    </div>
-
-                    <div class="contact-info">
-                        <p class="contact-title">Location</p>
-
-                        <address>Tbilisi, Georgia</address>
-                    </div>
-
-                </li>
-
+    <!-- Header -->
+    <header class="header scrolled" id="header">
+        <nav class="nav container">
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link" @click="currentSection = 'about'">About</a></li>
+                <li><a href="#skills" class="nav-link" @click="currentSection = 'skills'">Skills</a></li>
+                <li><a href="#projects" class="nav-link" @click="currentSection = 'projects'">Projects</a></li>
+                <li><a href="#contact" class="nav-link" @click="currentSection = 'contact'">Contact</a></li>
             </ul>
-
-            <div class="separator"></div>
-
-            <ul class="social-list">
-                <li class="social-item">
-                    <a href="https://www.instagram.com/otokapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://www.facebook.com/otokapanadzeofficial/" target="_blank" class="social-link">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://twitter.com/Oto_Kapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                </li>
-
-                <li class="social-item">
-                    <a href="https://soundcloud.com/otokapanadze" target="_blank" class="social-link">
-                        <ion-icon name="logo-soundcloud"></ion-icon>
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-
-    </aside>
-
-    <div class="main-content">
-        <nav class="navbar">
-
-            <ul class="navbar-list">
-
-                <li class="navbar-item">
-                    <button class="navbar-link" x-on:click="page = 'about'" :class="page === 'about' ? 'active' : ''">About</button>
-                </li>
-
-                <li class="navbar-item">
-                    <button class="navbar-link" x-on:click="page = 'music'" :class="page === 'music' ? 'active' : ''">Music</button>
-                </li>
-
-                <li class="navbar-item">
-                    <button class="navbar-link" x-on:click="page = 'projects'" :class="page === 'projects' ? 'active' : ''">Projects</button>
-                </li>
-            </ul>
-
         </nav>
+    </header>
 
-
-        <article class="about" data-page="about" :class="page === 'about' ? 'active' : ''">
-
-            <header>
-                <h2 class="h2 article-title">About me</h2>
-            </header>
-
-            <section class="about-text">
-                <p>
-                    I’m a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem. I
-                    specialize in building scalable web applications, RESTful APIs, and modern backend solutions using
-                    Laravel, MySQL, and tools like Livewire, InertiaJS, and Tailwind CSS.
-
-                    With fluency in PHP, JavaScript, and experience integrating frontend frameworks like Vue and React,
-                    I ensure smooth development of full-stack apps, SPAs, and complex systems. I’m also proficient in
-                    API development, Git, and tools like OpenAI’s ChatGPT API.
-
-                    I bring additional experience with Node.js, SQLite, and Docker, and have worked with cloud services
-                    like AWS. My workflow is rooted in clean, maintainable code and a solid understanding of backend
-                    architecture.
-
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-content">
+                <img src="assets/imcool.png" alt="Oto Kapanadze" class="hero-avatar">
+                <h1 class="hero-title">Oto Kapanadze</h1>
+                <h2 class="hero-subtitle">Full Stack Developer</h2>
+                <p class="hero-description">
+                    I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem. 
+                    I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.
                 </p>
-            </section>
-
-
-            <!--
-              - service
-            -->
-
-            <section class="service">
-
-                <h3 class="h3 service-title">Skills</h3>
-
-                <ul class="service-list">
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path
-                                        d="M505.57 234.62c-3.28-3.53-26.82-32.29-39.51-47.79-6.75-8.24-12.08-14.75-14.32-17.45l-.18-.22-.2-.21c-5.22-5.83-12.64-12.51-23.78-12.51a39.78 39.78 0 00-5.41.44c-.37.05-.75.11-1.15.15-2.45.27-10.06 1.5-28.14 4.48-14 2.29-35.11 5.77-38.31 6.07l-.71.06-.69.13c-10 1.78-16.62 6.22-19.56 13.19-1.55 3.68-3.22 11.15 2.94 19.86 1.53 2.22 6.83 9.56 15.94 22.17 6.06 8.4 12.87 17.82 18.75 26L259.9 275 150.66 96.05l-.2-.34-.23-.33-.44-.65C145.32 88.17 139.76 80 123.7 80c-1.13 0-2.31 0-3.63.11-4.6.25-21.42 1.57-40.89 3.11-21.49 1.69-50.9 4-54.72 4.1h-.73l-.79.08c-9.14.89-15.77 4.6-19.7 11-6.55 10.69-1.42 22.69.26 26.63C6.87 133 37.56 197.7 64.63 254.81c18 37.94 36.58 77.17 38.1 80.65a34.85 34.85 0 0032.94 21.59 46.62 46.62 0 009.86-1.1h.21l.2-.05c13.86-3.38 57.83-14.54 89.2-22.59 1.9 3.32 3.9 6.83 6 10.44 21.93 38.5 37.9 66.35 43.16 73.46C287 421 295 432 310.06 432c5.46 0 10.46-1.4 15.74-2.89l1.53-.43h.12c10.53-3 150.69-52.16 157.87-55.35l.22-.1c5.44-2.41 13.66-6.05 16.18-15.4 1.65-6.12.18-12.33-4.38-18.46l-.07-.09-.07-.09c-.85-1.1-4-5.21-8.27-10.9-9.13-12.07-23.88-31.57-36.84-48.54 17.37-4.5 38.8-10.11 43.38-11.55 11.47-3.43 14.94-10.69 16-14.73.79-3.15 1.82-11.2-5.9-18.85zm-320 58.19c-17.81 4.17-30.22 7.08-37.89 8.9-6.67-13.34-19.74-39.65-32.5-65.33-29.74-59.92-45.1-90.77-53.18-106.9l8.15-.7c13.34-1.15 31.61-2.72 41.78-3.57 16.76 28.26 74.32 125.3 96.3 162.3zM427.58 172zM310.06 416.4zm53.67-56.95c-24.21 8-37.33 12.37-44.42 14.74-6.3-10.34-20.16-33.52-32.47-54.19l115.7-29.48c5 6.81 14.57 19.72 33.46 44.93-18.07 6.04-48.2 16.02-72.27 24zm55.87-121.63l-23.76-31.53c13.67-2.39 21.54-3.77 26.15-4.6l12 14.88 11.94 14.82c-8.2 1.99-17.74 4.32-26.33 6.43z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Laravel</h4>
-
-                            <p class="service-item-text">
-                                Building scalable web applications and APIs using Laravel's MVC architecture with focus on performance and maintainability.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                            <svg class="w-14 fill-current text-yellow-500 transform -translate-y-3" id="Layer_1"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 viewBox="0 0 512 512" xml:space="preserve">
-<g>
-    <g>
-        <path d="M431.958,165.704h-0.092c-0.031,0-0.051-0.01-0.071-0.01l-61.533-3.139c-5.626-0.306-10.417,4.036-10.702,9.652
-			c-0.285,5.626,4.036,10.417,9.663,10.702c0,0,61.889,3.16,61.92,3.16c7.624,0.306,13.587,6.523,13.587,14.157
-			c0,5.626,4.566,10.193,10.193,10.193s10.193-4.566,10.193-10.193C465.115,181.605,450.549,166.448,431.958,165.704z"/>
-    </g>
-</g>
-                                <g>
-                                <g>
-                                    <path d="M156.137,186.793c-5.626,0-10.182,4.556-10.182,10.172c0,5.626,4.556,10.182,10.182,10.182
-			c5.616,0,10.172-4.556,10.172-10.182C166.309,191.349,161.753,186.793,156.137,186.793z"/>
-                                </g>
-                            </g>
-                                <g id="SVGCleanerId_1">
-                                <g>
-                                    <path d="M156.137,186.793c-5.626,0-10.182,4.556-10.182,10.172c0,5.626,4.556,10.182,10.182,10.182
-			c5.616,0,10.172-4.556,10.172-10.182C166.309,191.349,161.753,186.793,156.137,186.793z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M431.958,165.704h-0.092c-0.031,0-0.051-0.01-0.071-0.01l-61.533-3.139c-5.626-0.306-10.417,4.036-10.702,9.652
-			c-0.285,5.626,4.036,10.417,9.663,10.702c0,0,61.889,3.16,61.92,3.16c7.624,0.306,13.587,6.523,13.587,14.157
-			c0,5.626,4.566,10.193,10.193,10.193s10.193-4.566,10.193-10.193C465.115,181.605,450.549,166.448,431.958,165.704z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M433.885,118.859c-141.87-7.93-215.93-9.866-215.93-9.866c-62.185,0-112.923,49.933-114.238,111.812
-			c-0.194,0.785-2.538,31.811-6.87,42.615c-7.104,17.684-17.949,28.661-28.315,28.661c-8.939,0-18.438-8.276-25.4-22.159
-			c-1.784-3.547-5.361-5.749-9.326-5.749H10.455c-3.139,0-6.085,1.386-8.073,3.812c-1.988,2.405-2.783,5.555-2.191,8.623
-			c3.985,20.487,14.015,39.129,28.244,52.522c14.779,13.903,35.98,21.251,55.193,21.251c20.069-0.591,39.017-8.246,54.938-22.271
-			c13.597-11.976,24.187-28.244,30.404-46.478c0.622,0.031,4.943,0.561,11.935-1.029l10.182,89.042
-			c0.591,5.147,4.943,9.041,10.121,9.041h33.095l1.243,14.973c0.438,5.28,4.852,9.347,10.152,9.347h46.662
-			c5.361,0,9.805-4.148,10.172-9.499l4.383-64.56c20.406,3.292,40.454,4.943,60.523,4.943c8.052,0,16.104-0.265,24.187-0.795
-			l4.862,36.734c0.673,5.066,4.994,8.857,10.111,8.857h32.545l1.814,15.33c0.612,5.127,4.964,8.99,10.121,8.99h50.728
-			c5.636,0,10.192-4.566,10.192-10.193V200.226C512,156.368,477.662,121.305,433.885,118.859z M415.528,358.303l-3.578-27.071
-			c7.002-0.836,14.086-1.896,21.18-3.129l3.588,30.201H415.528z M491.615,382.622L491.615,382.622h-31.475l-11.864-99.877
-			c-0.662-5.586-5.738-9.581-11.324-8.919c-5.596,0.663-9.581,5.738-8.919,11.324l2.691,22.699
-			c-10.498,1.845-20.956,3.262-31.179,4.189c-30.486,2.762-60.442,1.61-91.315-3.527l1.427-23.953
-			c0.336-5.626-3.945-10.447-9.561-10.784c-5.606-0.336-10.447,3.945-10.784,9.561l-1.947,32.524l-4.526,66.761h-27.754
-			l-8.276-89.43c-0.459-5.606-5.382-9.785-10.998-9.316c-5.606,0.459-9.775,5.382-9.316,10.998l5.973,63.428h-22.169l-10.621-92.915
-			c-0.642-5.596-5.677-9.612-11.283-8.969c-1.427,0.163-2.742,0.612-3.914,1.284c-6.167,3.486-13.342,4.475-20.232,2.813
-			c-0.01,0-0.02,0-0.02,0c-5.463-1.396-11.008,1.896-12.404,7.349c-4.546,17.806-14.045,33.768-26.735,44.949
-			c-12.18,10.743-26.552,16.644-41.677,17.174c-0.071,0.01-0.143,0.01-0.214,0.01c-13.862,0-29.558-5.84-40.444-16.084
-			c-8.144-7.665-14.545-17.643-18.612-28.845h3.465c10.61,17.827,25.278,27.907,40.923,27.907c19.366,0,37.203-15.615,47.701-41.769
-			c5.341-13.281,8.001-49.301,7.858-49.984c1.101-50.83,42.778-91.845,93.863-91.845c0,0,34.971,0.642,35.042,0.652
-			c5.106,0.255,9.907,1.926,14.259,4.964l9.092,6.37c12.731,8.888,20.589,22.882,21.557,38.385
-			c0.958,15.503-5.096,30.374-16.624,40.791l-35.97,32.484c-4.505,4.067-10.478,4.954-15.972,2.385
-			c-5.504-2.569-8.643-7.716-8.419-13.78c0.01-0.204,0.01-0.418,0.01-0.622l-0.408-17.969c-0.133-5.626-4.77-10.07-10.427-9.958
-			c-5.626,0.122-10.08,4.791-9.958,10.417l0.408,17.694c-0.408,14.168,7.288,26.674,20.171,32.688
-			c4.852,2.273,9.938,3.384,14.973,3.384c8.399,0,16.634-3.109,23.28-9.112l35.97-32.484c16.165-14.596,24.666-35.44,23.31-57.18
-			c-1.111-17.715-8.633-34.023-21.037-46.203l135.694,6.931c0.031,0,0.071,0.01,0.112,0.01
-			c32.861,1.315,58.597,28.111,58.597,61.003V382.622z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M156.137,186.793c-5.626,0-10.182,4.556-10.182,10.172c0,5.626,4.556,10.182,10.182,10.182
-			c5.616,0,10.172-4.556,10.172-10.182C166.309,191.349,161.753,186.793,156.137,186.793z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path d="M431.958,165.704h-0.092c-0.031,0-0.051-0.01-0.071-0.01l-61.533-3.139c-5.626-0.306-10.417,4.036-10.702,9.652
-			c-0.285,5.626,4.036,10.417,9.663,10.702c0,0,61.889,3.16,61.92,3.16c7.624,0.306,13.587,6.523,13.587,14.157
-			c0,5.626,4.566,10.193,10.193,10.193s10.193-4.566,10.193-10.193C465.115,181.605,450.549,166.448,431.958,165.704z"/>
-                                </g>
-                            </g>
-                                <g>
-                                <g>
-                                    <path
-                                            d="M83.627,350.383C82.832,350.577,84.483,350.383,83.627,350.383L83.627,350.383z"/>
-                                </g>
-                            </g>
-</svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">PHP</h4>
-
-                            <p class="service-item-text">
-                                Experienced with PHP frameworks including Laravel, Symfony, and WordPress development.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <img src="assets/icon-photo.svg" alt="camera icon" width="40">
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">MySQL | PostgreSQL | SQLite</h4>
-
-                            <p class="service-item-text">
-                                Proficient with relational databases including MySQL, PostgreSQL, and SQLite for web applications.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current w-14"
-                                 viewBox="0 0 512 512">
-                                <path d="M32 32v448h448V32zm240 348c0 43.61-25.76 64.87-63.05 64.87-33.68 0-53.23-17.44-63.15-38.49l34.28-20.75c6.61 11.73 11.63 21.65 26.06 21.65 12 0 21.86-5.41 21.86-26.46V240h44zm99.35 63.87c-39.09 0-64.35-17.64-76.68-42L329 382c9 14.74 20.75 24.56 41.5 24.56 17.44 0 27.57-7.72 27.57-19.75 0-14.43-10.43-19.54-29.68-28l-10.52-4.52c-30.38-12.92-50.52-29.16-50.52-63.45 0-31.57 24.05-54.63 61.64-54.63 26.77 0 46 8.32 59.85 32.68L396 290c-7.22-12.93-15-18-27.06-18-12.33 0-20.15 7.82-20.15 18 0 12.63 7.82 17.74 25.86 25.56l10.52 4.51c35.79 15.34 55.94 31 55.94 66.16.01 37.9-29.76 57.64-69.76 57.64z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">JS | Node | Vue | React | React Native | Alpine</h4>
-
-                            <p class="service-item-text">
-                                Skilled in JavaScript ecosystem including Node.js, Vue.js, React, React Native, and Alpine.js for modern web and mobile development.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current w-14"
-                                 viewBox="0 0 512 512">
-                                <path d="M64 32l34.94 403.21L255.77 480 413 435.15 448 32zm308 132H188l4 51h176l-13.51 151.39L256 394.48l-98.68-28-6.78-77.48h48.26l3.42 39.29L256 343.07l53.42-14.92L315 264H148l-12.59-149.59H376.2z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">HTML | CSS</h4>
-
-                            <p class="service-item-text">
-                                Proficient in HTML5 and CSS3 for modern web development.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current w-14"
-                                 viewBox="0 0 512 512">
-                                <path d="M64 32l35 403.22L255.77 480 413 435.15 448 32zm290.68 334.9L256.07 395l-98.46-28.24-6.75-77.76h48.26l3.43 39.56 53.59 15.16.13.28 53.47-14.85 5.64-64.15H203l-4-50h120.65l4.35-51H140l-4-49h240.58z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Tailwind CSS | Bootstrap | SASS | LESS | SCSS</h4>
-
-                            <p class="service-item-text">
-                                Experienced with modern CSS frameworks and preprocessors for responsive design.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48zm-6 321.4c-5.5 1.4-11.2-.6-14.9-5.1l-38.5-44.9V348c0 6.6-5.4 12-12 12h-28c-6.6 0-12-5.4-12-12V164c0-6.6 5.4-12 12-12h28c6.6 0 12 5.4 12 12v90.4l38.5-44.9c3.7-4.5 9.4-6.5 14.9-5.1 5.5 1.4 9.4 6.1 9.4 11.7V358.1c0 5.6-3.9 10.3-9.4 11.7z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">LLM | AI</h4>
-
-                            <p class="service-item-text">
-                                Experience with Large Language Models and AI integration for enhanced application functionality.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48zm-6 321.4c-5.5 1.4-11.2-.6-14.9-5.1l-38.5-44.9V348c0 6.6-5.4 12-12 12h-28c-6.6 0-12-5.4-12-12V164c0-6.6 5.4-12 12-12h28c6.6 0 12 5.4 12 12v90.4l38.5-44.9c3.7-4.5 9.4-6.5 14.9-5.1 5.5 1.4 9.4 6.1 9.4 11.7V358.1c0 5.6-3.9 10.3-9.4 11.7z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Cursor AI</h4>
-
-                            <p class="service-item-text">
-                                Proficient with Cursor AI for enhanced development workflow and code generation.
-                            </p>
-                        </div>
-
-                    </li>
-
-                    <li class="service-item">
-
-                        <div class="service-icon-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40"
-                                 class="ionicon text-yellow-500 text-[3rem] mx-auto fill-current" viewBox="0 0 512 512">
-                                <path d="M349.13 136.86c-40.32 0-57.36 19.24-85.44 19.24-28.79 0-50.75-19.1-85.69-19.1-34.2 0-70.67 20.88-93.83 56.45-32.52 50.16-27 144.63 25.67 225.11 18.84 28.81 44 61.12 77 61.47h.6c28.68 0 37.2-18.78 76.67-19h.6c38.88 0 46.68 18.89 75.24 18.89h.6c33-.35 59.51-36.15 78.35-64.85 13.56-20.64 18.6-31 29-54.35-76.19-28.92-88.43-136.93-13.08-178.34-23-28.8-55.32-45.48-85.79-45.48z"/>
-                                <path d="M340.25 32c-24 1.63-52 16.91-68.4 36.86-14.88 18.08-27.12 44.9-22.32 70.91h1.92c25.56 0 51.72-15.39 67-35.11 14.72-18.77 25.88-45.37 21.8-72.66z"/>
-                            </svg>
-                        </div>
-
-                        <div class="service-content-box">
-                            <h4 class="h4 service-item-title">Swift | Apple Ecosystem</h4>
-
-                            <p class="service-item-text">
-                                Experience with Swift programming language and Apple ecosystem development for iOS, macOS, watchOS, and tvOS applications.
-                            </p>
-                        </div>
-
-                    </li>
-
-                </ul>
-
-            </section>
-
-
-            <!--
-              - testimonials
-            -->
-
-            <section class="testimonials">
-
-                <h3 class="h3 testimonials-title">Testimonials</h3>
-
-                <ul class="testimonials-list has-scrollbar">
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box">
-                                <img src="assets/avatar-1.png" alt="Daniel lewis" width="60"
-                                     data-testimonials-avatar>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Benjamin Bagehorn
-                                (Nuucap)</h4>
-
-                            <div class="testimonials-text" data-testimonials-text>
-                                <p>
-                                    We are working with Oto for over a year now. In more than 870 hours he constantly
-                                    proved
-                                    his willing to get things done. He is a very kind and reliable person and always
-                                    motivated to find the best solution. Oto has strong skills in PHP, Laravel & JS. We
-                                    definitely we want go on working with Oto.
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box">
-                                <img src="assets/avatar-4.png" alt="Jessica miller" width="60"
-                                     data-testimonials-avatar>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Adrian St Vaughan (Ascendia
-                                LTD)</h4>
-
-                            <div class="testimonials-text" data-testimonials-text>
-                                <p>
-                                    Working with Oto was a fantastic experience. He understood what we needed quickly,
-                                    he
-                                    delivered accurate, prompt work. He was diligent in suggesting better options to
-                                    consider. We worked together on a number of projects over the course of over a year
-                                    and
-                                    we had no complaints at all about the quality or timeliness of our deliverables. We
-                                    would recommend without hesitation.
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box">
-                                <img src="assets/avatar-4.png" alt="Jessica miller" width="60"
-                                     data-testimonials-avatar>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Quincy Chapman (DewQ
-                                Finance)</h4>
-
-                            <div class="testimonials-text" data-testimonials-text>
-                                <p>
-                                    Well, as always this is the best freelancer I have ever worked with for web
-                                    development projects. I just didn't have enough work to keep him going. I would hire
-                                    Oto again immediately. This is the guy to do your job great!
-                                </p>
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li class="testimonials-item">
-                        <div class="content-card" data-testimonials-item>
-
-                            <figure class="testimonials-avatar-box h-20 w-20 flex justify-center items-center">
-                                <svg width="50" viewBox="0 0 512 153" xmlns="http://www.w3.org/2000/svg"
-                                     preserveAspectRatio="xMidYMid">
-                                    <path d="M140.107 96.628c-8.321 0-16.118-3.523-23.202-9.258l1.725-8.096.075-.3c1.536-8.62 6.409-23.089 21.402-23.089 11.244 0 20.39 9.146 20.39 20.39-.038 11.207-9.183 20.353-20.39 20.353zm0-61.395c-19.154 0-33.996 12.444-40.03 32.909-9.221-13.831-16.193-30.435-20.278-44.416H59.184v53.636c0 10.57-8.621 19.19-19.191 19.19-10.57 0-19.19-8.62-19.19-19.19V23.726H.186v53.636c-.075 21.965 17.804 39.993 39.768 39.993 21.965 0 39.844-18.028 39.844-39.993v-8.995c4.01 8.358 8.92 16.791 14.88 24.288l-12.632 59.37h21.103l9.145-43.066c8.021 5.135 17.242 8.359 27.812 8.359 22.601 0 41.005-18.516 41.005-41.118 0-22.564-18.404-40.967-41.005-40.967z"
-                                          fill="#6FDA44"/>
-                                    <path d="M244.043 37.557l13.306 53.636 14.656-53.636h17.466l-22.526 77.512h-17.467l-13.83-53.974-13.794 53.936h-17.466L181.86 37.52h17.467l14.655 53.636 13.306-53.636h16.754v.038zm87.22-2.324c-22.676 0-41.042 18.403-41.042 41.042 0 22.677 18.403 41.043 41.042 41.043 22.677 0 41.08-18.366 41.08-41.043 0-22.676-18.403-41.042-41.08-41.042zm0 65.218c-13.343 0-24.138-10.795-24.138-24.138 0-13.344 10.832-24.138 24.138-24.138 13.344 0 24.138 10.794 24.138 24.138 0 13.306-10.794 24.138-24.138 24.138zm90.968-45.54c-11.731 0-21.214 9.52-21.214 21.214v38.906h-17.58V37.557h17.58v11.919s7.496-11.957 22.901-11.957h5.397v17.392h-7.084zm58.997 18.366c12.48-7.047 20.952-20.428 20.952-35.758H484.6c0 12.931-10.494 23.426-23.425 23.426h-2.362V.15h-17.578V115.03h17.578V78.524h2.1c1.724 0 3.973 1.125 4.985 2.511l24.962 33.996h21.065l-30.697-41.754z"/>
-                                </svg>
-                            </figure>
-
-                            <h4 class="h4 testimonials-item-title" data-testimonials-title>Upwork</h4>
-
-                            <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank"
-                               class="testimonials-text">
-                                <p>
-                                    All these reviews are from my Upwork profile. More <span class="text-yellow-500">here</span>.
-                                </p>
-                            </a>
-
-                        </div>
-                    </li>
-                </ul>
-
-            </section>
-
-        </article>
-
-
-        <article
-                class="portfolio"
-                data-page="music"
-                :class="page === 'music' ? 'active' : ''"
-        >
-
-            <header>
-                <h2 class="h2 article-title">Music</h2>
-            </header>
-
-            <section class="projects min-h-[600px]"
-                     x-init="$watch('page', async (value) => {
-                    if (value === 'music') {
-                        loading = true;
-                        try {
-                            const response = await fetch('./music.json');
-                            albums = await response.json();
-                            currentPage = 1;
-                        } catch (error) {
-                            console.error('Error loading music:', error);
-                        } finally {
-                            loading = false;
-                        }
-                    }
-                })"
-            >
-                <template x-if="loading">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills-section" id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills &amp; Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🔥</div>
+                    <h3 class="skill-title">Laravel</h3>
+                    <p class="skill-description">Building scalable web applications and APIs using Laravel's MVC architecture with focus on performance and maintainability.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🐘</div>
+                    <h3 class="skill-title">PHP</h3>
+                    <p class="skill-description">Experienced with PHP frameworks including Laravel, Symfony, and WordPress development.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🗄️</div>
+                    <h3 class="skill-title">Databases</h3>
+                    <p class="skill-description">Proficient with MySQL, PostgreSQL, and SQLite for web applications.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">JavaScript</h3>
+                    <p class="skill-description">Skilled in Node.js, Vue.js, React, React Native, and Alpine.js for modern development.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3 class="skill-title">Frontend</h3>
+                    <p class="skill-description">Proficient in HTML5, CSS3, Tailwind CSS, Bootstrap, and modern CSS frameworks.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🤖</div>
+                    <h3 class="skill-title">AI &amp; Tools</h3>
+                    <p class="skill-description">Experience with Large Language Models, AI integration, and Cursor AI for enhanced development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects-section" id="projects" x-init="if (currentSection === 'projects' && projects.length === 0) loadProjects()">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button @click="loadProjects()" class="btn btn-primary" x-show="projects.length === 0" style="display: none;">Load Projects</button>
+            </div>
+            <div class="projects-grid">
+                <template x-if="loading && !projects.length">
+                    <div class="loading">
+                        <div class="spinner"></div>
                     </div>
                 </template>
-
-                <template x-if="!loading && !albums.length">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <p class="text-gray-400">No albums found</p>
-                    </div>
-                </template>
-
-                <template x-if="albums.length">
-                    <div>
-                        <ul class="project-list">
-                        <template x-for="album in albums.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="album.id">
-                            <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
-                                <a :href="`https://open.spotify.com/album/${album.id}`" target="_blank" class="h-full block">
-                                    <figure class="project-img h-[200px] w-full">
-                                        <div class="project-item-icon-box">
-                                            <ion-icon name="eye-outline"></ion-icon>
-                                        </div>
-                                        <img :src="album.image" :alt="album.name" loading="lazy" class="w-full h-full object-cover" />
-                                    </figure>
-                                    <h3 class="project-title" x-text="album.name"></h3>
-                                    <p class="project-category" x-text="album.artists"></p>
-                                </a>
-                            </li>
-                        </template>
-                                            </ul>
-
-                        <!-- Pagination -->
-                        <div class="pagination-wrapper" x-show="albums.length > itemsPerPage">
-                        <div class="pagination">
-                            <button 
-                                x-on:click="currentPage = Math.max(1, currentPage - 1)" 
-                                :disabled="currentPage === 1"
-                                class="pagination-btn"
-                                :class="currentPage === 1 ? 'disabled' : ''"
-                            >
-                                <ion-icon name="chevron-back-outline"></ion-icon>
-                                Previous
-                            </button>
-                            
-                            <div class="pagination-info">
-                                <span x-text="`Page ${currentPage} of ${Math.ceil(albums.length / itemsPerPage)}`"></span>
-                            </div>
-                            
-                            <button 
-                                x-on:click="currentPage = Math.min(Math.ceil(albums.length / itemsPerPage), currentPage + 1)" 
-                                :disabled="currentPage >= Math.ceil(albums.length / itemsPerPage)"
-                                class="pagination-btn"
-                                :class="currentPage >= Math.ceil(albums.length / itemsPerPage) ? 'disabled' : ''"
-                            >
-                                Next
-                                <ion-icon name="chevron-forward-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                </template>
-            </section>
-
-        </article>
-
-
-        <article
-                class="portfolio"
-                data-page="projects"
-                :class="page === 'projects' ? 'active' : ''"
-        >
-
-            <header>
-                <h2 class="h2 article-title">Projects</h2>
-            </header>
-
-            <section class="projects min-h-[600px]"
-                     x-init="$watch('page', async (value) => {
-                    if (value === 'projects') {
-                        loading = true;
-                        try {
-                            const response = await fetch('./projects.json');
-                            projects = await response.json();
-                            currentPage = 1;
-                        } catch (error) {
-                            console.error('Error loading projects:', error);
-                        } finally {
-                            loading = false;
-                        }
-                    }
-                })"
-            >
-                <template x-if="loading">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
-                    </div>
-                </template>
-
-                <template x-if="!loading && !projects.length">
-                    <div class="flex justify-center w-full min-h-[600px] items-center">
-                        <p class="text-gray-400">No projects found</p>
-                    </div>
-                </template>
-
-                <template x-if="projects.length">
-                    <div>
-                        <ul class="project-list">
-                        <template x-for="project in projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)" :key="project.id">
-                            <li class="project-item active h-[320px] w-full" data-filter-item data-category="web development">
-                                <div class="h-full block">
-                                    <a :href="project.url" target="_blank" class="block">
-                                        <figure class="project-img h-[200px] w-full">
-                                            <div class="project-item-icon-box">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </div>
-                                            <img :src="project.image" :alt="project.name" loading="lazy" class="w-full h-full object-cover" />
-                                        </figure>
-                                        <h3 class="project-title" x-text="project.name"></h3>
-                                    </a>
-                                    <div class="project-category mt-2">
-                                        <template x-if="project.github_url">
-                                            <a :href="project.github_url" target="_blank" class="text-yellow-500 hover:text-yellow-400 text-sm">
-                                                <ion-icon name="logo-github" class="inline mr-1"></ion-icon>
-                                                View on GitHub
-                                            </a>
-                                        </template>
-                                        <template x-if="!project.github_url">
-                                            <div class="text-sm opacity-0">Placeholder</div>
-                                        </template>
-                                    </div>
+                <template x-if="!loading && projects.length">
+                    <template x-for="project in projects" :key="project.id">
+                        <div class="project-card">
+                            <img :src="project.image" :alt="project.name" class="project-image">
+                            <div class="project-content">
+                                <h3 class="project-title" x-text="project.name"></h3>
+                                <p class="project-description" x-text="project.description || 'A web development project'"></p>
+                                <div class="project-links">
+                                    <a :href="project.url" target="_blank" class="project-link">View Live</a>
+                                    <template x-if="project.github_url">
+                                        <a :href="project.github_url" target="_blank" class="project-link">GitHub</a>
+                                    </template>
                                 </div>
-                            </li>
-                        </template>
-                                            </ul>
-
-                        <!-- Pagination -->
-                        <div class="pagination-wrapper" x-show="projects.length > itemsPerPage">
-                        <div class="pagination">
-                            <button 
-                                x-on:click="currentPage = Math.max(1, currentPage - 1)" 
-                                :disabled="currentPage === 1"
-                                class="pagination-btn"
-                                :class="currentPage === 1 ? 'disabled' : ''"
-                            >
-                                <ion-icon name="chevron-back-outline"></ion-icon>
-                                Previous
-                            </button>
-                            
-                            <div class="pagination-info">
-                                <span x-text="`Page ${currentPage} of ${Math.ceil(projects.length / itemsPerPage)}`"></span>
                             </div>
-                            
-                            <button 
-                                x-on:click="currentPage = Math.min(Math.ceil(projects.length / itemsPerPage), currentPage + 1)" 
-                                :disabled="currentPage >= Math.ceil(projects.length / itemsPerPage)"
-                                class="pagination-btn"
-                                :class="currentPage >= Math.ceil(projects.length / itemsPerPage) ? 'disabled' : ''"
-                            >
-                                Next
-                                <ion-icon name="chevron-forward-outline"></ion-icon>
-                            </button>
                         </div>
+                    </template>
+                </template>
+            </div>
+            
+            <!-- Projects Load More -->
+            <div class="load-more-container" x-show="currentSection === 'projects' && projects.length > 0" style="display: none;">
+                <template x-if="projectsLoading">
+                    <div class="loading-more">
+                        <div class="loading-spinner"></div>
+                        <span>Loading more projects...</span>
                     </div>
                 </template>
-            </section>
+                <template x-if="!projectsLoading && hasMoreProjects">
+                    <button @click="loadMoreProjects()" class="load-more-btn">
+                        Load More Projects
+                    </button>
+                </template>
+                <template x-if="!projectsLoading && !hasMoreProjects && projects.length > 0">
+                    <p style="color: rgba(255, 255, 255, 0.8);">All projects loaded</p>
+                </template>
+            </div>
+        </div>
+    </section>
 
-        </article>
-    </div>
-</main>
+    <!-- Testimonials Section -->
+    <section class="section testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">
+                        "We are working with Oto for over a year now. In more than 870 hours he constantly proved his willing to get things done. He is a very kind and reliable person and always motivated to find the best solution."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="assets/avatar-1.png" alt="Benjamin Bagehorn" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Benjamin Bagehorn</h4>
+                            <p>Nuucap</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">
+                        "Working with Oto was a fantastic experience. He understood what we needed quickly, he delivered accurate, prompt work. We would recommend without hesitation."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="assets/avatar-4.png" alt="Adrian St Vaughan" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Adrian St Vaughan</h4>
+                            <p>Ascendia LTD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">
+                        "Well, as always this is the best freelancer I have ever worked with for web development projects. I would hire Oto again immediately. This is the guy to do your job great!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="assets/avatar-4.png" alt="Quincy Chapman" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Quincy Chapman</h4>
+                            <p>DewQ Finance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-</html>
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="contact-description">
+                    I'm always interested in new opportunities and exciting projects. 
+                    Let's discuss how we can work together to bring your ideas to life.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:info@otokapanadze.com" class="contact-link">
+                        📧 Email
+                    </a>
+                    <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank" class="contact-link">
+                        💼 Upwork
+                    </a>
+                    <a href="https://github.com/otokapanadze" target="_blank" class="contact-link">
+                        🐙 GitHub
+                    </a>
+                    <a href="https://www.instagram.com/otokapanadze" target="_blank" class="contact-link">
+                        📸 Instagram
+                    </a>
+                    <a href="https://soundcloud.com/otokapanadze" target="_blank" class="contact-link">
+                        🎵 SoundCloud
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>© <span id="current-year"></span> Oto Kapanadze. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Handle header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Auto-load more content when scrolling to bottom
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Check if user is near bottom (within 100px)
+            if (scrollTop + windowHeight >= documentHeight - 100) {
+                // Get the Alpine component
+                const alpineComponent = document.querySelector('[x-data]').__x.$data;
+                
+                // Auto-load more projects if in projects section
+                if (alpineComponent.currentSection === 'projects') {
+                    if (alpineComponent.hasMoreProjects && !alpineComponent.projectsLoading) {
+                        alpineComponent.loadMoreProjects();
+                    }
+                }
+            }
+        });
+    </script>
+
+
+</body></html>
