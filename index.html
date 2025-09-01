@@ -576,6 +576,23 @@
             transition: transform 0.1s ease-out;
         }
         
+        /* Section Content Animations */
+        .section-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-content.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-content.animate-out {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        
         .parallax-content {
             position: relative;
             z-index: 2;
@@ -713,7 +730,8 @@
     <section class="hero parallax-section" id="about">
         <div class="parallax-bg" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);"></div>
         <div class="container parallax-content">
-            <div class="hero-content">
+            <div class="section-content">
+                <div class="hero-content">
                 <img src="assets/imcool.png" alt="Oto Kapanadze" class="hero-avatar">
                 <h1 class="hero-title">Oto Kapanadze</h1>
                 <h2 class="hero-subtitle">Full Stack Developer</h2>
@@ -733,7 +751,8 @@
     <section class="section skills-section parallax-section" id="skills">
         <div class="parallax-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
         <div class="container parallax-content">
-            <h2 class="section-title">Skills &amp; Expertise</h2>
+            <div class="section-content">
+                <h2 class="section-title">Skills &amp; Expertise</h2>
             <div class="skills-grid">
                 <div class="skill-card">
                     <div class="skill-icon">🔥</div>
@@ -773,7 +792,8 @@
     <section class="section projects-section parallax-section" id="projects" x-init="if (currentSection === 'projects' && projects.length === 0) loadProjects()">
         <div class="parallax-bg" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
         <div class="container parallax-content">
-            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-content">
+                <h2 class="section-title">Featured Projects</h2>
             <div style="text-align: center; margin-bottom: 2rem;">
                 <button @click="loadProjects()" class="btn btn-primary" x-show="projects.length === 0" style="display: none;">Load Projects</button>
             </div>
@@ -826,7 +846,8 @@
     <section class="section testimonials-section parallax-section" id="testimonials">
         <div class="parallax-bg" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
         <div class="container parallax-content">
-            <h2 class="section-title">What Clients Say</h2>
+            <div class="section-content">
+                <h2 class="section-title">What Clients Say</h2>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <p class="testimonial-content">
@@ -872,7 +893,8 @@
     <section class="section contact-section parallax-section" id="contact">
         <div class="parallax-bg" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
         <div class="container parallax-content">
-            <div class="contact-content">
+            <div class="section-content">
+                <div class="contact-content">
                 <h2 class="section-title">Get In Touch</h2>
                 <p class="contact-description">
                     I'm always interested in new opportunities and exciting projects. 
@@ -915,6 +937,104 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
+        // Section content animations
+        function updateSectionAnimations() {
+            const sections = document.querySelectorAll('.parallax-section');
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach(section => {
+                const content = section.querySelector('.section-content');
+                if (!content) return;
+                
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top;
+                const sectionHeight = rect.height;
+                
+                // Calculate how much of the section is visible
+                const visibleTop = Math.max(0, sectionTop);
+                const visibleBottom = Math.min(windowHeight, sectionTop + sectionHeight);
+                const visibleHeight = visibleBottom - visibleTop;
+                const visibility = visibleHeight / Math.min(sectionHeight, windowHeight);
+                
+                // Animate content based on visibility
+                if (visibility > 0.3) {
+                    content.classList.add('animate-in');
+                    content.classList.remove('animate-out');
+                } else {
+                    content.classList.remove('animate-in');
+                    content.classList.add('animate-out');
+                }
+            });
+        }
+        
+        // Simple auto-center on scroll end
+        let scrollTimeout;
+        
+        function checkAndCenterSection() {
+            const sections = document.querySelectorAll('.parallax-section');
+            const windowHeight = window.innerHeight;
+            let bestSection = null;
+            let bestVisibility = 0;
+            let closestToCenter = null;
+            let smallestDistance = Infinity;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top;
+                const sectionHeight = rect.height;
+                
+                // Calculate visibility
+                const visibleTop = Math.max(0, sectionTop);
+                const visibleBottom = Math.min(windowHeight, sectionTop + sectionHeight);
+                const visibleHeight = visibleBottom - visibleTop;
+                const visibility = visibleHeight / Math.min(sectionHeight, windowHeight);
+                
+                // Calculate distance to center
+                const sectionCenter = sectionTop + sectionHeight / 2;
+                const viewportCenter = windowHeight / 2;
+                const distanceToCenter = Math.abs(sectionCenter - viewportCenter);
+                
+                if (visibility > bestVisibility) {
+                    bestVisibility = visibility;
+                    bestSection = section;
+                }
+                
+                if (distanceToCenter < smallestDistance) {
+                    smallestDistance = distanceToCenter;
+                    closestToCenter = section;
+                }
+            });
+            
+            // If we're close to a section center, center it immediately
+            if (closestToCenter && smallestDistance < 200) {
+                const rect = closestToCenter.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const sectionHeight = rect.height;
+                const targetScroll = window.pageYOffset + rect.top - (windowHeight - sectionHeight) / 2;
+                
+                console.log('Quick centering section:', closestToCenter.id, 'Distance:', smallestDistance);
+                window.scrollTo({
+                    top: targetScroll,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+            
+            // Otherwise, center the most visible section
+            if (bestSection && bestVisibility > 0.3) {
+                const rect = bestSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const sectionHeight = rect.height;
+                const targetScroll = window.pageYOffset + rect.top - (windowHeight - sectionHeight) / 2;
+                
+                console.log('Centering section:', bestSection.id, 'Visibility:', bestVisibility);
+                window.scrollTo({
+                    top: targetScroll,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
         // Parallax effect
         function updateParallax() {
             const scrolled = window.pageYOffset;
@@ -936,13 +1056,23 @@
                 header.classList.remove('scrolled');
             }
             
+            // Clear previous timeout and set new one
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                checkAndCenterSection();
+            }, 100); // Wait 100ms after user stops scrolling
+            
             // Update parallax effect
             updateParallax();
+            
+            // Update section animations
+            updateSectionAnimations();
         });
         
         // Initialize parallax on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateParallax();
+            updateSectionAnimations();
         });
         
         // Smooth scrolling for navigation links
