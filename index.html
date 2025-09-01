@@ -116,7 +116,6 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             position: relative;
             overflow: hidden;
         }
@@ -241,7 +240,6 @@
         
         /* Skills Section */
         .skills-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
         
@@ -305,7 +303,6 @@
         
         /* Projects Section */
         .projects-section {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
         }
         
@@ -396,7 +393,6 @@
         
         /* Testimonials Section */
         .testimonials-section {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             color: white;
         }
         
@@ -464,7 +460,6 @@
         
         /* Contact Section */
         .contact-section {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: white;
         }
         
@@ -561,6 +556,29 @@
                 width: 100%;
                 max-width: 300px;
             }
+        }
+        
+        /* Parallax Effect */
+        .parallax-section {
+            position: relative;
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: translateY(0);
+            transition: transform 0.1s ease-out;
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 2;
         }
         
         /* Loading States */
@@ -692,8 +710,9 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="container">
+    <section class="hero parallax-section" id="about">
+        <div class="parallax-bg" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);"></div>
+        <div class="container parallax-content">
             <div class="hero-content">
                 <img src="assets/imcool.png" alt="Oto Kapanadze" class="hero-avatar">
                 <h1 class="hero-title">Oto Kapanadze</h1>
@@ -711,8 +730,9 @@
     </section>
 
     <!-- Skills Section -->
-    <section class="section skills-section" id="skills">
-        <div class="container">
+    <section class="section skills-section parallax-section" id="skills">
+        <div class="parallax-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+        <div class="container parallax-content">
             <h2 class="section-title">Skills &amp; Expertise</h2>
             <div class="skills-grid">
                 <div class="skill-card">
@@ -750,8 +770,9 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="section projects-section" id="projects" x-init="if (currentSection === 'projects' && projects.length === 0) loadProjects()">
-        <div class="container">
+    <section class="section projects-section parallax-section" id="projects" x-init="if (currentSection === 'projects' && projects.length === 0) loadProjects()">
+        <div class="parallax-bg" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+        <div class="container parallax-content">
             <h2 class="section-title">Featured Projects</h2>
             <div style="text-align: center; margin-bottom: 2rem;">
                 <button @click="loadProjects()" class="btn btn-primary" x-show="projects.length === 0" style="display: none;">Load Projects</button>
@@ -802,8 +823,9 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="section testimonials-section" id="testimonials">
-        <div class="container">
+    <section class="section testimonials-section parallax-section" id="testimonials">
+        <div class="parallax-bg" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
+        <div class="container parallax-content">
             <h2 class="section-title">What Clients Say</h2>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
@@ -847,8 +869,9 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="section contact-section" id="contact">
-        <div class="container">
+    <section class="section contact-section parallax-section" id="contact">
+        <div class="parallax-bg" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+        <div class="container parallax-content">
             <div class="contact-content">
                 <h2 class="section-title">Get In Touch</h2>
                 <p class="contact-description">
@@ -892,6 +915,18 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
+        // Parallax effect
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxBgs = document.querySelectorAll('.parallax-bg');
+            
+            parallaxBgs.forEach(bg => {
+                const speed = 0.5;
+                const yPos = -(scrolled * speed);
+                bg.style.transform = `translateY(${yPos}px)`;
+            });
+        }
+        
         // Handle header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -900,6 +935,14 @@
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            // Update parallax effect
+            updateParallax();
+        });
+        
+        // Initialize parallax on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateParallax();
         });
         
         // Smooth scrolling for navigation links
