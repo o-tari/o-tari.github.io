@@ -521,17 +521,7 @@
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
         }
         
-        /* Footer */
-        .footer {
-            background: var(--secondary);
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-        
-        .footer-content {
-            color: var(--text-secondary);
-        }
+
         
         /* Responsive */
         @media (max-width: 768px) {
@@ -921,22 +911,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>© <span id="current-year"></span> Oto Kapanadze. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     
     <script>
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
         // Section content animations
         function updateSectionAnimations() {
             const sections = document.querySelectorAll('.parallax-section');
