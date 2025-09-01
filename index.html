@@ -568,7 +568,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 300%;
+            height: 100%; /* Reduced from 300% to 150% */
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -967,76 +967,100 @@
             });
         }
         
-        // Simple auto-center on scroll end
-        let scrollTimeout;
+        // Gesture-based scrolling with direction detection
+        let lastScrollY = 0;
+        let scrollDirection = 'none';
+        let isCentering = false;
+        let lastGestureTime = 0;
+        let isParallaxDisabled = false;
         
-        function checkAndCenterSection() {
+        function handleGestureScroll() {
+            if (isCentering) return; // Don't trigger while already centering
+            
+            const currentTime = Date.now();
+            const currentScrollY = window.pageYOffset;
             const sections = document.querySelectorAll('.parallax-section');
             const windowHeight = window.innerHeight;
-            let bestSection = null;
-            let bestVisibility = 0;
-            let closestToCenter = null;
-            let smallestDistance = Infinity;
             
-            sections.forEach(section => {
+            // Only process gestures if enough time has passed since last gesture
+            if (currentTime - lastGestureTime < 1000) return;
+            
+            // Determine scroll direction with larger threshold
+            if (Math.abs(currentScrollY - lastScrollY) > 100) { // Increased threshold
+                scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+                lastScrollY = currentScrollY;
+                
+                // Immediately disable parallax when direction is detected
+                isParallaxDisabled = true;
+            }
+            
+            // Find current section with more precise detection
+            let currentSectionIndex = -1;
+            let bestCenterDistance = Infinity;
+            
+            sections.forEach((section, index) => {
                 const rect = section.getBoundingClientRect();
-                const sectionTop = rect.top;
-                const sectionHeight = rect.height;
+                const sectionCenter = rect.top + rect.height / 2;
+                const windowCenter = windowHeight / 2;
+                const distanceFromCenter = Math.abs(sectionCenter - windowCenter);
                 
-                // Calculate visibility
-                const visibleTop = Math.max(0, sectionTop);
-                const visibleBottom = Math.min(windowHeight, sectionTop + sectionHeight);
-                const visibleHeight = visibleBottom - visibleTop;
-                const visibility = visibleHeight / Math.min(sectionHeight, windowHeight);
-                
-                // Calculate distance to center
-                const sectionCenter = sectionTop + sectionHeight / 2;
-                const viewportCenter = windowHeight / 2;
-                const distanceToCenter = Math.abs(sectionCenter - viewportCenter);
-                
-                if (visibility > bestVisibility) {
-                    bestVisibility = visibility;
-                    bestSection = section;
-                }
-                
-                if (distanceToCenter < smallestDistance) {
-                    smallestDistance = distanceToCenter;
-                    closestToCenter = section;
+                // Find the section closest to the center of the viewport
+                if (distanceFromCenter < bestCenterDistance) {
+                    bestCenterDistance = distanceFromCenter;
+                    currentSectionIndex = index;
                 }
             });
             
-            // If we're close to a section center, center it immediately
-            if (closestToCenter && smallestDistance < 200) {
-                const rect = closestToCenter.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                const sectionHeight = rect.height;
-                const targetScroll = window.pageYOffset + rect.top - (windowHeight - sectionHeight) / 2;
+            // Only trigger if we're close to a section center and have clear direction
+            if (currentSectionIndex !== -1 && scrollDirection !== 'none' && bestCenterDistance < 200) {
+                const targetIndex = scrollDirection === 'down' 
+                    ? currentSectionIndex + 1 
+                    : currentSectionIndex - 1;
                 
-                console.log('Quick centering section:', closestToCenter.id, 'Distance:', smallestDistance);
-                window.scrollTo({
-                    top: targetScroll,
-                    behavior: 'smooth'
-                });
-                return;
+                if (targetIndex >= 0 && targetIndex < sections.length) {
+                    const targetSection = sections[targetIndex];
+                    centerSection(targetSection);
+                    lastGestureTime = currentTime;
+                }
             }
+        }
+        
+        function centerSection(section) {
+            if (isCentering) return; // Prevent multiple centering actions
             
-            // Otherwise, center the most visible section
-            if (bestSection && bestVisibility > 0.3) {
-                const rect = bestSection.getBoundingClientRect();
+            isCentering = true;
+            // Parallax is already disabled from handleGestureScroll
+            
+            // Special handling for Projects section due to dynamic content
+            const isProjectsSection = section.id === 'projects';
+            const isTestimonialsSection = section.id === 'testimonials';
+            const delay = isProjectsSection || isTestimonialsSection ? 200 : 0; // Extra delay for dynamic sections
+            
+            setTimeout(() => {
+                const rect = section.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
                 const sectionHeight = rect.height;
                 const targetScroll = window.pageYOffset + rect.top - (windowHeight - sectionHeight) / 2;
                 
-                console.log('Centering section:', bestSection.id, 'Visibility:', bestVisibility);
+                console.log('Gesture centering section:', section.id, 'Direction:', scrollDirection, 'Height:', sectionHeight);
                 window.scrollTo({
                     top: targetScroll,
                     behavior: 'smooth'
                 });
-            }
+                
+                // Re-enable parallax and reset flags after animation completes
+                setTimeout(() => {
+                    scrollDirection = 'none';
+                    isCentering = false;
+                    isParallaxDisabled = false;
+                }, 1000); // Wait for scroll animation to complete
+            }, delay);
         }
         
         // Parallax effect
         function updateParallax() {
+            if (isParallaxDisabled) return; // Skip parallax during centering
+            
             const scrolled = window.pageYOffset;
             const parallaxBgs = document.querySelectorAll('.parallax-bg');
             
@@ -1056,11 +1080,8 @@
                 header.classList.remove('scrolled');
             }
             
-            // Clear previous timeout and set new one
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                checkAndCenterSection();
-            }, 100); // Wait 100ms after user stops scrolling
+            // Handle gesture scroll
+            handleGestureScroll();
             
             // Update parallax effect
             updateParallax();
