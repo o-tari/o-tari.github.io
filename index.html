@@ -201,7 +201,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 80vh;
         }
         
@@ -209,7 +209,7 @@
             text-align: center;
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             color: var(--text);
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
         }
@@ -221,6 +221,7 @@
             height: 600px;
             max-width: 800px;
             margin: 0 auto;
+            margin-top: 2rem;
         }
         
         .orbit {
@@ -897,11 +898,11 @@
         <!-- Projects Dashboard -->
         <section class="projects-dashboard">
             <div class="container">
+                <h2 class="dashboard-title" x-show="!loading && projects.length">Projects</h2>
+                
                 <div x-show="loading" class="loading">
                     <div class="spinner"></div>
                 </div>
-                
-                <h2 class="dashboard-title" x-show="!loading && projects.length">Projects</h2>
                 
                 <div class="solar-system" x-show="!loading && projects.length">
                     <!-- Orbit rings with planets -->
