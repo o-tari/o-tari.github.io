@@ -478,5 +478,101 @@
     "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
     "url": "https://pharmacy.example.com",
     "github_url": "https://github.com/otokapanadze/pharmacy-management"
+  },
+  {
+    "id": 61,
+    "name": "Restaurant POS System",
+    "description": "Point of sale and order management for restaurants",
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop",
+    "url": "https://restaurant-pos.example.com",
+    "github_url": "https://github.com/otokapanadze/restaurant-pos"
+  },
+  {
+    "id": 62,
+    "name": "Hotel Booking System",
+    "description": "Room reservation and hospitality management",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+    "url": "https://hotel-booking.example.com",
+    "github_url": "https://github.com/otokapanadze/hotel-booking"
+  },
+  {
+    "id": 63,
+    "name": "Gym Management",
+    "description": "Fitness center membership and class scheduling",
+    "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    "url": "https://gym-management.example.com",
+    "github_url": "https://github.com/otokapanadze/gym-management"
+  },
+  {
+    "id": 64,
+    "name": "School Management",
+    "description": "Educational institution administration system",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop",
+    "url": "https://school-management.example.com",
+    "github_url": "https://github.com/otokapanadze/school-management"
+  },
+  {
+    "id": 65,
+    "name": "Taxi Booking App",
+    "description": "Ride-hailing and transportation service platform",
+    "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
+    "url": "https://taxi-booking.example.com",
+    "github_url": "https://github.com/otokapanadze/taxi-booking"
+  },
+  {
+    "id": 66,
+    "name": "Auction Platform",
+    "description": "Online bidding and auction management system",
+    "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
+    "url": "https://auction.example.com",
+    "github_url": "https://github.com/otokapanadze/auction-platform"
+  },
+  {
+    "id": 67,
+    "name": "Dating App Backend",
+    "description": "Social networking and matchmaking API",
+    "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop",
+    "url": "https://dating-api.example.com",
+    "github_url": "https://github.com/otokapanadze/dating-app-backend"
+  },
+  {
+    "id": 68,
+    "name": "Freelance Marketplace",
+    "description": "Gig economy and freelance service platform",
+    "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
+    "url": "https://freelance-marketplace.example.com",
+    "github_url": "https://github.com/otokapanadze/freelance-marketplace"
+  },
+  {
+    "id": 69,
+    "name": "Warehouse Management",
+    "description": "Inventory tracking and logistics optimization",
+    "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
+    "url": "https://warehouse.example.com",
+    "github_url": "https://github.com/otokapanadze/warehouse-management"
+  },
+  {
+    "id": 70,
+    "name": "Music Production Studio",
+    "description": "Audio recording and music creation platform",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop",
+    "url": "https://music-studio.example.com",
+    "github_url": "https://github.com/otokapanadze/music-production-studio"
+  },
+  {
+    "id": 71,
+    "name": "Art Gallery Platform",
+    "description": "Digital art showcase and sales management",
+    "image": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=300&fit=crop",
+    "url": "https://art-gallery.example.com",
+    "github_url": "https://github.com/otokapanadze/art-gallery-platform"
+  },
+  {
+    "id": 72,
+    "name": "Pet Adoption Center",
+    "description": "Animal shelter and pet adoption management",
+    "image": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop",
+    "url": "https://pet-adoption.example.com",
+    "github_url": "https://github.com/otokapanadze/pet-adoption-center"
   }
 ]
