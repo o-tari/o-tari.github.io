@@ -222,17 +222,19 @@
         .solar-system {
             position: relative;
             width: 100%;
-            height: 1000px;
-            max-width: 1600px;
+            height: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             margin-top: 2rem;
+            perspective: 1000px;
+            transform-style: preserve-3d;
         }
         
         .orbit {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotateX(25deg);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             animation: rotate 60s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
@@ -241,24 +243,24 @@
             pointer-events: none;
         }
         
-        .orbit-1 { width: 200px; height: 200px; animation-duration: 60s; animation-delay: 1s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-2 { width: 350px; height: 350px; animation-duration: 90s; animation-delay: 1.2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-3 { width: 500px; height: 500px; animation-duration: 120s; animation-delay: 1.4s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-4 { width: 650px; height: 650px; animation-duration: 150s; animation-delay: 1.6s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-5 { width: 800px; height: 800px; animation-duration: 180s; animation-delay: 1.8s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-6 { width: 950px; height: 950px; animation-duration: 210s; animation-delay: 2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-7 { width: 1100px; height: 1100px; animation-duration: 240s; animation-delay: 2.2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-8 { width: 1250px; height: 1250px; animation-duration: 270s; animation-delay: 2.4s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-1 { width: 160px; height: 160px; animation-duration: 60s; animation-delay: 1s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-2 { width: 260px; height: 260px; animation-duration: 90s; animation-delay: 1.2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-3 { width: 360px; height: 360px; animation-duration: 120s; animation-delay: 1.4s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-4 { width: 460px; height: 460px; animation-duration: 150s; animation-delay: 1.6s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-5 { width: 560px; height: 560px; animation-duration: 180s; animation-delay: 1.8s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-6 { width: 660px; height: 660px; animation-duration: 210s; animation-delay: 2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-7 { width: 760px; height: 760px; animation-duration: 240s; animation-delay: 2.2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .orbit-8 { width: 860px; height: 860px; animation-duration: 270s; animation-delay: 2.4s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
         
         @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+            from { transform: translate(-50%, -50%) rotateX(25deg) rotateZ(0deg); }
+            to { transform: translate(-50%, -50%) rotateX(25deg) rotateZ(360deg); }
         }
         
         .project-planet {
             position: absolute;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: transparent;
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -267,7 +269,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 600;
             color: white;
             text-align: center;
@@ -276,13 +278,13 @@
             overflow: hidden;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotateX(-25deg);
             pointer-events: auto;
             z-index: 1;
         }
         
         .project-planet:hover {
-            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(3);
+            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) rotateX(-25deg) scale(3);
             background: transparent;
             border-color: var(--accent);
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
@@ -295,7 +297,7 @@
         }
         
         .project-planet:active {
-            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(2.8);
+            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) rotateX(-25deg) scale(2.8);
             transition: all 0.1s ease;
         }
         
@@ -750,23 +752,23 @@
             }
             
             .solar-system {
-                height: 900px;
-                max-width: 1200px;
+                height: 500px;
+                max-width: 600px;
             }
             
-            .orbit-1 { width: 150px; height: 150px; }
-            .orbit-2 { width: 250px; height: 250px; }
-            .orbit-3 { width: 350px; height: 350px; }
-            .orbit-4 { width: 450px; height: 450px; }
-            .orbit-5 { width: 550px; height: 550px; }
-            .orbit-6 { width: 650px; height: 650px; }
-            .orbit-7 { width: 750px; height: 750px; }
-            .orbit-8 { width: 850px; height: 850px; }
+            .orbit-1 { width: 100px; height: 100px; }
+            .orbit-2 { width: 150px; height: 150px; }
+            .orbit-3 { width: 200px; height: 200px; }
+            .orbit-4 { width: 250px; height: 250px; }
+            .orbit-5 { width: 300px; height: 300px; }
+            .orbit-6 { width: 350px; height: 350px; }
+            .orbit-7 { width: 400px; height: 400px; }
+            .orbit-8 { width: 450px; height: 450px; }
             
             .project-planet {
-                width: 50px;
-                height: 50px;
-                font-size: 0.6rem;
+                width: 35px;
+                height: 35px;
+                font-size: 0.4rem;
             }
             
             .modal-content {
@@ -777,23 +779,23 @@
         
         @media (max-width: 480px) {
             .solar-system {
-                height: 800px;
-                max-width: 800px;
+                height: 400px;
+                max-width: 500px;
             }
             
-            .orbit-1 { width: 120px; height: 120px; }
-            .orbit-2 { width: 200px; height: 200px; }
-            .orbit-3 { width: 280px; height: 280px; }
-            .orbit-4 { width: 360px; height: 360px; }
-            .orbit-5 { width: 440px; height: 440px; }
-            .orbit-6 { width: 520px; height: 520px; }
-            .orbit-7 { width: 600px; height: 600px; }
-            .orbit-8 { width: 680px; height: 680px; }
+            .orbit-1 { width: 80px; height: 80px; }
+            .orbit-2 { width: 120px; height: 120px; }
+            .orbit-3 { width: 160px; height: 160px; }
+            .orbit-4 { width: 200px; height: 200px; }
+            .orbit-5 { width: 240px; height: 240px; }
+            .orbit-6 { width: 280px; height: 280px; }
+            .orbit-7 { width: 320px; height: 320px; }
+            .orbit-8 { width: 360px; height: 360px; }
             
             .project-planet {
-                width: 40px;
-                height: 40px;
-                font-size: 0.5rem;
+                width: 30px;
+                height: 30px;
+                font-size: 0.4rem;
             }
             
             .hero {
@@ -919,7 +921,7 @@
         const angle = (projectIndex / totalProjectsInOrbit) * 2 * Math.PI;
         
         // Calculate radius based on orbit (orbit containers are already sized)
-        const orbitRadius = 100 + (orbitIndex * 75); // Match the orbit sizing with increased spacing
+        const orbitRadius = 80 + (orbitIndex * 50); // Match the orbit sizing with balanced system
         
         // Calculate x and y positions relative to the orbit center
         const x = Math.cos(angle) * orbitRadius;
