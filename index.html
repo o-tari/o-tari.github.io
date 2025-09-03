@@ -325,326 +325,582 @@
         @keyframes counterRotate7 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         @keyframes counterRotate8 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         
-        /* Project Modal for Solar System */
+        /* Enhanced Project Modal for Solar System */
         .project-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 1rem;
         }
-        
+
         .project-modal.active {
             opacity: 1;
             visibility: visible;
         }
-        
+
         .project-modal-content {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.12) 0%,
+                rgba(255, 255, 255, 0.06) 100%);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 28px;
+            padding: 0;
+            max-width: 600px;
+            width: 100%;
             text-align: center;
             position: relative;
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
+            transform: scale(0.6) translateY(80px) rotateX(15deg);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(245, 158, 11, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            overflow: hidden;
         }
-        
+
         .project-modal.active .project-modal-content {
-            transform: scale(1);
+            transform: scale(1) translateY(0) rotateX(0deg);
         }
-        
+
+        .project-modal-header {
+            background: linear-gradient(135deg,
+                rgba(245, 158, 11, 0.15) 0%,
+                rgba(245, 158, 11, 0.08) 100%);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 1.5rem 2rem;
+            position: relative;
+        }
+
         .project-modal-close {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            font-size: 1.25rem;
             color: white;
             cursor: pointer;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
-        
+
         .project-modal-close:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(245, 158, 11, 0.2);
+            border-color: rgba(245, 158, 11, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
         }
-        
+
+        .project-modal-close:active {
+            transform: scale(0.95);
+        }
+
+        .project-modal-body {
+            padding: 2rem;
+        }
+
         .project-modal-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 1rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(245, 158, 11, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
-        
+
+        .project-modal-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        }
+
         .project-modal-title {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
         }
-        
+
         .project-modal-description {
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 2rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 1rem;
         }
-        
+
         .project-modal-links {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-        
+
         .project-modal-link {
-            padding: 0.75rem 1.5rem;
+            padding: 0.875rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .project-modal-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-modal-link:hover::before {
+            left: 100%;
+        }
+
         .project-modal-link.primary {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            border-color: rgba(245, 158, 11, 0.3);
         }
-        
+
         .project-modal-link.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);
+            background: linear-gradient(135deg, #d97706 0%, var(--accent) 100%);
         }
-        
+
         .project-modal-link.secondary {
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
-        
+
         .project-modal-link.secondary:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
-        
 
-        
-        /* Modal Styles */
+
+
+        /* Enhanced Modal Styles */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 1rem;
         }
-        
+
         .modal.active {
             opacity: 1;
             visibility: visible;
         }
-        
+
         .modal-content {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 24px;
+            padding: 0;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow: hidden;
             position: relative;
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
+            transform: scale(0.7) translateY(50px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(245, 158, 11, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-        
+
         .modal.active .modal-content {
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
-        
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text);
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+
+        .modal-header {
+            background: linear-gradient(135deg,
+                rgba(245, 158, 11, 0.1) 0%,
+                rgba(245, 158, 11, 0.05) 100%);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 1.5rem 2rem;
+            position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
+            justify-content: space-between;
         }
-        
-        .modal-close:hover {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        
+
         .modal-title {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
             color: var(--text);
+            margin: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
-        /* Skills Modal */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .skill-card {
+
+        .modal-close {
+            position: relative;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .skill-icon {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 1rem;
-            background: var(--accent);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            font-size: 1.25rem;
+            color: var(--text);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
-        
-        .skill-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text);
+
+        .modal-close:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: rgba(245, 158, 11, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
         }
-        
-        .skill-description {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+
+        .modal-close:active {
+            transform: scale(0.95);
         }
-        
-        /* Testimonials Modal */
-        .testimonials-grid {
+
+        .modal-body {
+            padding: 2rem;
+            max-height: calc(85vh - 120px);
+            overflow-y: auto;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.5);
+            border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.7);
+        }
+
+        /* Enhanced Skills Modal */
+        .skills-grid {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-        
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 1.5rem;
+
+        .skill-card {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.04) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
-        
-        .testimonial-content {
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: var(--text);
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+
+        .skill-card:hover::before {
+            transform: translateX(100%);
         }
-        
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
-        
-        .testimonial-info h4 {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--text);
-        }
-        
-        .testimonial-info p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Contact Modal */
-        .contact-links {
-            display: grid;
-            gap: 1rem;
-        }
-        
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.3s ease;
-        }
-        
-        .contact-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--accent);
-            border-radius: 10px;
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: white;
+            font-size: 1.75rem;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+            transition: all 0.3s ease;
         }
-        
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.4);
+        }
+
+        .skill-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Testimonials Modal */
+        .testimonials-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.04) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 4rem;
+            color: rgba(245, 158, 11, 0.3);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.7;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .testimonial-content::after {
+            content: '"';
+            position: absolute;
+            bottom: -0.5rem;
+            right: 0;
+            font-size: 2rem;
+            color: rgba(245, 158, 11, 0.3);
+            font-family: serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding-left: 2rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(245, 158, 11, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover .testimonial-avatar {
+            border-color: rgba(245, 158, 11, 0.6);
+            transform: scale(1.05);
+        }
+
+        .testimonial-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--text);
+            background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .testimonial-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Enhanced Contact Modal */
+        .contact-links {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.04) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            background: linear-gradient(135deg,
+                rgba(245, 158, 11, 0.1) 0%,
+                rgba(245, 158, 11, 0.05) 100%);
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: white;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .contact-link:hover .contact-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .contact-link-content {
+            flex: 1;
+        }
+
+        .contact-link-content strong {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-link-content div {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
         /* Loading States */
         .loading {
             display: flex;
@@ -652,7 +908,7 @@
             align-items: center;
             min-height: 200px;
         }
-        
+
         /* Mobile Message */
         .mobile-message {
             position: fixed;
@@ -669,20 +925,20 @@
             text-align: center;
             padding: 2rem;
         }
-        
+
         .mobile-message-icon {
             font-size: 4rem;
             margin-bottom: 2rem;
             color: var(--accent);
         }
-        
+
         .mobile-message-title {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: var(--text);
         }
-        
+
         .mobile-message-text {
             font-size: 1.1rem;
             color: var(--text-secondary);
@@ -690,9 +946,9 @@
             line-height: 1.6;
             margin-bottom: 2rem;
         }
-        
 
-        
+
+
         .spinner {
             width: 40px;
             height: 40px;
@@ -701,58 +957,58 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        /* Responsive */
+
+        /* Enhanced Responsive Design */
         @media (max-width: 768px) {
             .hero-content {
                 flex-direction: column;
                 text-align: center;
                 gap: 1rem;
             }
-            
+
             .hero-info {
                 flex-direction: column;
                 text-align: center;
                 gap: 1rem;
             }
-            
+
             .hero-text {
                 text-align: center;
             }
-            
+
             .hero-description {
                 max-width: 100%;
                 text-align: center;
             }
-            
+
             .hero-title {
                 font-size: 1.5rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 0.9rem;
             }
-            
+
             .nav-link {
                 font-size: 0.9rem;
                 padding: 0.4rem 0.8rem;
             }
-            
+
             .action-btn {
                 width: 100%;
                 max-width: 300px;
             }
-            
+
             .solar-system {
                 height: 500px;
                 max-width: 600px;
             }
-            
+
             .orbit-1 { width: 100px; height: 100px; }
             .orbit-2 { width: 150px; height: 150px; }
             .orbit-3 { width: 200px; height: 200px; }
@@ -761,24 +1017,132 @@
             .orbit-6 { width: 350px; height: 350px; }
             .orbit-7 { width: 400px; height: 400px; }
             .orbit-8 { width: 450px; height: 450px; }
-            
+
             .project-planet {
                 width: 35px;
                 height: 35px;
             }
-            
+
+            /* Enhanced Modal Responsive */
+            .modal {
+                padding: 0.5rem;
+            }
+
             .modal-content {
+                max-width: 95%;
+                max-height: 90vh;
+                border-radius: 20px;
+            }
+
+            .modal-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-body {
                 padding: 1.5rem;
-                margin: 1rem;
+            }
+
+            .modal-close {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .skill-card {
+                padding: 1.5rem;
+            }
+
+            .skill-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .testimonials-grid {
+                gap: 1.5rem;
+            }
+
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .testimonial-content {
+                padding-left: 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .testimonial-author {
+                padding-left: 1.5rem;
+                gap: 1rem;
+            }
+
+            .testimonial-avatar {
+                width: 50px;
+                height: 50px;
+            }
+
+            .contact-links {
+                gap: 1rem;
+            }
+
+            .contact-link {
+                padding: 1.25rem;
+                gap: 1rem;
+            }
+
+            .contact-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            .project-modal-content {
+                max-width: 95%;
+                border-radius: 24px;
+            }
+
+            .project-modal-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .project-modal-body {
+                padding: 1.5rem;
+            }
+
+            .project-modal-image {
+                height: 180px;
+            }
+
+            .project-modal-title {
+                font-size: 1.5rem;
+            }
+
+            .project-modal-links {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .project-modal-link {
+                width: 100%;
+                justify-content: center;
             }
         }
-        
+
         @media (max-width: 480px) {
             .solar-system {
                 height: 400px;
                 max-width: 500px;
             }
-            
+
             .orbit-1 { width: 80px; height: 80px; }
             .orbit-2 { width: 120px; height: 120px; }
             .orbit-3 { width: 160px; height: 160px; }
@@ -787,38 +1151,38 @@
             .orbit-6 { width: 280px; height: 280px; }
             .orbit-7 { width: 320px; height: 320px; }
             .orbit-8 { width: 360px; height: 360px; }
-            
+
             .project-planet {
                 width: 30px;
                 height: 30px;
             }
-            
+
             .hero {
                 padding: 30px 0;
             }
-            
+
             .hero-avatar {
                 width: 60px;
                 height: 60px;
             }
-            
+
             .hero-title {
                 font-size: 1.3rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 0.8rem;
             }
-            
+
             .dashboard-title {
                 font-size: 1.2rem;
                 margin-bottom: 2rem;
             }
-            
+
             .mobile-message-title {
                 font-size: 1.5rem;
             }
-            
+
             .mobile-message-text {
                 font-size: 1rem;
             }
@@ -831,11 +1195,11 @@
     projects: [],
     loading: false,
     isMobile: false,
-    
+
     checkMobile() {
         this.isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     },
-    
+
     async loadProjects() {
         this.loading = true;
         try {
@@ -848,42 +1212,68 @@
             this.loading = false;
         }
     },
-    
+
     openModal(modalName) {
+        console.log('Opening modal:', modalName);
         this.currentModal = modalName;
         document.body.style.overflow = 'hidden';
+        // Focus management for accessibility
+        setTimeout(() => {
+            const modal = document.querySelector('.modal.active');
+            if (modal) {
+                modal.focus();
+            }
+        }, 100);
     },
-    
+
     closeModal() {
+        console.log('Closing modal');
         this.currentModal = null;
         document.body.style.overflow = 'auto';
+        // Return focus to the trigger element
+        const activeElement = document.activeElement;
+        if (activeElement && activeElement.blur) {
+            activeElement.blur();
+        }
     },
-    
+
     openProjectModal(project) {
         this.currentProjectModal = project;
         document.body.style.overflow = 'hidden';
+        // Focus management for accessibility
+        setTimeout(() => {
+            const modal = document.querySelector('.project-modal.active');
+            if (modal) {
+                modal.focus();
+            }
+        }, 100);
     },
-    
+
     closeProjectModal() {
         this.currentProjectModal = null;
         document.body.style.overflow = 'auto';
+        // Return focus to the trigger element
+        const activeElement = document.activeElement;
+        if (activeElement && activeElement.blur) {
+            activeElement.blur();
+        }
     },
-    
+
     getProjectsInOrbit(orbitIndex) {
         if (!this.projects || this.projects.length === 0) return [];
-        
+
         const totalProjects = this.projects.length;
         const orbitCount = 8;
-        
+
         // Calculate projects per orbit: orbit number (1-based) * 2
         // Orbit 1: 2 projects, Orbit 2: 4 projects, Orbit 3: 6 projects, etc.
         const projectsPerOrbit = [];
         let totalAllocated = 0;
-        
+
         for (let i = 0; i < orbitCount; i++) {
             const orbitNumber = i + 1; // Convert to 1-based orbit number
             const baseProjects = orbitNumber * 2;
-            
+
             // For the last orbit, add any leftover projects
             if (i === orbitCount - 1) {
                 const remainingProjects = totalProjects - totalAllocated;
@@ -893,53 +1283,53 @@
                 totalAllocated += baseProjects;
             }
         }
-        
+
         // Calculate start and end indices for this orbit
         let startIndex = 0;
         for (let i = 0; i < orbitIndex; i++) {
             startIndex += projectsPerOrbit[i];
         }
-        
+
         const projectsInThisOrbit = projectsPerOrbit[orbitIndex];
         const endIndex = startIndex + projectsInThisOrbit;
-        
+
         return this.projects.slice(startIndex, endIndex);
     },
-    
+
     getPlanetPositionInOrbit(projectIndex, orbitIndex) {
         const projectsInThisOrbit = this.getProjectsInOrbit(orbitIndex);
         const totalProjectsInOrbit = projectsInThisOrbit.length;
-        
+
         if (totalProjectsInOrbit === 0) return '';
-        
+
         // Calculate angle for this position in the orbit
         const angle = (projectIndex / totalProjectsInOrbit) * 2 * Math.PI;
-        
+
         // Calculate radius based on orbit (orbit containers are already sized)
         const orbitRadius = 80 + (orbitIndex * 50); // Match the orbit sizing with balanced system
-        
+
         // Calculate x and y positions relative to the orbit center
         const x = Math.cos(angle) * orbitRadius;
         const y = Math.sin(angle) * orbitRadius;
-        
+
         // Set CSS custom properties for hover effect and position the planet
         return `--planet-x: ${x}px; --planet-y: ${y}px; transform: translate(-50%, -50%) translate(${x}px, ${y}px);`;
     }
 }" x-init="checkMobile(); loadProjects()">
-    
+
     <!-- Particles Background -->
     <div id="particles-js"></div>
-    
+
     <!-- Mobile Message -->
     <div class="mobile-message" x-show="isMobile">
         <div class="mobile-message-icon">🖥️</div>
         <h1 class="mobile-message-title">Desktop Experience Required</h1>
         <p class="mobile-message-text">
-            This interactive solar system portfolio is optimized for desktop viewing. 
+            This interactive solar system portfolio is optimized for desktop viewing.
             Please access this site from a desktop or laptop computer for the best experience.
         </p>
     </div>
-    
+
     <!-- Main Layout -->
     <div class="main-layout" x-show="!isMobile">
         <!-- Hero Section -->
@@ -952,16 +1342,16 @@
                             <h1 class="hero-title">Otar Kapanadze</h1>
                             <h2 class="hero-subtitle">Full Stack Developer</h2>
                             <p class="hero-description">
-                                I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem. 
+                                I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem.
                                 I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.
                             </p>
                         </div>
                     </div>
                     <div class="hero-nav">
 
-                        <a href="#" class="nav-link" @click="openModal('skills')">Skills</a>
-                        <a href="#" class="nav-link" @click="openModal('testimonials')">Testimonials</a>
-                        <a href="#" class="nav-link" @click="openModal('contact')">Contact</a>
+                        <a href="#" class="nav-link" @click.prevent="openModal('skills')">Skills</a>
+                        <a href="#" class="nav-link" @click.prevent="openModal('testimonials')">Testimonials</a>
+                        <a href="#" class="nav-link" @click.prevent="openModal('contact')">Contact</a>
                     </div>
                 </div>
             </div>
@@ -974,13 +1364,13 @@
                 <div x-show="loading" class="loading">
                     <div class="spinner"></div>
                 </div>
-                
+
                 <div class="solar-system" x-show="!loading && projects.length">
                     <!-- Orbit rings with planets -->
                     <template x-for="orbitIndex in 8" :key="orbitIndex">
                         <div :class="`orbit orbit-${orbitIndex}`">
                             <template x-for="(project, projectIndex) in getProjectsInOrbit(orbitIndex - 1)" :key="project.id">
-                                <div class="project-planet" 
+                                <div class="project-planet"
                                      :style="getPlanetPositionInOrbit(projectIndex, orbitIndex - 1)"
                                      @click="openProjectModal(project)">
                                     <img :src="project.image" :alt="project.name" class="project-planet-image">
@@ -996,11 +1386,14 @@
 
 
     <!-- Skills Modal -->
-    <div class="modal" :class="{ active: currentModal === 'skills' }" @click="closeModal()">
+    <div class="modal" :class="{ active: currentModal === 'skills' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
         <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeModal()">×</button>
-            <h2 class="modal-title">Skills & Expertise</h2>
-            <div class="skills-grid">
+            <div class="modal-header">
+                <h2 class="modal-title">Skills & Expertise</h2>
+                <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="skills-grid">
                 <div class="skill-card">
                     <div class="skill-icon">🔥</div>
                     <h3 class="skill-title">Laravel</h3>
@@ -1031,16 +1424,20 @@
                     <h3 class="skill-title">AI & Tools</h3>
                     <p class="skill-description">Experience with Large Language Models, AI integration, and Cursor AI for enhanced development.</p>
                 </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Testimonials Modal -->
-    <div class="modal" :class="{ active: currentModal === 'testimonials' }" @click="closeModal()">
+    <div class="modal" :class="{ active: currentModal === 'testimonials' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
         <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeModal()">×</button>
-            <h2 class="modal-title">What Clients Say</h2>
-            <div class="testimonials-grid">
+            <div class="modal-header">
+                <h2 class="modal-title">What Clients Say</h2>
+                <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <p class="testimonial-content">
                         "We are working with Oto for over a year now. In more than 870 hours he constantly proved his willing to get things done. He is a very kind and reliable person and always motivated to find the best solution."
@@ -1077,69 +1474,78 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Contact Modal -->
-    <div class="modal" :class="{ active: currentModal === 'contact' }" @click="closeModal()">
+    <div class="modal" :class="{ active: currentModal === 'contact' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
         <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeModal()">×</button>
-            <h2 class="modal-title">Get In Touch</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
-                I'm always interested in new opportunities and exciting projects. 
-                Let's discuss how we can work together to bring your ideas to life.
-            </p>
-            <div class="contact-links">
+            <div class="modal-header">
+                <h2 class="modal-title">Get In Touch</h2>
+                <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; text-align: center;">
+                    I'm always interested in new opportunities and exciting projects.
+                    Let's discuss how we can work together to bring your ideas to life.
+                </p>
+                <div class="contact-links">
                 <a href="mailto:oto.kapanadze.dev@gmail.com" class="contact-link">
                     <div class="contact-icon">📧</div>
-                    <div>
+                    <div class="contact-link-content">
                         <strong>Email</strong>
-                        <div style="font-size: 0.9rem; color: var(--text-secondary);">oto.kapanadze.dev@gmail.com</div>
+                        <div>oto.kapanadze.dev@gmail.com</div>
                     </div>
                 </a>
                 <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank" class="contact-link">
                     <div class="contact-icon">💼</div>
-                    <div>
+                    <div class="contact-link-content">
                         <strong>Upwork</strong>
-                        <div style="font-size: 0.9rem; color: var(--text-secondary);">View my profile</div>
+                        <div>View my profile</div>
                     </div>
                 </a>
                 <a href="https://github.com/otokapanadze" target="_blank" class="contact-link">
                     <div class="contact-icon">🐙</div>
-                    <div>
+                    <div class="contact-link-content">
                         <strong>GitHub</strong>
-                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Check my code</div>
+                        <div>Check my code</div>
                     </div>
                 </a>
                 <a href="https://www.instagram.com/otokapanadze" target="_blank" class="contact-link">
                     <div class="contact-icon">📸</div>
-                    <div>
+                    <div class="contact-link-content">
                         <strong>Instagram</strong>
-                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Follow me</div>
+                        <div>Follow me</div>
                     </div>
                 </a>
                 <a href="https://soundcloud.com/otokapanadze" target="_blank" class="contact-link">
                     <div class="contact-icon">🎵</div>
-                    <div>
+                    <div class="contact-link-content">
                         <strong>SoundCloud</strong>
-                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Listen to my music</div>
+                        <div>Listen to my music</div>
                     </div>
                 </a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Project Modal -->
-    <div class="project-modal" :class="{ active: currentProjectModal }" @click="closeProjectModal()">
+    <div class="project-modal" :class="{ active: currentProjectModal }" @click.self="closeProjectModal()" @keydown.escape="closeProjectModal()" tabindex="-1">
         <div class="project-modal-content" @click.stop>
-            <button class="project-modal-close" @click="closeProjectModal()">×</button>
-            <img :src="currentProjectModal?.image" :alt="currentProjectModal?.name" class="project-modal-image">
-            <h3 class="project-modal-title" x-text="currentProjectModal?.name"></h3>
-            <p class="project-modal-description" x-text="currentProjectModal?.description || 'A web development project'"></p>
-            <div class="project-modal-links">
-                <a :href="currentProjectModal?.url" target="_blank" class="project-modal-link primary">Visit Project</a>
-                <a :href="currentProjectModal?.github_url" target="_blank" class="project-modal-link secondary" x-show="currentProjectModal?.github_url">View Code</a>
+            <div class="project-modal-header">
+                <button class="project-modal-close" @click.prevent="closeProjectModal()" aria-label="Close modal">×</button>
+            </div>
+            <div class="project-modal-body">
+                <img :src="currentProjectModal?.image" :alt="currentProjectModal?.name" class="project-modal-image">
+                <h3 class="project-modal-title" x-text="currentProjectModal?.name"></h3>
+                <p class="project-modal-description" x-text="currentProjectModal?.description || 'A web development project'"></p>
+                <div class="project-modal-links">
+                    <a :href="currentProjectModal?.url" target="_blank" class="project-modal-link primary">Visit Project</a>
+                    <a :href="currentProjectModal?.github_url" target="_blank" class="project-modal-link secondary" x-show="currentProjectModal?.github_url">View Code</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1147,22 +1553,33 @@
     <script>
         // Mobile detection and resize handling
         document.addEventListener('DOMContentLoaded', function() {
-            const alpineComponent = document.querySelector('[x-data]').__x.$data;
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                alpineComponent.checkMobile();
-            });
+            // Wait for Alpine.js to initialize
+            setTimeout(() => {
+                const alpineElement = document.querySelector('[x-data]');
+                if (alpineElement && alpineElement.__x && alpineElement.__x.$data) {
+                    const alpineComponent = alpineElement.__x.$data;
+                    
+                    // Handle window resize
+                    window.addEventListener('resize', function() {
+                        if (alpineComponent && alpineComponent.checkMobile) {
+                            alpineComponent.checkMobile();
+                        }
+                    });
+                }
+            }, 100);
         });
         
         // Close modal on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                const alpineComponent = document.querySelector('[x-data]').__x.$data;
-                if (alpineComponent.currentProjectModal) {
-                    alpineComponent.closeProjectModal();
-                } else {
-                    alpineComponent.closeModal();
+                const alpineElement = document.querySelector('[x-data]');
+                if (alpineElement && alpineElement.__x && alpineElement.__x.$data) {
+                    const alpineComponent = alpineElement.__x.$data;
+                    if (alpineComponent.currentProjectModal) {
+                        alpineComponent.closeProjectModal();
+                    } else {
+                        alpineComponent.closeModal();
+                    }
                 }
             }
         });
