@@ -207,6 +207,7 @@
             align-items: center;
             justify-content: center;
             z-index: 1;
+            pointer-events: none;
         }
         
         .dashboard-title {
@@ -226,6 +227,8 @@
             max-width: 1000px;
             margin: 0 auto;
             margin-top: 2rem;
+            z-index: 1;
+            pointer-events: none;
         }
         
         .orbit {
@@ -337,16 +340,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            z-index: 10000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 1rem;
+            pointer-events: auto;
         }
 
         .project-modal.active {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
+        }
+        
+        .project-modal:not(.active) {
+            pointer-events: none;
         }
 
         .project-modal-content {
@@ -361,6 +370,7 @@
             width: 100%;
             text-align: center;
             position: relative;
+            z-index: 10001;
             transform: scale(0.6) translateY(80px) rotateX(15deg);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
@@ -400,6 +410,7 @@
             justify-content: center;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
+            z-index: 10002;
         }
 
         .project-modal-close:hover {
@@ -467,6 +478,7 @@
             border: 2px solid transparent;
             font-size: 0.95rem;
             position: relative;
+            z-index: 10002;
             overflow: hidden;
         }
 
@@ -526,16 +538,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            z-index: 10000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 1rem;
+            pointer-events: auto;
         }
 
         .modal.active {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
+        }
+        
+        .modal:not(.active) {
+            pointer-events: none;
         }
 
         .modal-content {
@@ -551,6 +569,7 @@
             max-height: 85vh;
             overflow: hidden;
             position: relative;
+            z-index: 10001;
             transform: scale(0.7) translateY(50px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
@@ -602,6 +621,7 @@
             justify-content: center;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
+            z-index: 10002;
         }
 
         .modal-close:hover {
