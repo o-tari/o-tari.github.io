@@ -254,8 +254,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: transparent;
             border: 2px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
@@ -278,7 +277,7 @@
         
         .project-planet:hover {
             transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(3);
-            background: rgba(255, 255, 255, 0.2);
+            background: transparent;
             border-color: var(--accent);
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
             z-index: 10;
@@ -294,16 +293,7 @@
             transition: all 0.1s ease;
         }
         
-        .project-planet::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border-radius: 50%;
-        }
+
         
         .project-planet-content {
             position: relative;
