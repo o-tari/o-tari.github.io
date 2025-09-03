@@ -274,7 +274,7 @@
             overflow: hidden;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px));
             pointer-events: auto;
             z-index: 1;
         }
@@ -288,7 +288,7 @@
         }
         
         .project-planet:hover {
-            transform: scale(5);
+            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(1.5);
             background: transparent;
             border: 2px solid var(--accent);
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
@@ -1369,7 +1369,7 @@
         const y = Math.sin(angle) * orbitRadius;
 
         // Set CSS custom properties for hover effect and position the planet
-        return `--planet-x: ${x}px; --planet-y: ${y}px; transform: translate(-50%, -50%) translate(${x}px, ${y}px);`;
+        return `--planet-x: ${x}px; --planet-y: ${y}px;`;
     }
 }" x-init="checkMobile(); loadProjects()">
 
