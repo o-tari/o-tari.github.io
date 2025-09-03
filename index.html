@@ -880,7 +880,7 @@
                         </div>
                     </div>
                     <div class="hero-nav">
-                        <a href="#" class="nav-link" @click="openModal('about')">About</a>
+
                         <a href="#" class="nav-link" @click="openModal('skills')">Skills</a>
                         <a href="#" class="nav-link" @click="openModal('testimonials')">Testimonials</a>
                         <a href="#" class="nav-link" @click="openModal('contact')">Contact</a>
@@ -915,26 +915,7 @@
         </section>
     </div>
 
-    <!-- About Modal -->
-    <div class="modal" :class="{ active: currentModal === 'about' }" @click="closeModal()">
-        <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeModal()">×</button>
-            <h2 class="modal-title">About Me</h2>
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <img src="assets/imcool.png" alt="Otar Kapanadze" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.2); margin-bottom: 1.5rem;">
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text);">Otar Kapanadze</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Full Stack Developer</p>
-            </div>
-            <p style="color: var(--text); font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; text-align: center;">
-                I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem. 
-                I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.
-            </p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="#" class="action-btn primary" @click="closeModal(); openModal('contact')">Get In Touch</a>
-                <a href="#" class="action-btn secondary" @click="closeModal(); openModal('skills')">View Skills</a>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Skills Modal -->
     <div class="modal" :class="{ active: currentModal === 'skills' }" @click="closeModal()">
