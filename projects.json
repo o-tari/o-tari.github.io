@@ -2,6 +2,7 @@
   {
     "id": 1,
     "name": "E-Commerce Platform",
+    "description": "Full-featured online store with payment integration",
     "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
     "url": "https://example-ecommerce.com",
     "github_url": "https://github.com/otokapanadze/ecommerce-platform"
@@ -9,6 +10,7 @@
   {
     "id": 2,
     "name": "Task Management App",
+    "description": "Collaborative project management solution",
     "image": "https://images.unsplash.com/photo-1484480974693-6ca2a3290bf8?w=400&h=300&fit=crop",
     "url": "https://taskmanager.example.com",
     "github_url": null
@@ -16,6 +18,7 @@
   {
     "id": 3,
     "name": "Blog CMS",
+    "description": "Modern content management system",
     "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop",
     "url": "https://blog.example.com",
     "github_url": "https://github.com/otokapanadze/blog-cms"
@@ -23,6 +26,7 @@
   {
     "id": 4,
     "name": "API Gateway",
+    "description": "Microservices API management platform",
     "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop",
     "url": "https://api.example.com",
     "github_url": "https://github.com/otokapanadze/api-gateway"
@@ -30,6 +34,7 @@
   {
     "id": 5,
     "name": "Real-time Chat",
+    "description": "WebSocket-based messaging application",
     "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
     "url": "https://chat.example.com",
     "github_url": "https://github.com/otokapanadze/realtime-chat"
@@ -37,6 +42,7 @@
   {
     "id": 6,
     "name": "Inventory System",
+    "description": "Enterprise inventory management solution",
     "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
     "url": "https://inventory.example.com",
     "github_url": "https://github.com/otokapanadze/inventory-system"
@@ -44,6 +50,7 @@
   {
     "id": 7,
     "name": "Weather Dashboard",
+    "description": "Real-time weather data visualization",
     "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop",
     "url": "https://weather.example.com",
     "github_url": "https://github.com/otokapanadze/weather-dashboard"
@@ -51,6 +58,7 @@
   {
     "id": 8,
     "name": "Portfolio Website",
+    "description": "Creative portfolio showcase platform",
     "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop",
     "url": "https://portfolio.example.com",
     "github_url": "https://github.com/otokapanadze/portfolio-website"
@@ -58,6 +66,7 @@
   {
     "id": 9,
     "name": "Social Media API",
+    "description": "RESTful API for social networking features",
     "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop",
     "url": "https://social.example.com",
     "github_url": "https://github.com/otokapanadze/social-media-api"
@@ -65,8 +74,249 @@
   {
     "id": 10,
     "name": "Learning Management System",
+    "description": "Online education platform with courses",
     "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop",
     "url": "https://lms.example.com",
     "github_url": "https://github.com/otokapanadze/lms-platform"
+  },
+  {
+    "id": 11,
+    "name": "Cryptocurrency Tracker",
+    "description": "Real-time crypto price monitoring",
+    "image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=300&fit=crop",
+    "url": "https://crypto.example.com",
+    "github_url": "https://github.com/otokapanadze/crypto-tracker"
+  },
+  {
+    "id": 12,
+    "name": "Fitness Tracker",
+    "description": "Personal health and workout monitoring",
+    "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    "url": "https://fitness.example.com",
+    "github_url": "https://github.com/otokapanadze/fitness-tracker"
+  },
+  {
+    "id": 13,
+    "name": "Recipe Manager",
+    "description": "Digital cookbook with meal planning",
+    "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop",
+    "url": "https://recipes.example.com",
+    "github_url": "https://github.com/otokapanadze/recipe-manager"
+  },
+  {
+    "id": 14,
+    "name": "Event Scheduler",
+    "description": "Calendar and event management system",
+    "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=300&fit=crop",
+    "url": "https://events.example.com",
+    "github_url": "https://github.com/otokapanadze/event-scheduler"
+  },
+  {
+    "id": 15,
+    "name": "File Storage Service",
+    "description": "Cloud-based file management platform",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    "url": "https://files.example.com",
+    "github_url": "https://github.com/otokapanadze/file-storage"
+  },
+  {
+    "id": 16,
+    "name": "Music Streaming API",
+    "description": "Backend for music streaming application",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop",
+    "url": "https://music.example.com",
+    "github_url": "https://github.com/otokapanadze/music-api"
+  },
+  {
+    "id": 17,
+    "name": "News Aggregator",
+    "description": "Multi-source news collection platform",
+    "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=300&fit=crop",
+    "url": "https://news.example.com",
+    "github_url": "https://github.com/otokapanadze/news-aggregator"
+  },
+  {
+    "id": 18,
+    "name": "Booking System",
+    "description": "Appointment and reservation management",
+    "image": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop",
+    "url": "https://booking.example.com",
+    "github_url": "https://github.com/otokapanadze/booking-system"
+  },
+  {
+    "id": 19,
+    "name": "Analytics Dashboard",
+    "description": "Data visualization and reporting tool",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    "url": "https://analytics.example.com",
+    "github_url": "https://github.com/otokapanadze/analytics-dashboard"
+  },
+  {
+    "id": 20,
+    "name": "Email Marketing Tool",
+    "description": "Campaign management and automation",
+    "image": "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=400&h=300&fit=crop",
+    "url": "https://email.example.com",
+    "github_url": "https://github.com/otokapanadze/email-marketing"
+  },
+  {
+    "id": 21,
+    "name": "Video Conferencing",
+    "description": "WebRTC-based video calling platform",
+    "image": "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?w=400&h=300&fit=crop",
+    "url": "https://video.example.com",
+    "github_url": "https://github.com/otokapanadze/video-conferencing"
+  },
+  {
+    "id": 22,
+    "name": "Document Editor",
+    "description": "Collaborative online document editing",
+    "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
+    "url": "https://docs.example.com",
+    "github_url": "https://github.com/otokapanadze/document-editor"
+  },
+  {
+    "id": 23,
+    "name": "Stock Trading Platform",
+    "description": "Real-time stock market trading system",
+    "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop",
+    "url": "https://trading.example.com",
+    "github_url": "https://github.com/otokapanadze/stock-trading"
+  },
+  {
+    "id": 24,
+    "name": "Travel Planner",
+    "description": "Itinerary and travel booking platform",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+    "url": "https://travel.example.com",
+    "github_url": "https://github.com/otokapanadze/travel-planner"
+  },
+  {
+    "id": 25,
+    "name": "Healthcare Portal",
+    "description": "Patient management and medical records",
+    "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
+    "url": "https://healthcare.example.com",
+    "github_url": "https://github.com/otokapanadze/healthcare-portal"
+  },
+  {
+    "id": 26,
+    "name": "E-Learning Platform",
+    "description": "Interactive online learning system",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop",
+    "url": "https://elearning.example.com",
+    "github_url": "https://github.com/otokapanadze/elearning-platform"
+  },
+  {
+    "id": 27,
+    "name": "IoT Dashboard",
+    "description": "Internet of Things device monitoring",
+    "image": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=400&h=300&fit=crop",
+    "url": "https://iot.example.com",
+    "github_url": "https://github.com/otokapanadze/iot-dashboard"
+  },
+  {
+    "id": 28,
+    "name": "Gaming Platform",
+    "description": "Multiplayer online gaming system",
+    "image": "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&h=300&fit=crop",
+    "url": "https://gaming.example.com",
+    "github_url": "https://github.com/otokapanadze/gaming-platform"
+  },
+  {
+    "id": 29,
+    "name": "Real Estate Portal",
+    "description": "Property listing and management system",
+    "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
+    "url": "https://realestate.example.com",
+    "github_url": "https://github.com/otokapanadze/real-estate-portal"
+  },
+  {
+    "id": 30,
+    "name": "Banking System",
+    "description": "Secure online banking platform",
+    "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
+    "url": "https://banking.example.com",
+    "github_url": "https://github.com/otokapanadze/banking-system"
+  },
+  {
+    "id": 31,
+    "name": "Supply Chain Tracker",
+    "description": "Logistics and supply chain management",
+    "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
+    "url": "https://supplychain.example.com",
+    "github_url": "https://github.com/otokapanadze/supply-chain-tracker"
+  },
+  {
+    "id": 32,
+    "name": "AI Chatbot Platform",
+    "description": "Intelligent customer service automation",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop",
+    "url": "https://chatbot.example.com",
+    "github_url": "https://github.com/otokapanadze/ai-chatbot"
+  },
+  {
+    "id": 33,
+    "name": "Content Management",
+    "description": "Multi-site content management system",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+    "url": "https://cms.example.com",
+    "github_url": "https://github.com/otokapanadze/content-management"
+  },
+  {
+    "id": 34,
+    "name": "Mobile App Backend",
+    "description": "RESTful API for mobile applications",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop",
+    "url": "https://mobile.example.com",
+    "github_url": "https://github.com/otokapanadze/mobile-backend"
+  },
+  {
+    "id": 35,
+    "name": "Blockchain Explorer",
+    "description": "Cryptocurrency blockchain analysis tool",
+    "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop",
+    "url": "https://blockchain.example.com",
+    "github_url": "https://github.com/otokapanadze/blockchain-explorer"
+  },
+  {
+    "id": 36,
+    "name": "Social Network",
+    "description": "Full-featured social networking platform",
+    "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop",
+    "url": "https://socialnet.example.com",
+    "github_url": "https://github.com/otokapanadze/social-network"
+  },
+  {
+    "id": 37,
+    "name": "Video Streaming",
+    "description": "Live and on-demand video platform",
+    "image": "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&h=300&fit=crop",
+    "url": "https://streaming.example.com",
+    "github_url": "https://github.com/otokapanadze/video-streaming"
+  },
+  {
+    "id": 38,
+    "name": "Project Management",
+    "description": "Agile project management and collaboration",
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    "url": "https://projects.example.com",
+    "github_url": "https://github.com/otokapanadze/project-management"
+  },
+  {
+    "id": 39,
+    "name": "E-Commerce Analytics",
+    "description": "Business intelligence for online stores",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    "url": "https://ecommerce-analytics.example.com",
+    "github_url": "https://github.com/otokapanadze/ecommerce-analytics"
+  },
+  {
+    "id": 40,
+    "name": "DevOps Dashboard",
+    "description": "CI/CD pipeline monitoring and management",
+    "image": "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=300&fit=crop",
+    "url": "https://devops.example.com",
+    "github_url": "https://github.com/otokapanadze/devops-dashboard"
   }
 ]

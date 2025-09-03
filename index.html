@@ -198,109 +198,262 @@
         .projects-dashboard {
             flex: 1;
             padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
         }
         
         .dashboard-title {
-            text-align: left;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
             color: var(--text);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
         }
         
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+        /* Solar System Container */
+        .solar-system {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            max-width: 800px;
             margin: 0 auto;
         }
         
-        .project-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rotate 60s linear infinite;
+            pointer-events: none;
+        }
+        
+        .orbit-1 { width: 200px; height: 200px; animation-duration: 40s; }
+        .orbit-2 { width: 300px; height: 300px; animation-duration: 60s; }
+        .orbit-3 { width: 400px; height: 400px; animation-duration: 80s; }
+        .orbit-4 { width: 500px; height: 500px; animation-duration: 100s; }
+        .orbit-5 { width: 600px; height: 600px; animation-duration: 120s; }
+        .orbit-6 { width: 700px; height: 700px; animation-duration: 140s; }
+        .orbit-7 { width: 800px; height: 800px; animation-duration: 160s; }
+        .orbit-8 { width: 900px; height: 900px; animation-duration: 180s; }
+        
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .project-planet {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            min-height: 200px;
+            transition: all 0.3s ease;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        
-        .project-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            filter: blur(8px);
-            transform: scale(1.1);
-            z-index: 1;
-        }
-        
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
-            z-index: 2;
-        }
-        
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-            z-index: 1;
-            border-radius: 20px;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-        
-        .project-card:hover::after {
-            background: rgba(0, 0, 0, 0.25);
-        }
-        
-        .project-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
             color: white;
-            position: relative;
-            z-index: 4;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-            letter-spacing: 0.5px;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+            z-index: 1;
         }
         
-        .project-description {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 4;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-            line-height: 1.5;
+        .project-planet:hover {
+            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(3);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+            z-index: 10;
+            transition: all 0.3s ease;
         }
+        
+        .project-planet:hover .project-planet-content {
+            animation-play-state: paused;
+        }
+        
+        .project-planet:active {
+            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(2.8);
+            transition: all 0.1s ease;
+        }
+        
+        .project-planet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 50%;
+        }
+        
+        .project-planet-content {
+            position: relative;
+            z-index: 2;
+            padding: 5px;
+        }
+        
+        /* Counter-rotation animations for each orbit */
+        .orbit-1 .project-planet-content { animation: counterRotate1 40s linear infinite; }
+        .orbit-2 .project-planet-content { animation: counterRotate2 60s linear infinite; }
+        .orbit-3 .project-planet-content { animation: counterRotate3 80s linear infinite; }
+        .orbit-4 .project-planet-content { animation: counterRotate4 100s linear infinite; }
+        .orbit-5 .project-planet-content { animation: counterRotate5 120s linear infinite; }
+        .orbit-6 .project-planet-content { animation: counterRotate6 140s linear infinite; }
+        .orbit-7 .project-planet-content { animation: counterRotate7 160s linear infinite; }
+        .orbit-8 .project-planet-content { animation: counterRotate8 180s linear infinite; }
+        
+        @keyframes counterRotate1 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes counterRotate2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes counterRotate3 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes counterRotate4 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes counterRotate5 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes counterRotate6 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes counterRotate7 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes counterRotate8 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        
+        /* Project Modal for Solar System */
+        .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .project-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .project-modal-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-modal.active .project-modal-content {
+            transform: scale(1);
+        }
+        
+        .project-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .project-modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-modal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+        
+        .project-modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .project-modal-description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .project-modal-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .project-modal-link {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+        }
+        
+        .project-modal-link.primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .project-modal-link.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        
+        .project-modal-link.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .project-modal-link.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+
         
         /* Modal Styles */
         .modal {
@@ -559,9 +712,24 @@
                 max-width: 300px;
             }
             
-            .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5rem;
+            .solar-system {
+                height: 500px;
+                max-width: 600px;
+            }
+            
+            .orbit-1 { width: 150px; height: 150px; }
+            .orbit-2 { width: 220px; height: 220px; }
+            .orbit-3 { width: 290px; height: 290px; }
+            .orbit-4 { width: 360px; height: 360px; }
+            .orbit-5 { width: 430px; height: 430px; }
+            .orbit-6 { width: 500px; height: 500px; }
+            .orbit-7 { width: 570px; height: 570px; }
+            .orbit-8 { width: 640px; height: 640px; }
+            
+            .project-planet {
+                width: 50px;
+                height: 50px;
+                font-size: 0.6rem;
             }
             
             .modal-content {
@@ -571,8 +739,24 @@
         }
         
         @media (max-width: 480px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .solar-system {
+                height: 400px;
+                max-width: 400px;
+            }
+            
+            .orbit-1 { width: 120px; height: 120px; }
+            .orbit-2 { width: 180px; height: 180px; }
+            .orbit-3 { width: 240px; height: 240px; }
+            .orbit-4 { width: 300px; height: 300px; }
+            .orbit-5 { width: 360px; height: 360px; }
+            .orbit-6 { width: 420px; height: 420px; }
+            .orbit-7 { width: 480px; height: 480px; }
+            .orbit-8 { width: 540px; height: 540px; }
+            
+            .project-planet {
+                width: 40px;
+                height: 40px;
+                font-size: 0.5rem;
             }
             
             .hero {
@@ -591,11 +775,17 @@
             .hero-subtitle {
                 font-size: 0.8rem;
             }
+            
+            .dashboard-title {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
         }
     </style>
 </head>
 <body x-data="{
     currentModal: null,
+    currentProjectModal: null,
     projects: [],
     loading: false,
     
@@ -620,6 +810,57 @@
     closeModal() {
         this.currentModal = null;
         document.body.style.overflow = 'auto';
+    },
+    
+    openProjectModal(project) {
+        this.currentProjectModal = project;
+        document.body.style.overflow = 'hidden';
+    },
+    
+    closeProjectModal() {
+        this.currentProjectModal = null;
+        document.body.style.overflow = 'auto';
+    },
+    
+    getProjectsInOrbit(orbitIndex) {
+        if (!this.projects || this.projects.length === 0) return [];
+        
+        const totalProjects = this.projects.length;
+        const orbitCount = 8;
+        
+        // Distribute projects more evenly across orbits
+        const projectsPerOrbit = Math.floor(totalProjects / orbitCount);
+        const extraProjects = totalProjects % orbitCount;
+        
+        let startIndex = 0;
+        for (let i = 0; i < orbitIndex; i++) {
+            startIndex += projectsPerOrbit + (i < extraProjects ? 1 : 0);
+        }
+        
+        const projectsInThisOrbit = projectsPerOrbit + (orbitIndex < extraProjects ? 1 : 0);
+        const endIndex = startIndex + projectsInThisOrbit;
+        
+        return this.projects.slice(startIndex, endIndex);
+    },
+    
+    getPlanetPositionInOrbit(projectIndex, orbitIndex) {
+        const projectsInThisOrbit = this.getProjectsInOrbit(orbitIndex);
+        const totalProjectsInOrbit = projectsInThisOrbit.length;
+        
+        if (totalProjectsInOrbit === 0) return '';
+        
+        // Calculate angle for this position in the orbit
+        const angle = (projectIndex / totalProjectsInOrbit) * 2 * Math.PI;
+        
+        // Calculate radius based on orbit (orbit containers are already sized)
+        const orbitRadius = 100 + (orbitIndex * 50); // Match the orbit sizing
+        
+        // Calculate x and y positions relative to the orbit center
+        const x = Math.cos(angle) * orbitRadius;
+        const y = Math.sin(angle) * orbitRadius;
+        
+        // Set CSS custom properties for hover effect and position the planet
+        return `--planet-x: ${x}px; --planet-y: ${y}px; transform: translate(-50%, -50%) translate(${x}px, ${y}px);`;
     }
 }" x-init="loadProjects()">
     
@@ -656,18 +897,23 @@
         <!-- Projects Dashboard -->
         <section class="projects-dashboard">
             <div class="container">
-                <h2 class="dashboard-title">Projects</h2>
+                <h2 class="dashboard-title">My Solar System of Projects</h2>
                 
                 <div x-show="loading" class="loading">
                     <div class="spinner"></div>
                 </div>
                 
-                <div class="projects-grid" x-show="!loading && projects.length">
-                    <template x-for="project in projects" :key="project.id">
-                        <div class="project-card" @click="window.open(project.url, '_blank')">
-                            <div class="project-bg" :style="`background-image: url('${project.image}')`"></div>
-                            <h3 class="project-title" x-text="project.name"></h3>
-                            <p class="project-description" x-text="project.description || 'A web development project'"></p>
+                <div class="solar-system" x-show="!loading && projects.length">
+                    <!-- Orbit rings with planets -->
+                    <template x-for="orbitIndex in 8" :key="orbitIndex">
+                        <div :class="`orbit orbit-${orbitIndex}`">
+                            <template x-for="(project, projectIndex) in getProjectsInOrbit(orbitIndex - 1)" :key="project.id">
+                                <div class="project-planet" 
+                                     :style="getPlanetPositionInOrbit(projectIndex, orbitIndex - 1)"
+                                     @click="openProjectModal(project)">
+                                    <div class="project-planet-content" x-text="project.name.split(' ')[0]"></div>
+                                </div>
+                            </template>
                         </div>
                     </template>
                 </div>
@@ -831,12 +1077,30 @@
         </div>
     </div>
 
+    <!-- Project Modal -->
+    <div class="project-modal" :class="{ active: currentProjectModal }" @click="closeProjectModal()">
+        <div class="project-modal-content" @click.stop>
+            <button class="project-modal-close" @click="closeProjectModal()">×</button>
+            <img :src="currentProjectModal?.image" :alt="currentProjectModal?.name" class="project-modal-image">
+            <h3 class="project-modal-title" x-text="currentProjectModal?.name"></h3>
+            <p class="project-modal-description" x-text="currentProjectModal?.description || 'A web development project'"></p>
+            <div class="project-modal-links">
+                <a :href="currentProjectModal?.url" target="_blank" class="project-modal-link primary">Visit Project</a>
+                <a :href="currentProjectModal?.github_url" target="_blank" class="project-modal-link secondary" x-show="currentProjectModal?.github_url">View Code</a>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Close modal on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const alpineComponent = document.querySelector('[x-data]').__x.$data;
-                alpineComponent.closeModal();
+                if (alpineComponent.currentProjectModal) {
+                    alpineComponent.closeProjectModal();
+                } else {
+                    alpineComponent.closeModal();
+                }
             }
         });
         
