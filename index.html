@@ -226,15 +226,13 @@
             max-width: 1000px;
             margin: 0 auto;
             margin-top: 2rem;
-            perspective: 1000px;
-            transform-style: preserve-3d;
         }
         
         .orbit {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotateX(25deg);
+            transform: translate(-50%, -50%);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             animation: rotate 60s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
@@ -253,8 +251,8 @@
         .orbit-8 { width: 860px; height: 860px; animation-duration: 270s; animation-delay: 2.4s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
         
         @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotateX(25deg) rotateZ(0deg); }
-            to { transform: translate(-50%, -50%) rotateX(25deg) rotateZ(360deg); }
+            from { transform: translate(-50%, -50%) rotateZ(0deg); }
+            to { transform: translate(-50%, -50%) rotateZ(360deg); }
         }
         
         .project-planet {
@@ -263,61 +261,60 @@
             height: 50px;
             border-radius: 50%;
             background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: none;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: white;
-            text-align: center;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotateX(-25deg);
+            transform: translate(-50%, -50%);
             pointer-events: auto;
             z-index: 1;
         }
         
+        .project-planet-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
         .project-planet:hover {
-            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) rotateX(-25deg) scale(3);
+            transform: scale(5);
             background: transparent;
-            border-color: var(--accent);
+            border: 2px solid var(--accent);
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
             z-index: 10;
             transition: all 0.3s ease;
         }
         
-        .project-planet:hover .project-planet-content {
+        .project-planet:hover .project-planet-image {
             animation-play-state: paused;
         }
         
         .project-planet:active {
-            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) rotateX(-25deg) scale(2.8);
+            transform: scale(4.8);
             transition: all 0.1s ease;
         }
         
 
         
-        .project-planet-content {
-            position: relative;
-            z-index: 2;
-            padding: 5px;
-        }
+
         
         /* Counter-rotation animations for each orbit */
-        .orbit-1 .project-planet-content { animation: counterRotate1 60s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1s; animation-fill-mode: both; }
-        .orbit-2 .project-planet-content { animation: counterRotate2 90s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.2s; animation-fill-mode: both; }
-        .orbit-3 .project-planet-content { animation: counterRotate3 120s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.4s; animation-fill-mode: both; }
-        .orbit-4 .project-planet-content { animation: counterRotate4 150s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.6s; animation-fill-mode: both; }
-        .orbit-5 .project-planet-content { animation: counterRotate5 180s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.8s; animation-fill-mode: both; }
-        .orbit-6 .project-planet-content { animation: counterRotate6 210s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 2s; animation-fill-mode: both; }
-        .orbit-7 .project-planet-content { animation: counterRotate7 240s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 2.2s; animation-fill-mode: both; }
-        .orbit-8 .project-planet-content { animation: counterRotate8 270s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 2.4s; animation-fill-mode: both; }
+        .orbit-1 .project-planet-image { animation: counterRotate1 60s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1s; animation-fill-mode: both; }
+        .orbit-2 .project-planet-image { animation: counterRotate2 90s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.2s; animation-fill-mode: both; }
+        .orbit-3 .project-planet-image { animation: counterRotate3 120s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.4s; animation-fill-mode: both; }
+        .orbit-4 .project-planet-image { animation: counterRotate4 150s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.6s; animation-fill-mode: both; }
+        .orbit-5 .project-planet-image { animation: counterRotate5 180s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 1.8s; animation-fill-mode: both; }
+        .orbit-6 .project-planet-image { animation: counterRotate6 210s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 2s; animation-fill-mode: both; }
+        .orbit-7 .project-planet-image { animation: counterRotate7 240s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 2.2s; animation-fill-mode: both; }
+        .orbit-8 .project-planet-image { animation: counterRotate8 270s cubic-bezier(0.4, 0.0, 0.2, 1) infinite; animation-delay: 2.4s; animation-fill-mode: both; }
         
         @keyframes counterRotate1 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         @keyframes counterRotate2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
@@ -768,7 +765,6 @@
             .project-planet {
                 width: 35px;
                 height: 35px;
-                font-size: 0.4rem;
             }
             
             .modal-content {
@@ -795,7 +791,6 @@
             .project-planet {
                 width: 30px;
                 height: 30px;
-                font-size: 0.4rem;
             }
             
             .hero {
@@ -988,7 +983,7 @@
                                 <div class="project-planet" 
                                      :style="getPlanetPositionInOrbit(projectIndex, orbitIndex - 1)"
                                      @click="openProjectModal(project)">
-                                    <div class="project-planet-content" x-text="project.name.split(' ')[0]"></div>
+                                    <img :src="project.image" :alt="project.name" class="project-planet-image">
                                 </div>
                             </template>
                         </div>
