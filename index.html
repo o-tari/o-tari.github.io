@@ -664,6 +664,46 @@
             min-height: 200px;
         }
         
+        /* Mobile Message */
+        .mobile-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .mobile-message-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+        
+        .mobile-message-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .mobile-message-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 400px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+
+        
         .spinner {
             width: 40px;
             height: 40px;
@@ -795,14 +835,27 @@
                 font-size: 1.2rem;
                 margin-bottom: 2rem;
             }
+            
+            .mobile-message-title {
+                font-size: 1.5rem;
+            }
+            
+            .mobile-message-text {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
-<body x-data="{
+<body     x-data="{
     currentModal: null,
     currentProjectModal: null,
     projects: [],
     loading: false,
+    isMobile: false,
+    
+    checkMobile() {
+        this.isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    },
     
     async loadProjects() {
         this.loading = true;
@@ -877,13 +930,23 @@
         // Set CSS custom properties for hover effect and position the planet
         return `--planet-x: ${x}px; --planet-y: ${y}px; transform: translate(-50%, -50%) translate(${x}px, ${y}px);`;
     }
-}" x-init="loadProjects()">
+}" x-init="checkMobile(); loadProjects()">
     
     <!-- Particles Background -->
     <div id="particles-js"></div>
     
+    <!-- Mobile Message -->
+    <div class="mobile-message" x-show="isMobile">
+        <div class="mobile-message-icon">🖥️</div>
+        <h1 class="mobile-message-title">Desktop Experience Required</h1>
+        <p class="mobile-message-text">
+            This interactive solar system portfolio is optimized for desktop viewing. 
+            Please access this site from a desktop or laptop computer for the best experience.
+        </p>
+    </div>
+    
     <!-- Main Layout -->
-    <div class="main-layout">
+    <div class="main-layout" x-show="!isMobile">
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
@@ -1087,6 +1150,16 @@
     </div>
 
     <script>
+        // Mobile detection and resize handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const alpineComponent = document.querySelector('[x-data]').__x.$data;
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                alpineComponent.checkMobile();
+            });
+        });
+        
         // Close modal on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
