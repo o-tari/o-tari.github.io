@@ -1200,7 +1200,7 @@
         }
 
         /* Enhanced Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .hero-content {
                 flex-direction: column;
                 text-align: center;
@@ -1432,6 +1432,76 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .solar-system {
+                height: 600px;
+                max-width: 700px;
+            }
+
+            .orbit-1 { width: 120px; height: 120px; }
+            .orbit-2 { width: 180px; height: 180px; }
+            .orbit-3 { width: 240px; height: 240px; }
+            .orbit-4 { width: 300px; height: 300px; }
+            .orbit-5 { width: 360px; height: 360px; }
+            .orbit-6 { width: 420px; height: 420px; }
+            .orbit-7 { width: 480px; height: 480px; }
+            .orbit-8 { width: 540px; height: 540px; }
+
+            .project-planet {
+                width: 40px;
+                height: 40px;
+            }
+
+            .hero {
+                padding: 35px 0;
+            }
+
+            .hero-avatar {
+                width: 70px;
+                height: 70px;
+            }
+
+            .hero-title {
+                font-size: 1.6rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .dashboard-title {
+                font-size: 1.3rem;
+                margin-bottom: 2rem;
+            }
+
+            .project-name-display {
+                bottom: 110px;
+            }
+
+            .project-name-text {
+                padding: 0.4rem 0.8rem;
+                font-size: 1.1rem;
+            }
+
+            .view-toggle {
+                bottom: 80px;
+            }
+
+            .view-toggle-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+
+            .bottom-description {
+                bottom: 20px;
+            }
+
+            .bottom-description-text {
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 480px) {
             .solar-system {
                 height: 400px;
@@ -1501,7 +1571,10 @@
     hoveredProject: null,
 
     checkMobile() {
-        this.isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Allow iPad Mini (768px) and above, only disallow iPhone
+        const isIPhone = /iPhone/i.test(navigator.userAgent);
+        const isSmallScreen = window.innerWidth < 768;
+        this.isMobile = isIPhone || isSmallScreen;
     },
 
     async loadProjects() {
@@ -1638,11 +1711,11 @@
 
     <!-- Mobile Message -->
     <div class="mobile-message" x-show="isMobile">
-        <div class="mobile-message-icon">🖥️</div>
-        <h1 class="mobile-message-title">Desktop Experience Required</h1>
+        <div class="mobile-message-icon">📱</div>
+        <h1 class="mobile-message-title">Larger Screen Required</h1>
         <p class="mobile-message-text">
-            This interactive solar system portfolio is optimized for desktop viewing.
-            Please access this site from a desktop or laptop computer for the best experience.
+            This interactive solar system portfolio requires a larger screen for the best experience.
+            Please access this site from a tablet (iPad Mini or larger), laptop, or desktop computer.
         </p>
     </div>
 
