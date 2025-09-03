@@ -236,21 +236,23 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             animation: rotate 60s linear infinite;
+            animation-delay: 2s;
+            animation-fill-mode: both;
             pointer-events: none;
         }
         
-        .orbit-1 { width: 200px; height: 200px; animation-duration: 40s; }
-        .orbit-2 { width: 300px; height: 300px; animation-duration: 60s; }
-        .orbit-3 { width: 400px; height: 400px; animation-duration: 80s; }
-        .orbit-4 { width: 500px; height: 500px; animation-duration: 100s; }
-        .orbit-5 { width: 600px; height: 600px; animation-duration: 120s; }
-        .orbit-6 { width: 700px; height: 700px; animation-duration: 140s; }
-        .orbit-7 { width: 800px; height: 800px; animation-duration: 160s; }
-        .orbit-8 { width: 900px; height: 900px; animation-duration: 180s; }
-        .orbit-9 { width: 1000px; height: 1000px; animation-duration: 200s; }
-        .orbit-10 { width: 1100px; height: 1100px; animation-duration: 220s; }
-        .orbit-11 { width: 1200px; height: 1200px; animation-duration: 240s; }
-        .orbit-12 { width: 1300px; height: 1300px; animation-duration: 260s; }
+        .orbit-1 { width: 200px; height: 200px; animation-duration: 40s; animation-delay: 1s; }
+        .orbit-2 { width: 300px; height: 300px; animation-duration: 60s; animation-delay: 1.2s; }
+        .orbit-3 { width: 400px; height: 400px; animation-duration: 80s; animation-delay: 1.4s; }
+        .orbit-4 { width: 500px; height: 500px; animation-duration: 100s; animation-delay: 1.6s; }
+        .orbit-5 { width: 600px; height: 600px; animation-duration: 120s; animation-delay: 1.8s; }
+        .orbit-6 { width: 700px; height: 700px; animation-duration: 140s; animation-delay: 2s; }
+        .orbit-7 { width: 800px; height: 800px; animation-duration: 160s; animation-delay: 2.2s; }
+        .orbit-8 { width: 900px; height: 900px; animation-duration: 180s; animation-delay: 2.4s; }
+        .orbit-9 { width: 1000px; height: 1000px; animation-duration: 200s; animation-delay: 2.6s; }
+        .orbit-10 { width: 1100px; height: 1100px; animation-duration: 220s; animation-delay: 2.8s; }
+        .orbit-11 { width: 1200px; height: 1200px; animation-duration: 240s; animation-delay: 3s; }
+        .orbit-12 { width: 1300px; height: 1300px; animation-duration: 260s; animation-delay: 3.2s; }
         
         @keyframes rotate {
             from { transform: translate(-50%, -50%) rotate(0deg); }
@@ -310,18 +312,18 @@
         }
         
         /* Counter-rotation animations for each orbit */
-        .orbit-1 .project-planet-content { animation: counterRotate1 40s linear infinite; }
-        .orbit-2 .project-planet-content { animation: counterRotate2 60s linear infinite; }
-        .orbit-3 .project-planet-content { animation: counterRotate3 80s linear infinite; }
-        .orbit-4 .project-planet-content { animation: counterRotate4 100s linear infinite; }
-        .orbit-5 .project-planet-content { animation: counterRotate5 120s linear infinite; }
-        .orbit-6 .project-planet-content { animation: counterRotate6 140s linear infinite; }
-        .orbit-7 .project-planet-content { animation: counterRotate7 160s linear infinite; }
-        .orbit-8 .project-planet-content { animation: counterRotate8 180s linear infinite; }
-        .orbit-9 .project-planet-content { animation: counterRotate9 200s linear infinite; }
-        .orbit-10 .project-planet-content { animation: counterRotate10 220s linear infinite; }
-        .orbit-11 .project-planet-content { animation: counterRotate11 240s linear infinite; }
-        .orbit-12 .project-planet-content { animation: counterRotate12 260s linear infinite; }
+        .orbit-1 .project-planet-content { animation: counterRotate1 40s linear infinite; animation-delay: 1s; animation-fill-mode: both; }
+        .orbit-2 .project-planet-content { animation: counterRotate2 60s linear infinite; animation-delay: 1.2s; animation-fill-mode: both; }
+        .orbit-3 .project-planet-content { animation: counterRotate3 80s linear infinite; animation-delay: 1.4s; animation-fill-mode: both; }
+        .orbit-4 .project-planet-content { animation: counterRotate4 100s linear infinite; animation-delay: 1.6s; animation-fill-mode: both; }
+        .orbit-5 .project-planet-content { animation: counterRotate5 120s linear infinite; animation-delay: 1.8s; animation-fill-mode: both; }
+        .orbit-6 .project-planet-content { animation: counterRotate6 140s linear infinite; animation-delay: 2s; animation-fill-mode: both; }
+        .orbit-7 .project-planet-content { animation: counterRotate7 160s linear infinite; animation-delay: 2.2s; animation-fill-mode: both; }
+        .orbit-8 .project-planet-content { animation: counterRotate8 180s linear infinite; animation-delay: 2.4s; animation-fill-mode: both; }
+        .orbit-9 .project-planet-content { animation: counterRotate9 200s linear infinite; animation-delay: 2.6s; animation-fill-mode: both; }
+        .orbit-10 .project-planet-content { animation: counterRotate10 220s linear infinite; animation-delay: 2.8s; animation-fill-mode: both; }
+        .orbit-11 .project-planet-content { animation: counterRotate11 240s linear infinite; animation-delay: 3s; animation-fill-mode: both; }
+        .orbit-12 .project-planet-content { animation: counterRotate12 260s linear infinite; animation-delay: 3.2s; animation-fill-mode: both; }
         
         @keyframes counterRotate1 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         @keyframes counterRotate2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
