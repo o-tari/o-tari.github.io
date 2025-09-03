@@ -18,16 +18,17 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <style>
         :root {
             --primary: #ffffff;
             --secondary: #f8fafc;
             --accent: #f59e0b;
-            --text: #1f2937;
-            --text-secondary: #6b7280;
+            --text: #ffffff;
+            --text-secondary: #d1d5db;
             --gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            --border: #e5e7eb;
+            --border: #374151;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
         }
@@ -38,15 +39,29 @@
             box-sizing: border-box;
         }
         
+        html, body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        
         body {
             font-family: 'Figtree', sans-serif;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            margin: 0;
-            padding: 0;
+            position: relative;
+        }
+        
+        #particles-js {
+            width: 100%;
+            height: 100%;
+            background: #111111;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
         
         .container {
@@ -61,6 +76,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            z-index: 1;
         }
         
         /* Navigation Links */
@@ -201,9 +217,9 @@
         }
         
         .project-card {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             padding: 1.5rem;
             text-align: center;
@@ -293,9 +309,9 @@
         }
         
         .modal-content {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             padding: 2rem;
             max-width: 600px;
@@ -590,6 +606,9 @@
     }
 }" x-init="loadProjects()">
     
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
     <!-- Main Layout -->
     <div class="main-layout">
         <!-- Hero Section -->
@@ -802,6 +821,103 @@
                 const alpineComponent = document.querySelector('[x-data]').__x.$data;
                 alpineComponent.closeModal();
             }
+        });
+        
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 1000
+                    }
+                },
+                "color": {
+                    "value": ["#aa73ff", "#f8c210", "#83d238", "#33b1f8"]
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#fff"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.6,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 2,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 120,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": false
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
