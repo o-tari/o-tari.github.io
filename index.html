@@ -983,6 +983,34 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Project Name Display */
+        .project-name-display {
+            position: absolute;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            pointer-events: none;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-name-display.show {
+            opacity: 1;
+        }
+
+        .project-name-text {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: inline-block;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
         /* View Toggle Button */
         .view-toggle {
             position: absolute;
@@ -1344,6 +1372,15 @@
                 justify-content: center;
             }
 
+            .project-name-display {
+                bottom: 120px;
+            }
+
+            .project-name-text {
+                padding: 0.4rem 0.8rem;
+                font-size: 1.1rem;
+            }
+
             .view-toggle {
                 bottom: 90px;
             }
@@ -1461,6 +1498,7 @@
     projects: [],
     loading: false,
     isMobile: false,
+    hoveredProject: null,
 
     checkMobile() {
         this.isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1648,12 +1686,19 @@
                             <template x-for="(project, projectIndex) in getProjectsInOrbit(orbitIndex - 1)" :key="project.id">
                                 <div class="project-planet"
                                      :style="getPlanetPositionInOrbit(projectIndex, orbitIndex - 1)"
-                                     @click="openProjectModal(project)">
+                                     @click="openProjectModal(project)"
+                                     @mouseenter="hoveredProject = project"
+                                     @mouseleave="hoveredProject = null">
                                     <img :src="project.image" :alt="project.name" class="project-planet-image">
                                 </div>
                             </template>
                         </div>
                     </template>
+                </div>
+
+                <!-- Project Name Display -->
+                <div class="project-name-display" :class="{ show: hoveredProject }" x-show="!loading && projects.length">
+                    <div class="project-name-text" x-text="hoveredProject?.name"></div>
                 </div>
 
                 <!-- Table View Button -->
