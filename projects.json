@@ -318,5 +318,165 @@
     "image": "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=300&fit=crop",
     "url": "https://devops.example.com",
     "github_url": "https://github.com/otokapanadze/devops-dashboard"
+  },
+  {
+    "id": 41,
+    "name": "Smart Home System",
+    "description": "IoT-based home automation platform",
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    "url": "https://smarthome.example.com",
+    "github_url": "https://github.com/otokapanadze/smart-home-system"
+  },
+  {
+    "id": 42,
+    "name": "Car Rental Platform",
+    "description": "Vehicle rental and booking management system",
+    "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
+    "url": "https://carrental.example.com",
+    "github_url": "https://github.com/otokapanadze/car-rental-platform"
+  },
+  {
+    "id": 43,
+    "name": "Food Delivery API",
+    "description": "Restaurant and delivery service backend",
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+    "url": "https://fooddelivery.example.com",
+    "github_url": "https://github.com/otokapanadze/food-delivery-api"
+  },
+  {
+    "id": 44,
+    "name": "Job Board Platform",
+    "description": "Employment and recruitment management system",
+    "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
+    "url": "https://jobboard.example.com",
+    "github_url": "https://github.com/otokapanadze/job-board-platform"
+  },
+  {
+    "id": 45,
+    "name": "Pet Care Management",
+    "description": "Veterinary and pet care scheduling system",
+    "image": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop",
+    "url": "https://petcare.example.com",
+    "github_url": "https://github.com/otokapanadze/pet-care-management"
+  },
+  {
+    "id": 46,
+    "name": "Library Management",
+    "description": "Digital library and book tracking system",
+    "image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop",
+    "url": "https://library.example.com",
+    "github_url": "https://github.com/otokapanadze/library-management"
+  },
+  {
+    "id": 47,
+    "name": "Fitness Coach App",
+    "description": "Personal training and workout tracking",
+    "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    "url": "https://fitnesscoach.example.com",
+    "github_url": "https://github.com/otokapanadze/fitness-coach-app"
+  },
+  {
+    "id": 48,
+    "name": "Event Ticketing",
+    "description": "Concert and event ticket management system",
+    "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=300&fit=crop",
+    "url": "https://ticketing.example.com",
+    "github_url": "https://github.com/otokapanadze/event-ticketing"
+  },
+  {
+    "id": 49,
+    "name": "Crowdfunding Platform",
+    "description": "Project funding and donation management",
+    "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
+    "url": "https://crowdfunding.example.com",
+    "github_url": "https://github.com/otokapanadze/crowdfunding-platform"
+  },
+  {
+    "id": 50,
+    "name": "Language Learning",
+    "description": "Interactive language education platform",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop",
+    "url": "https://language.example.com",
+    "github_url": "https://github.com/otokapanadze/language-learning"
+  },
+  {
+    "id": 51,
+    "name": "Waste Management",
+    "description": "Environmental waste tracking and management",
+    "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
+    "url": "https://wastemanagement.example.com",
+    "github_url": "https://github.com/otokapanadze/waste-management"
+  },
+  {
+    "id": 52,
+    "name": "Parking Management",
+    "description": "Smart parking space booking and payment",
+    "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
+    "url": "https://parking.example.com",
+    "github_url": "https://github.com/otokapanadze/parking-management"
+  },
+  {
+    "id": 53,
+    "name": "Insurance Portal",
+    "description": "Insurance policy management and claims",
+    "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
+    "url": "https://insurance.example.com",
+    "github_url": "https://github.com/otokapanadze/insurance-portal"
+  },
+  {
+    "id": 54,
+    "name": "Fleet Management",
+    "description": "Vehicle fleet tracking and maintenance",
+    "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
+    "url": "https://fleet.example.com",
+    "github_url": "https://github.com/otokapanadze/fleet-management"
+  },
+  {
+    "id": 55,
+    "name": "Subscription Billing",
+    "description": "Recurring payment and subscription management",
+    "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
+    "url": "https://billing.example.com",
+    "github_url": "https://github.com/otokapanadze/subscription-billing"
+  },
+  {
+    "id": 56,
+    "name": "Digital Wallet",
+    "description": "Cryptocurrency and digital payment system",
+    "image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=300&fit=crop",
+    "url": "https://wallet.example.com",
+    "github_url": "https://github.com/otokapanadze/digital-wallet"
+  },
+  {
+    "id": 57,
+    "name": "Weather Station",
+    "description": "Environmental monitoring and data collection",
+    "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop",
+    "url": "https://weatherstation.example.com",
+    "github_url": "https://github.com/otokapanadze/weather-station"
+  },
+  {
+    "id": 58,
+    "name": "Legal Case Management",
+    "description": "Law firm case tracking and document management",
+    "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
+    "url": "https://legal.example.com",
+    "github_url": "https://github.com/otokapanadze/legal-case-management"
+  },
+  {
+    "id": 59,
+    "name": "Construction Management",
+    "description": "Building project tracking and resource management",
+    "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop",
+    "url": "https://construction.example.com",
+    "github_url": "https://github.com/otokapanadze/construction-management"
+  },
+  {
+    "id": 60,
+    "name": "Pharmacy Management",
+    "description": "Medication inventory and prescription tracking",
+    "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
+    "url": "https://pharmacy.example.com",
+    "github_url": "https://github.com/otokapanadze/pharmacy-management"
   }
 ]
