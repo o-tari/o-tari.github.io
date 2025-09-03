@@ -897,11 +897,11 @@
         <!-- Projects Dashboard -->
         <section class="projects-dashboard">
             <div class="container">
-                <h2 class="dashboard-title">My Solar System of Projects</h2>
-                
                 <div x-show="loading" class="loading">
                     <div class="spinner"></div>
                 </div>
+                
+                <h2 class="dashboard-title" x-show="!loading && projects.length">Projects</h2>
                 
                 <div class="solar-system" x-show="!loading && projects.length">
                     <!-- Orbit rings with planets -->
