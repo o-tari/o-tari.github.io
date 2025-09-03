@@ -983,6 +983,26 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Bottom Description Section */
+        .bottom-description {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .bottom-description-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
         /* Enhanced Responsive Design */
         @media (max-width: 768px) {
             .hero-content {
@@ -1155,6 +1175,14 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .bottom-description {
+                bottom: 20px;
+            }
+
+            .bottom-description-text {
+                font-size: 0.9rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1205,6 +1233,14 @@
 
             .mobile-message-text {
                 font-size: 1rem;
+            }
+
+            .bottom-description {
+                bottom: 15px;
+            }
+
+            .bottom-description-text {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -1361,10 +1397,7 @@
                         <div class="hero-text">
                             <h1 class="hero-title">Otar Kapanadze</h1>
                             <h2 class="hero-subtitle">Full Stack Developer</h2>
-                            <p class="hero-description">
-                                I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem.
-                                I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.
-                            </p>
+
                         </div>
                     </div>
                     <div class="hero-nav">
@@ -1399,6 +1432,16 @@
                         </div>
                     </template>
                 </div>
+            </div>
+        </section>
+
+        <!-- Bottom Description Section -->
+        <section class="bottom-description">
+            <div class="container">
+                <p class="bottom-description-text">
+                    I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem.
+                    I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.
+                </p>
             </div>
         </section>
     </div>
