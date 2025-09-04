@@ -294,13 +294,17 @@
             clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) calc(100% - 0px), 10px calc(100% - 0px), 0% calc(100% - 10px));
             background-color: var(--black-color);
             max-width: calc(100% - 10px);
-            background-color: var(--yellow-color);
+            background: linear-gradient(135deg, var(--yellow-color) 0%, rgba(249, 240, 2, 0.8) 100%);
             position: relative;
             transition: all 0.3s ease;
             cursor: pointer;
             overflow: hidden;
             aspect-ratio: 2 / 1;
             min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
         }
 
         .project-card:hover {
@@ -331,17 +335,18 @@
         }
 
         .project-card-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            transform: translateY(100%);
+            position: relative;
+            background: transparent;
+            backdrop-filter: none;
+            padding: 30px 20px;
+            transform: translateY(0);
             transition: all 0.3s ease;
             border-top: none;
             z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .project-card:hover .project-card-content {
@@ -390,83 +395,44 @@
             color: white !important;
         }
 
-        /* Show content always when no image */
-        .project-card.no-image .project-card-content,
-        .project-card-content.always-visible {
-            transform: translateY(0) !important;
-            position: relative !important;
-            background: transparent !important;
-            backdrop-filter: none !important;
-            padding: 30px 20px !important;
-            height: 100% !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
-        }
-
-        .project-card.no-image {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: stretch;
-            background: linear-gradient(135deg, var(--yellow-color) 0%, rgba(249, 240, 2, 0.8) 100%);
-        }
-
-        .project-card.no-image .project-card-content h3 {
-            color: var(--black-color) !important;
-            font-size: 1.4rem !important;
-            margin-bottom: 15px !important;
-            text-align: center !important;
-        }
-
-        .project-card.no-image .project-card-content p {
-            color: var(--black-color) !important;
-            font-size: 1rem !important;
-            line-height: 1.5 !important;
-            margin-bottom: 20px !important;
-            text-align: center !important;
-            flex-grow: 1 !important;
-        }
-
-        .project-card.no-image .project-links {
-            display: flex !important;
-            gap: 10px !important;
-            justify-content: center !important;
-            margin-top: auto !important;
-        }
-
-        .project-card.no-image .cyberpunk {
-            background-color: var(--black-color) !important;
-            color: var(--yellow-color) !important;
-            border-color: var(--black-color) !important;
-        }
-
-        .project-card.no-image .cyberpunk.green {
-            background-color: var(--green-color) !important;
-            color: white !important;
-        }
 
         .project-card:hover .project-card-image {
             transform: scale(1.1);
         }
 
         .project-card h3 {
-            color: var(--neon-cyan);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            color: var(--black-color) !important;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-align: center;
             text-transform: uppercase;
         }
 
         .project-card p {
-            color: var(--neon-cyan);
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin-bottom: 15px;
+            color: var(--black-color);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: center;
+            flex-grow: 1;
         }
 
         .project-links {
             display: flex;
-            gap: 5px;
+            gap: 10px;
+            justify-content: center;
+            margin-top: auto;
+        }
+
+        .project-card .cyberpunk {
+            background-color: var(--black-color);
+            color: var(--yellow-color);
+            border-color: var(--black-color);
+        }
+
+        .project-card .cyberpunk.green {
+            background-color: var(--green-color);
+            color: white;
         }
 
         /* Cyberpunk Paragraph Styles */
@@ -2048,21 +2014,16 @@
         </div>
         <div class="projects-grid" x-show="!loading && projects.length">
             <template x-for="project in displayedProjects" :key="project.id">
-                <div class="project-card" @click="openProjectModal(project)" 
-                     :class="{ 'no-image': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
+                <div class="project-card" @click="openProjectModal(project)">
                     <div class="project-card-image-container">
-                        <img class="project-card-image" 
-                             :src="project.image"
-                             :alt="project.name"
-                             x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')">
+                        <img class="project-card-image" :src="project.image" :alt="project.name" x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')" alt="Task Management App" style="display: none;">
                     </div>
-                    <div class="project-card-content" 
-                         :class="{ 'always-visible': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
-                        <h3 x-text="project.name"></h3>
-                        <p x-text="project.description || 'A web development project'"></p>
+                    <div class="project-card-content">
+                        <h3 x-text="project.name">Task Management App</h3>
+                        <p x-text="project.description || 'A web development project'">Collaborative project management solution</p>
                         <div class="project-links">
-                            <a :href="project.url" target="_blank" class="cyberpunk" @click.stop>Visit_</a>
-                            <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop>Code_</a>
+                            <a :href="project.url" target="_blank" class="cyberpunk" @click.stop="" href="https://taskmanager.example.com">Visit_</a>
+                            <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop="" style="display: none;">Code_</a>
                         </div>
                     </div>
                 </div>
@@ -2185,21 +2146,16 @@
             <div class="modal-body">
                 <div class="projects-grid">
                     <template x-for="project in projects" :key="project.id">
-                        <div class="project-card" @click="openProjectModal(project)" 
-                             :class="{ 'no-image': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
+                        <div class="project-card" @click="openProjectModal(project)">
                             <div class="project-card-image-container">
-                                <img class="project-card-image" 
-                                     :src="project.image"
-                                     :alt="project.name"
-                                     x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')">
+                                <img class="project-card-image" :src="project.image" :alt="project.name" x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')" alt="Task Management App" style="display: none;">
                             </div>
-                            <div class="project-card-content" 
-                                 :class="{ 'always-visible': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
-                                <h3 x-text="project.name"></h3>
-                                <p x-text="project.description || 'A web development project'"></p>
+                            <div class="project-card-content">
+                                <h3 x-text="project.name">Task Management App</h3>
+                                <p x-text="project.description || 'A web development project'">Collaborative project management solution</p>
                                 <div class="project-links">
-                                    <a :href="project.url" target="_blank" class="cyberpunk" @click.stop>Visit_</a>
-                                    <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop>Code_</a>
+                                    <a :href="project.url" target="_blank" class="cyberpunk" @click.stop="" href="https://taskmanager.example.com">Visit_</a>
+                                    <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop="" style="display: none;">Code_</a>
                                 </div>
                             </div>
                         </div>
