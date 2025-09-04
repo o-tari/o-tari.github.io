@@ -336,6 +336,48 @@
 
         .project-card:hover .project-card-content {
             transform: translateY(0);
+            position: relative !important;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            padding: 30px 20px !important;
+            height: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+        }
+
+        .project-card:hover .project-card-content h3 {
+            color: var(--black-color) !important;
+            font-size: 1.4rem !important;
+            margin-bottom: 15px !important;
+            text-align: center !important;
+        }
+
+        .project-card:hover .project-card-content p {
+            color: var(--black-color) !important;
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 20px !important;
+            text-align: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .project-card:hover .project-links {
+            display: flex !important;
+            gap: 10px !important;
+            justify-content: center !important;
+            margin-top: auto !important;
+        }
+
+        .project-card:hover .cyberpunk {
+            background-color: var(--black-color) !important;
+            color: var(--yellow-color) !important;
+            border-color: var(--black-color) !important;
+        }
+
+        .project-card:hover .cyberpunk.green {
+            background-color: var(--green-color) !important;
+            color: white !important;
         }
 
         /* Show content always when no image */
