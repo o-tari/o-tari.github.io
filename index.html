@@ -391,6 +391,9 @@
             color: var(--neon-cyan);
             font-size: 1.2rem;
             position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         section.cyberpunk.black p.cyberpunk,
@@ -1963,7 +1966,7 @@
                     </div>
                     <div class="project-card-content">
                         <h3 x-text="project.name">Task Management App</h3>
-                        <p x-text="project.description || 'A web development project'">Collaborative project management solution</p>
+                        <p class="cyberpunk" x-text="project.description || 'A web development project'">Collaborative project management solution</p>
                         <div class="project-links">
                             <a :href="project.url" target="_blank" class="cyberpunk" @click.stop="" href="https://taskmanager.example.com">Visit_</a>
                             <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop="" style="display: none;">Code_</a>
@@ -2095,7 +2098,7 @@
                             </div>
                             <div class="project-card-content">
                                 <h3 x-text="project.name">Task Management App</h3>
-                                <p x-text="project.description || 'A web development project'">Collaborative project management solution</p>
+                                <p class="cyberpunk" x-text="project.description || 'A web development project'">Collaborative project management solution</p>
                                 <div class="project-links">
                                     <a :href="project.url" target="_blank" class="cyberpunk" @click.stop="" href="https://taskmanager.example.com">Visit_</a>
                                     <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop="" style="display: none;">Code_</a>
