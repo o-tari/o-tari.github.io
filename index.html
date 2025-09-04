@@ -16,21 +16,29 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.bunny.net/css?family=advent+pro:400,500,600,700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
     
     <style>
         :root {
-            --primary: #ffffff;
-            --secondary: #f8fafc;
-            --accent: #f59e0b;
-            --text: #ffffff;
-            --text-secondary: #d1d5db;
-            --gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            --border: #374151;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --glitched-duration: 0.9s;
+            --glitched-long-duration: 3s;
+            --yellow-color: #f9f002;
+            --yellow-color-opacity: #f9f00242;
+            --orange-color: #ff9800;
+            --border-color: #8ae66e;
+            --red-color: #ff003c;
+            --blue-color: #0c5f74;
+            --green-color: #298d29;
+            --purple-color: purple;
+            --neon-color: #39ff14;
+            --black-color: #000;
+            --dark-bg: #0a0a0a;
+            --dark-secondary: #1a1a1a;
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff00ff;
         }
         
         * {
@@ -46,22 +54,79 @@
         }
         
         body {
-            font-family: 'Figtree', sans-serif;
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
+            background-color: transparent;
+            padding: 0px;
+            margin: 0px;
+            font-size: 20px;
         }
-        
+
+        /* ---- particles.js container ---- */
         #particles-js {
+            position: fixed;
             width: 100%;
             height: 100%;
-            background: #111111;
-            position: fixed;
-            top: 0;
-            left: 0;
+            background-color: #b61924;
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
             z-index: -1;
+        }
+
+        /* ---- stats.js ---- */
+        .count-particles {
+            background: var(--black-color);
+            position: absolute;
+            top: 48px;
+            left: 0;
+            width: 80px;
+            color: var(--neon-cyan);
+            font-size: .8em;
+            text-align: left;
+            text-indent: 4px;
+            line-height: 14px;
+            padding-bottom: 2px;
+            font-family: "Advent Pro", Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            border: 1px solid var(--neon-cyan);
+        }
+
+        .js-count-particles {
+            font-size: 1.1em;
+        }
+
+        #stats, .count-particles {
+            -webkit-user-select: none;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+
+        #stats {
+            border-radius: 3px 3px 0 0;
+            overflow: hidden;
+        }
+
+        .count-particles {
+            border-radius: 0 0 3px 3px;
+        }
+
+        body * {
+            font-family: "Advent Pro", arial;
+        }
+        
+        /* Cyberpunk Section Styles */
+        section.cyberpunk {
+            background-color: transparent;
+            color: var(--neon-cyan);
+            padding: 60px 60px;
+            position: relative;
+            margin-top: -1px;
+            margin-bottom: -1px;
+        }
+
+        section.cyberpunk.black {
+            background-color: transparent;
+            color: var(--neon-cyan);
         }
         
         .container {
@@ -160,150 +225,370 @@
             color: var(--text-secondary);
         }
         
-        /* Action Buttons */
-        .action-btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-        }
-        
-        .action-btn.primary {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
-        
-        .action-btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
-        }
-        
-        .action-btn.secondary {
-            background: var(--glass-bg);
-            color: var(--text);
-            border-color: var(--glass-border);
-        }
-        
-        .action-btn.secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        /* Projects Dashboard */
-        .projects-dashboard {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .dashboard-title {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text);
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-        }
-        
-        /* Solar System Container */
-        .solar-system {
-            position: relative;
-            width: 100%;
-            height: 800px;
-            max-width: 1000px;
-            margin: 0 auto;
-            margin-top: -6rem;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .orbit {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: rotate 60s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-            animation-delay: 2s;
-            animation-fill-mode: both;
-            pointer-events: none;
-        }
-        
-        .orbit-1 { width: 160px; height: 160px; animation-duration: 60s; animation-delay: 1s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-2 { width: 260px; height: 260px; animation-duration: 90s; animation-delay: 1.2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-3 { width: 360px; height: 360px; animation-duration: 120s; animation-delay: 1.4s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-4 { width: 460px; height: 460px; animation-duration: 150s; animation-delay: 1.6s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-5 { width: 560px; height: 560px; animation-duration: 180s; animation-delay: 1.8s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-6 { width: 660px; height: 660px; animation-duration: 210s; animation-delay: 2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-7 { width: 760px; height: 760px; animation-duration: 240s; animation-delay: 2.2s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .orbit-8 { width: 860px; height: 860px; animation-duration: 270s; animation-delay: 2.4s; animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1); }
-        
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotateZ(0deg); }
-            to { transform: translate(-50%, -50%) rotateZ(360deg); }
-        }
-        
-        .project-planet {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: transparent;
+        /* Cyberpunk Buttons and Links */
+        button.cyberpunk,
+        input[type=submit].cyberpunk, 
+        a.cyberpunk {
+            --text: "R-25";
+            --background-color: var(--red-color);
+            display: block;
             border: none;
+            border-radius: 0%;
+            font-size: 1rem;
+            line-height: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 15px 30px;
+            margin: 5px 10px 5px 0px;
+            position: relative;
+            color: #fff;
+            border-right: 2px solid var(--border-color);
+            clip-path: polygon(
+                -8px 0%,
+                calc(100% + 8px) 0%,
+                calc(100% + 8px) 100%,
+                12px 100%,
+                -8px calc(100% - 20px)
+            );
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px));
-            pointer-events: auto;
-            z-index: 1;
+            background-color: var(--background-color);
+            outline: none;
+            display: inline-block;
         }
         
-        .project-planet-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            transition: all 0.3s ease;
+        button.cyberpunk.green,
+        input[type=submit].cyberpunk.green,
+        a.cyberpunk.green {
+            --background-color: var(--green-color);
+        }
+
+        button.cyberpunk.purple,
+        input[type=submit].cyberpunk.purple,
+        a.cyberpunk.purple {
+            --background-color: var(--purple-color);
+        }
+
+        button.cyberpunk.blue,
+        input[type=submit].cyberpunk.blue,
+        a.cyberpunk.blue {
+            --background-color: var(--blue-color);
+        }
+
+        button.cyberpunk:hover,
+        a.cyberpunk:hover,
+        input[type=submit].cyberpunk:hover,
+        button.cyberpunk:focus,
+        a.cyberpunk:focus,
+        input[type=submit].cyberpunk:focus{
+            animation-name: buttonhover;
+            animation-duration: var(--glitched-duration);
+            animation-iteration-count: infinite;
+            animation-timing-function: linear; 
         }
         
-        .project-planet:hover {
-            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(4);
+        @keyframes buttonhover {
+            0% {
+                transform: skew(0deg);
+            }
+            60% {
+                transform: skew(0deg);
+            }
+            61% {
+                transform: skew(10deg);
+            }
+            70% {
+                transform: skew(10deg);
+            }
+            71% {
+                transform: skew(0deg);
+            }
+            100% {
+                transform: skew(0deg);
+            }
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+        
+        .project-card {
             background: transparent;
-            border: 2px solid var(--accent);
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
-            z-index: 10;
+            border: 3px solid var(--neon-cyan);
+            padding: 20px;
+            position: relative;
             transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid var(--neon-cyan);
+        }
+
+        .project-card h3 {
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .project-card p {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* Cyberpunk Paragraph Styles */
+        p.cyberpunk,
+        .cyberpunk p {
+            border: 30px solid var(--black-color);
+            border-right: 5px solid var(--black-color);
+            border-left: 5px solid var(--black-color);
+            border-bottom: 24px solid var(--black-color);
+            padding: 5px;
+            clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) 100%, 80px calc(100% - 0px), 65px calc(100% - 15px), 0% calc(100% - 15px));
+            background-color: transparent;
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        section.cyberpunk.black p.cyberpunk,
+        section.cyberpunk.black p {
+            border: 30px solid var(--neon-cyan);
+            border-right: 5px solid var(--neon-cyan);
+            border-left: 5px solid var(--neon-cyan);
+            border-bottom: 24px solid var(--neon-cyan);
+            background-color: transparent;
+            color: var(--neon-cyan);
+        }
+
+        /* Cyberpunk Link Styles */
+        .cyberpunk a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+        }
+
+        .cyberpunk a:after {
+            content: " ";
+            position: absolute;
+            bottom: -1px;
+            left: 0px;
+            width: 100%;
+            height: 1.5px;
+            background-color: var(--neon-cyan);
+            box-shadow: 0px 0px 8px 3px var(--neon-cyan);
+        }
+
+        /* Cyberpunk Modal Content Styles */
+        .cyberpunk .boxtree {
+            --gap: 15px;
+            --border-height: 1px;
+            --padding: 5px;
+            --resolved-text: "RESOLVED";
+            --pending-text: "NO ACCESS";
+        }
+
+        @media (min-width: 600px) {
+            .cyberpunk .boxtree {
+                --gap: 20px;
+                --border-height: 3px;
+                --padding: 10px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .cyberpunk .boxtree {
+                --gap: 30px;
+                --border-height: 5px;
+                --padding: 20px;
+            }
+        }
+
+        .cyberpunk .boxtree {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            align-items: stretch;
+            gap: var(--gap);
+            margin: 60px -50px;
+        }
+
+        .cyberpunk .boxtree > div {
+            width: calc(100% - var(--gap));
+            box-sizing: border-box;
+            border: var(--border-height) dashed var(--neon-cyan);
+            padding: var(--padding);
+            color: var(--neon-cyan);
+            position: relative;
+        }
+
+        .cyberpunk.black .boxtree > div {
+            color: var(--neon-cyan);
+            border: var(--border-height) dashed var(--neon-cyan);
+        }
+
+        .cyberpunk .boxtree > div:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: var(--gap);
+            background-color: var(--neon-cyan);
+            left: 0px;
+            bottom: calc( 0px - var(--gap) - var(--border-height));
+            clip-path: polygon(calc(50% - 2px) 0%, calc(50% - 2px) 100%, calc(50% + 2px) 100%, calc(50% + 2px) 0%);
+        }
+
+        .cyberpunk.black .boxtree > div:after {
+            background-color: var(--neon-cyan);
+        }
+
+        .cyberpunk .boxtree > div {
+            width: calc(50% - var(--gap));
+        }
+
+        .cyberpunk.black .boxtree > div.resolved {
+            border-color: var(--neon-color);
+        }
+
+        .cyberpunk .boxtree > div.resolved {
+            border-color: var(--neon-color);
+        }
+
+        .cyberpunk .boxtree > div.resolved, 
+        .cyberpunk .boxtree > div.resolved *,
+        .cyberpunk .boxtree > div.resolved *:after {
+            color: var(--neon-color);
+        }
+
+        .cyberpunk .boxtree > div.resolved:after,
+        .cyberpunk .boxtree > div.resolved *:before {
+            background-color: var(--neon-color);
+        }
+
+        .cyberpunk.black .boxtree > div.resolved, 
+        .cyberpunk.black .boxtree > div.resolved *,
+        .cyberpunk.black .boxtree > div.resolved *:after {
+            color: var(--neon-color);
+        }
+
+        .cyberpunk.black .boxtree > div.resolved:after,
+        .cyberpunk.black .boxtree > div.resolved *:before {
+            background-color: var(--neon-color);
+        }
+
+        .cyberpunk .boxtree > .children1 {
+            width: calc(50% - var(--gap));
+        }
+
+        .cyberpunk .boxtree > .width1 {
+            width: calc(100% - var(--gap));
+        }
+
+        .cyberpunk .boxtree > .children0:after {
+            display: none;  
         }
         
-        .project-planet:hover .project-planet-image {
-            animation-play-state: paused;
+        /* Cyberpunk Headings */
+        h1.cyberpunk,
+        h2.cyberpunk,
+        h3.cyberpunk,
+        h4.cyberpunk,
+        .cyberpunk h1,
+        .cyberpunk h2,
+        .cyberpunk h3,
+        .cyberpunk h4 {
+            font-size: 2rem;
+            line-height: 2.2rem;
+            font-weight: 200;
+            position: relative;
+            padding-bottom: 15px;
+            color: var(--neon-cyan);
+        }
+
+        h2.cyberpunk,
+        .cyberpunk h2 {
+            font-size: 1.7rem;
+            line-height: 1.9rem;
+            font-weight: 300;
+        }
+
+        h3.cyberpunk,
+        .cyberpunk h3 {
+            font-size: 1.4rem;
+            line-height: 1.6rem;
+            font-weight: 500;
+        }
+
+        h4.cyberpunk,
+        .cyberpunk h4 {
+            font-size: 1rem;
+            line-height: 1.2rem;
+            font-weight: 700;
+        }
+
+        h1.cyberpunk:before,
+        h2.cyberpunk:before,
+        h3.cyberpunk:before,
+        h4.cyberpunk:before,
+        .cyberpunk h1:before,
+        .cyberpunk h2:before,
+        .cyberpunk h3:before,
+        .cyberpunk h4:before {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0px;
+            left: 2px;
+            width: 100%;
+            height: 10px;
+            background-color: var(--neon-cyan);
+            clip-path: polygon(0px 0px, 85px 0px, 90px 5px, 100% 5px, 100% 6px, 85px 6px, 80px 10px, 0px 10px);
+        }
+
+        section.cyberpunk.black h1.cyberpunk:before,
+        section.cyberpunk.black h2.cyberpunk:before,
+        section.cyberpunk.black h3.cyberpunk:before,
+        section.cyberpunk.black h4.cyberpunk:before,
+        section.cyberpunk.black h1:before,
+        section.cyberpunk.black h2:before,
+        section.cyberpunk.black h3:before,
+        section.cyberpunk.black h4:before {
+            background-color: var(--neon-cyan);
         }
         
-        .project-planet:active {
-            transform: translate(-50%, -50%) translate(var(--planet-x, 0px), var(--planet-y, 0px)) scale(4);
-            transition: all 0.1s ease;
-        }
+        /* Removed old orbit styles */
+        
+        /* Removed orbit sizing styles */
+        
+        /* Removed rotate animation */
+        
+        /* Removed project-planet styles */
+        
+        /* Removed project-planet hover styles */
         
 
         
@@ -359,12 +644,9 @@
         }
 
         .project-modal-content {
-            background: linear-gradient(135deg,
-                rgba(255, 255, 255, 0.12) 0%,
-                rgba(255, 255, 255, 0.06) 100%);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-            border-radius: 28px;
+            background: transparent;
+            border: 3px solid var(--neon-cyan);
+            border-radius: 0px;
             padding: 0;
             max-width: 600px;
             width: 100%;
@@ -373,10 +655,7 @@
             z-index: 10001;
             transform: scale(0.6) translateY(80px) rotateX(15deg);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow:
-                0 30px 60px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(245, 158, 11, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px var(--neon-cyan);
             overflow: hidden;
         }
 
@@ -385,10 +664,8 @@
         }
 
         .project-modal-header {
-            background: linear-gradient(135deg,
-                rgba(245, 158, 11, 0.15) 0%,
-                rgba(245, 158, 11, 0.08) 100%);
-            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+            background: transparent;
+            border-bottom: 3px solid var(--neon-cyan);
             padding: 1.5rem 2rem;
             position: relative;
         }
@@ -397,27 +674,26 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: var(--red-color);
+            border: 2px solid var(--border-color);
             font-size: 1.25rem;
             color: white;
             cursor: pointer;
             width: 40px;
             height: 40px;
-            border-radius: 12px;
+            border-radius: 0px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
             z-index: 10002;
         }
 
         .project-modal-close:hover {
-            background: rgba(245, 158, 11, 0.2);
-            border-color: rgba(245, 158, 11, 0.5);
+            background: var(--green-color);
+            border-color: var(--border-color);
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 10px var(--border-color);
         }
 
         .project-modal-close:active {
@@ -426,37 +702,36 @@
 
         .project-modal-body {
             padding: 2rem;
+            background: transparent;
         }
 
         .project-modal-image {
             width: 100%;
             height: 220px;
             object-fit: cover;
-            border-radius: 16px;
+            border-radius: 0px;
             margin-bottom: 1.5rem;
-            border: 2px solid rgba(245, 158, 11, 0.2);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--border-color);
+            box-shadow: 0 0 15px var(--border-color);
             transition: all 0.3s ease;
         }
 
         .project-modal-image:hover {
             transform: scale(1.02);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 25px var(--border-color);
         }
 
         .project-modal-title {
             font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            color: var(--black-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .project-modal-description {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--black-color);
             margin-bottom: 2rem;
             line-height: 1.7;
             font-size: 1rem;
@@ -498,30 +773,29 @@
         }
 
         .project-modal-link.primary {
-            background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);
+            background: var(--red-color);
             color: white;
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 15px var(--border-color);
+            border-color: var(--border-color);
         }
 
         .project-modal-link.primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);
-            background: linear-gradient(135deg, #d97706 0%, var(--accent) 100%);
+            box-shadow: 0 0 25px var(--border-color);
+            background: var(--green-color);
         }
 
         .project-modal-link.secondary {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--blue-color);
             color: white;
-            border-color: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            border-color: var(--border-color);
         }
 
         .project-modal-link.secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--green-color);
             transform: translateY(-3px);
-            border-color: rgba(245, 158, 11, 0.4);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--border-color);
+            box-shadow: 0 0 20px var(--border-color);
         }
 
 
@@ -557,12 +831,9 @@
         }
 
         .modal-content {
-            background: linear-gradient(135deg,
-                rgba(255, 255, 255, 0.05) 0%,
-                rgba(255, 255, 255, 0.02) 100%);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            border-radius: 20px;
+            background: transparent;
+            border: 3px solid var(--neon-cyan);
+            border-radius: 0px;
             padding: 0;
             max-width: 700px;
             width: 100%;
@@ -572,10 +843,7 @@
             z-index: 10001;
             transform: scale(0.7) translateY(50px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(245, 158, 11, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px var(--neon-cyan);
         }
 
         .modal.active .modal-content {
@@ -583,10 +851,8 @@
         }
 
         .modal-header {
-            background: linear-gradient(135deg,
-                rgba(245, 158, 11, 0.05) 0%,
-                rgba(245, 158, 11, 0.02) 100%);
-            border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+            background: transparent;
+            border-bottom: 3px solid var(--neon-cyan);
             padding: 1rem 1.5rem;
             position: relative;
             display: flex;
@@ -597,38 +863,34 @@
         .modal-title {
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--text);
+            color: var(--neon-cyan);
             margin: 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .modal-close {
             position: relative;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(245, 158, 11, 0.2);
+            background: var(--red-color);
+            border: 2px solid var(--neon-cyan);
             font-size: 1.25rem;
-            color: var(--text);
+            color: white;
             cursor: pointer;
             width: 35px;
             height: 35px;
-            border-radius: 10px;
+            border-radius: 0px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
             z-index: 10002;
         }
 
         .modal-close:hover {
-            background: rgba(245, 158, 11, 0.2);
-            border-color: rgba(245, 158, 11, 0.5);
+            background: var(--green-color);
+            border-color: var(--neon-cyan);
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 10px var(--neon-cyan);
         }
 
         .modal-close:active {
@@ -639,6 +901,7 @@
             padding: 2rem;
             max-height: calc(85vh - 120px);
             overflow-y: auto;
+            background: transparent;
         }
 
         .modal-body::-webkit-scrollbar {
@@ -646,17 +909,17 @@
         }
 
         .modal-body::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--black-color);
             border-radius: 3px;
         }
 
         .modal-body::-webkit-scrollbar-thumb {
-            background: rgba(245, 158, 11, 0.5);
+            background: var(--neon-cyan);
             border-radius: 3px;
         }
 
         .modal-body::-webkit-scrollbar-thumb:hover {
-            background: rgba(245, 158, 11, 0.7);
+            background: var(--neon-color);
         }
 
         /* Enhanced Skills Modal */
@@ -1571,10 +1834,8 @@
     hoveredProject: null,
 
     checkMobile() {
-        // Allow iPad Mini (768px) and above, only disallow iPhone
-        const isIPhone = /iPhone/i.test(navigator.userAgent);
-        const isSmallScreen = window.innerWidth < 768;
-        this.isMobile = isIPhone || isSmallScreen;
+        // Always show the cyberpunk layout
+        this.isMobile = false;
     },
 
     async loadProjects() {
@@ -1636,65 +1897,8 @@
         }
     },
 
-    getProjectsInOrbit(orbitIndex) {
-        if (!this.projects || this.projects.length === 0) return [];
-
-        const totalProjects = this.projects.length;
-        const orbitCount = 8;
-
-        // Calculate projects per orbit: orbit number (1-based) * 2
-        // Orbit 1: 2 projects, Orbit 2: 4 projects, Orbit 3: 6 projects, etc.
-        const projectsPerOrbit = [];
-        let totalAllocated = 0;
-
-        for (let i = 0; i < orbitCount; i++) {
-            const orbitNumber = i + 1; // Convert to 1-based orbit number
-            const baseProjects = orbitNumber * 2;
-
-            // For the last orbit, add any leftover projects
-            if (i === orbitCount - 1) {
-                const remainingProjects = totalProjects - totalAllocated;
-                projectsPerOrbit[i] = Math.max(baseProjects, remainingProjects);
-            } else {
-                projectsPerOrbit[i] = baseProjects;
-                totalAllocated += baseProjects;
-            }
-        }
-
-        // Calculate start and end indices for this orbit
-        let startIndex = 0;
-        for (let i = 0; i < orbitIndex; i++) {
-            startIndex += projectsPerOrbit[i];
-        }
-
-        const projectsInThisOrbit = projectsPerOrbit[orbitIndex];
-        const endIndex = startIndex + projectsInThisOrbit;
-
-        return this.projects.slice(startIndex, endIndex);
-    },
-
-    getPlanetPositionInOrbit(projectIndex, orbitIndex) {
-        const projectsInThisOrbit = this.getProjectsInOrbit(orbitIndex);
-        const totalProjectsInOrbit = projectsInThisOrbit.length;
-
-        if (totalProjectsInOrbit === 0) return '';
-
-        // Calculate angle for this position in the orbit
-        const angle = (projectIndex / totalProjectsInOrbit) * 2 * Math.PI;
-
-        // Calculate radius based on orbit (orbit containers are already sized)
-        const orbitRadius = 80 + (orbitIndex * 50); // Match the orbit sizing with balanced system
-
-        // Calculate x and y positions relative to the orbit center
-        const x = Math.cos(angle) * orbitRadius;
-        const y = Math.sin(angle) * orbitRadius;
-
-        // Set CSS custom properties for hover effect and position the planet
-        return `--planet-x: ${x}px; --planet-y: ${y}px;`;
-    },
-
-    openTableModal() {
-        this.currentModal = 'projects-table';
+    openProjectsModal() {
+        this.currentModal = 'projects';
         document.body.style.overflow = 'hidden';
         // Focus management for accessibility
         setTimeout(() => {
@@ -1706,93 +1910,57 @@
     }
 }" x-init="checkMobile(); loadProjects()">
 
-    <!-- Particles Background -->
+    <!-- particles.js container -->
     <div id="particles-js"></div>
-
-    <!-- Mobile Message -->
-    <div class="mobile-message" x-show="isMobile">
-        <div class="mobile-message-icon">📱</div>
-        <h1 class="mobile-message-title">Larger Screen Required</h1>
-        <p class="mobile-message-text">
-            This interactive solar system portfolio requires a larger screen for the best experience.
-            Please access this site from a tablet (iPad Mini or larger), laptop, or desktop computer.
-        </p>
+    
+    <!-- stats - count particles -->
+    <div class="count-particles">
+        <span class="js-count-particles">--</span> particles
     </div>
 
-    <!-- Main Layout -->
-    <div class="main-layout" x-show="!isMobile">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-info">
-                        <img src="assets/imcool.png" alt="Otar Kapanadze" class="hero-avatar">
-                        <div class="hero-text">
-                            <h1 class="hero-title">Otar Kapanadze</h1>
-                            <h2 class="hero-subtitle">Full Stack Developer</h2>
+    <!-- Cyberpunk Header -->
+    <header style="background-color: #000; height: 50px; display: flex; align-items: center; padding: 0 20px; position: relative; z-index: 1;">
+        <a href="https://github.com/otokapanadze" style="color: #f9f002; font-size: 2rem; text-decoration: none;">Github</a>
+    </header>
 
-                        </div>
+    <!-- Cyberpunk Navigation -->
+    <section class="cyberpunk" style="display: flex; justify-content: flex-end; align-items: center; position: relative; z-index: 1;">
+        <a class="cyberpunk" @click.prevent="openModal('skills')">Skills_</a>
+        <button class="cyberpunk green" @click.prevent="openModal('testimonials')">Testimonials_</button>
+        <a class="cyberpunk purple" @click.prevent="openModal('contact')">Contact_</a>
+        <button class="cyberpunk blue" @click.prevent="openModal('projects')">Projects_</button>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="cyberpunk black" style="position: relative; z-index: 1;">
+        <h1 class="cyberpunk">Otar Kapanadze</h1>
+        <h2 class="cyberpunk">Full Stack Developer</h2>
+        <p class="cyberpunk">I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem. I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.</p>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="cyberpunk" style="position: relative; z-index: 1;">
+        <h2 class="cyberpunk">Projects</h2>
+        <div x-show="loading" class="loading">
+            <div class="spinner"></div>
+        </div>
+        <div class="projects-grid" x-show="!loading && projects.length">
+            <template x-for="project in projects" :key="project.id">
+                <div class="project-card" @click="openProjectModal(project)">
+                    <img :src="project.image" :alt="project.name">
+                    <h3 x-text="project.name"></h3>
+                    <p x-text="project.description || 'A web development project'"></p>
+                    <div class="project-links">
+                        <a :href="project.url" target="_blank" class="cyberpunk" @click.stop>Visit_</a>
+                        <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop>Code_</a>
                     </div>
-                    <div class="hero-nav">
-
-                        <a href="#" class="nav-link" @click.prevent="openModal('skills')">Skills</a>
-                        <a href="#" class="nav-link" @click.prevent="openModal('testimonials')">Testimonials</a>
-                        <a href="#" class="nav-link" @click.prevent="openModal('contact')">Contact</a>
-                    </div>
                 </div>
-            </div>
-        </section>
+            </template>
+        </div>
+    </section>
 
-        <!-- Projects Dashboard -->
-        <section class="projects-dashboard">
-            <div class="container">
-
-                <div x-show="loading" class="loading">
-                    <div class="spinner"></div>
-                </div>
-
-                <!-- Solar System View -->
-                <div class="solar-system" x-show="!loading && projects.length">
-                    <!-- Orbit rings with planets -->
-                    <template x-for="orbitIndex in 8" :key="orbitIndex">
-                        <div :class="`orbit orbit-${orbitIndex}`">
-                            <template x-for="(project, projectIndex) in getProjectsInOrbit(orbitIndex - 1)" :key="project.id">
-                                <div class="project-planet"
-                                     :style="getPlanetPositionInOrbit(projectIndex, orbitIndex - 1)"
-                                     @click="openProjectModal(project)"
-                                     @mouseenter="hoveredProject = project"
-                                     @mouseleave="hoveredProject = null">
-                                    <img :src="project.image" :alt="project.name" class="project-planet-image">
-                                </div>
-                            </template>
-                        </div>
-                    </template>
-                </div>
-
-                <!-- Project Name Display -->
-                <div class="project-name-display" :class="{ show: hoveredProject }" x-show="!loading && projects.length">
-                    <div class="project-name-text" x-text="hoveredProject?.name"></div>
-                </div>
-
-                <!-- Table View Button -->
-                <div class="view-toggle" x-show="!loading && projects.length">
-                    <button class="view-toggle-btn" @click="openTableModal()">
-                        <span>Projects List</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bottom Description Section -->
-        <section class="bottom-description">
-            <div class="container">
-                <p class="bottom-description-text">
-                    I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem.
-                    I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.
-                </p>
-            </div>
-        </section>
-    </div>
+    <!-- Cyberpunk Footer -->
+    <footer style="background-color: #000; height: 50px; position: relative; z-index: 1;"></footer>
 
 
 
@@ -1804,37 +1972,31 @@
                 <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
-                <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">🔥</div>
-                    <h3 class="skill-title">Laravel</h3>
-                    <p class="skill-description">Building scalable web applications and APIs using Laravel's MVC architecture with focus on performance and maintainability.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🐘</div>
-                    <h3 class="skill-title">PHP</h3>
-                    <p class="skill-description">Experienced with PHP frameworks including Laravel, Symfony, and WordPress development.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🗄️</div>
-                    <h3 class="skill-title">Databases</h3>
-                    <p class="skill-description">Proficient with MySQL, PostgreSQL, and SQLite for web applications.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⚡</div>
-                    <h3 class="skill-title">JavaScript</h3>
-                    <p class="skill-description">Skilled in Node.js, Vue.js, React, React Native, and Alpine.js for modern development.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h3 class="skill-title">Frontend</h3>
-                    <p class="skill-description">Proficient in HTML5, CSS3, Tailwind CSS, Bootstrap, and modern CSS frameworks.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🤖</div>
-                    <h3 class="skill-title">AI & Tools</h3>
-                    <p class="skill-description">Experience with Large Language Models, AI integration, and Cursor AI for enhanced development.</p>
-                </div>
+                <div class="cyberpunk boxtree">
+                    <div class="resolved children1 width1">
+                        <h2>🔥 Laravel</h2>
+                        Building scalable web applications and APIs using Laravel's MVC architecture with focus on performance and maintainability.
+                    </div>
+                    <div class="resolved children1 width1">
+                        <h2>🐘 PHP</h2>
+                        Experienced with PHP frameworks including Laravel, Symfony, and WordPress development.
+                    </div>
+                    <div class="resolved children1 width1">
+                        <h2>🗄️ Databases</h2>
+                        Proficient with MySQL, PostgreSQL, and SQLite for web applications.
+                    </div>
+                    <div class="resolved children1 width1">
+                        <h2>⚡ JavaScript</h2>
+                        Skilled in Node.js, Vue.js, React, React Native, and Alpine.js for modern development.
+                    </div>
+                    <div class="resolved children1 width1">
+                        <h2>🎨 Frontend</h2>
+                        Proficient in HTML5, CSS3, Tailwind CSS, Bootstrap, and modern CSS frameworks.
+                    </div>
+                    <div class="resolved children1 width1">
+                        <h2>🤖 AI & Tools</h2>
+                        Experience with Large Language Models, AI integration, and Cursor AI for enhanced development.
+                    </div>
                 </div>
             </div>
         </div>
@@ -1848,43 +2010,19 @@
                 <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
-                <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-content">
+                <div class="cyberpunk boxtree">
+                    <div class="resolved children1 width1">
+                        <h2>Benjamin Bagehorn - Nuucap</h2>
                         "We are working with Oto for over a year now. In more than 870 hours he constantly proved his willing to get things done. He is a very kind and reliable person and always motivated to find the best solution."
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="assets/avatar-1.png" alt="Benjamin Bagehorn" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Benjamin Bagehorn</h4>
-                            <p>Nuucap</p>
-                        </div>
                     </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-content">
+                    <div class="resolved children1 width1">
+                        <h2>Adrian St Vaughan - Ascendia LTD</h2>
                         "Working with Oto was a fantastic experience. He understood what we needed quickly, he delivered accurate, prompt work. We would recommend without hesitation."
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="assets/avatar-4.png" alt="Adrian St Vaughan" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Adrian St Vaughan</h4>
-                            <p>Ascendia LTD</p>
-                        </div>
                     </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-content">
+                    <div class="resolved children1 width1">
+                        <h2>Quincy Chapman - DewQ Finance</h2>
                         "Well, as always this is the best freelancer I have ever worked with for web development projects. I would hire Oto again immediately. This is the guy to do your job great!"
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="assets/avatar-4.png" alt="Quincy Chapman" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Quincy Chapman</h4>
-                            <p>DewQ Finance</p>
-                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -1898,77 +2036,45 @@
                 <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
-                <p style="color: var(--text-secondary); margin-bottom: 2rem; text-align: center;">
-                    I'm always interested in new opportunities and exciting projects.
-                    Let's discuss how we can work together to bring your ideas to life.
-                </p>
-                <div class="contact-links">
-                <a href="mailto:oto.kapanadze.dev@gmail.com" class="contact-link">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-link-content">
-                        <strong>Email</strong>
-                        <div>oto.kapanadze.dev@gmail.com</div>
+                <div class="cyberpunk boxtree">
+                    <div class="resolved children1 width1">
+                        <h2>📧 Email</h2>
+                        I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together to bring your ideas to life.
+                        <br><br>
+                        <a href="mailto:oto.kapanadze.dev@gmail.com" class="cyberpunk">oto.kapanadze.dev@gmail.com_</a>
                     </div>
-                </a>
-                <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank" class="contact-link">
-                    <div class="contact-icon">💼</div>
-                    <div class="contact-link-content">
-                        <strong>Upwork</strong>
-                        <div>View my profile</div>
+                    <div class="resolved children1 width1">
+                        <h2>💼 Upwork</h2>
+                        View my professional profile and work history on Upwork. Connect with me for freelance opportunities and project collaborations.
+                        <br><br>
+                        <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank" class="cyberpunk green">View Profile_</a>
                     </div>
-                </a>
-                <a href="https://github.com/otokapanadze" target="_blank" class="contact-link">
-                    <div class="contact-icon">🐙</div>
-                    <div class="contact-link-content">
-                        <strong>GitHub</strong>
-                        <div>Check my code</div>
+                    <div class="resolved children1 width1">
+                        <h2>🐙 GitHub</h2>
+                        Check out my code repositories and open source contributions. See the quality and style of my development work.
+                        <br><br>
+                        <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk blue">View Code_</a>
                     </div>
-                </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Projects Table Modal -->
-    <div class="modal" :class="{ active: currentModal === 'projects-table' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
+    <!-- Projects Modal (if needed for additional project details) -->
+    <div class="modal" :class="{ active: currentModal === 'projects' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
         <div class="modal-content" @click.stop>
             <div class="modal-header">
-                <h2 class="modal-title">Projects List</h2>
+                <h2 class="modal-title">All Projects</h2>
                 <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
-                <div class="projects-table-container">
-                    <table class="projects-table">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Project Name</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template x-for="project in projects" :key="project.id">
-                                <tr @click="openProjectModal(project)">
-                                    <td>
-                                        <img :src="project.image" :alt="project.name" class="project-table-image">
-                                    </td>
-                                    <td>
-                                        <div class="project-table-name" x-text="project.name"></div>
-                                    </td>
-                                    <td>
-                                        <div class="project-table-description" x-text="project.description || 'A web development project'"></div>
-                                    </td>
-                                    <td>
-                                        <div class="project-table-links">
-                                            <a :href="project.url" target="_blank" class="project-table-link primary" @click.stop>Visit</a>
-                                            <a :href="project.github_url" target="_blank" class="project-table-link secondary" x-show="project.github_url" @click.stop>Code</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
+                <div class="cyberpunk boxtree">
+                    <template x-for="project in projects.slice(0, 12)" :key="project.id">
+                        <div class="resolved children1 width1" @click="openProjectModal(project)" style="cursor: pointer;">
+                            <h2 x-text="project.name"></h2>
+                            <span x-text="project.description || 'A web development project'"></span>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -2026,36 +2132,33 @@
             }
         });
         
+        // Cyberpunk theme initialized
+        
         // Initialize particles.js
         particlesJS("particles-js", {
             "particles": {
                 "number": {
-                    "value": 100,
+                    "value": 80,
                     "density": {
                         "enable": true,
-                        "value_area": 1000
+                        "value_area": 800
                     }
                 },
                 "color": {
-                    "value": ["#aa73ff", "#f8c210", "#83d238", "#33b1f8"]
+                    "value": "#00ffff"
                 },
                 "shape": {
                     "type": "circle",
                     "stroke": {
                         "width": 0,
-                        "color": "#fff"
+                        "color": "#000000"
                     },
                     "polygon": {
                         "nb_sides": 5
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
                     }
                 },
                 "opacity": {
-                    "value": 0.6,
+                    "value": 0.5,
                     "random": false,
                     "anim": {
                         "enable": false,
@@ -2065,7 +2168,7 @@
                     }
                 },
                 "size": {
-                    "value": 2,
+                    "value": 3,
                     "random": true,
                     "anim": {
                         "enable": false,
@@ -2076,10 +2179,24 @@
                 },
                 "line_linked": {
                     "enable": true,
-                    "distance": 120,
-                    "color": "#ffffff",
+                    "distance": 150,
+                    "color": "#00ffff",
                     "opacity": 0.4,
                     "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
                 }
             },
             "interactivity": {
@@ -2087,16 +2204,17 @@
                 "events": {
                     "onhover": {
                         "enable": true,
-                        "mode": "grab"
+                        "mode": "repulse"
                     },
                     "onclick": {
-                        "enable": false
+                        "enable": true,
+                        "mode": "push"
                     },
                     "resize": true
                 },
                 "modes": {
                     "grab": {
-                        "distance": 140,
+                        "distance": 400,
                         "line_linked": {
                             "opacity": 1
                         }
@@ -2122,6 +2240,26 @@
             },
             "retina_detect": true
         });
+
+        // Stats and particle counter
+        var count_particles, stats, update;
+        stats = new Stats();
+        stats.setMode(0);
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+        document.body.appendChild(stats.domElement);
+        
+        count_particles = document.querySelector('.js-count-particles');
+        update = function() {
+            stats.begin();
+            stats.end();
+            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+            }
+            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
     </script>
 </body>
 </html>
