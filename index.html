@@ -338,6 +338,62 @@
             transform: translateY(0);
         }
 
+        /* Show content always when no image */
+        .project-card.no-image .project-card-content,
+        .project-card-content.always-visible {
+            transform: translateY(0) !important;
+            position: relative !important;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            padding: 30px 20px !important;
+            height: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+        }
+
+        .project-card.no-image {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+            background: linear-gradient(135deg, var(--yellow-color) 0%, rgba(249, 240, 2, 0.8) 100%);
+        }
+
+        .project-card.no-image .project-card-content h3 {
+            color: var(--black-color) !important;
+            font-size: 1.4rem !important;
+            margin-bottom: 15px !important;
+            text-align: center !important;
+        }
+
+        .project-card.no-image .project-card-content p {
+            color: var(--black-color) !important;
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 20px !important;
+            text-align: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .project-card.no-image .project-links {
+            display: flex !important;
+            gap: 10px !important;
+            justify-content: center !important;
+            margin-top: auto !important;
+        }
+
+        .project-card.no-image .cyberpunk {
+            background-color: var(--black-color) !important;
+            color: var(--yellow-color) !important;
+            border-color: var(--black-color) !important;
+        }
+
+        .project-card.no-image .cyberpunk.green {
+            background-color: var(--green-color) !important;
+            color: white !important;
+        }
+
         .project-card:hover img {
             transform: scale(1.05);
         }
@@ -1940,9 +1996,13 @@
         </div>
         <div class="projects-grid" x-show="!loading && projects.length">
             <template x-for="project in displayedProjects" :key="project.id">
-                <div class="project-card" @click="openProjectModal(project)">
-                    <img :src="project.image" :alt="project.name">
-                    <div class="project-card-content">
+                <div class="project-card" @click="openProjectModal(project)" 
+                     :class="{ 'no-image': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
+                    <img :src="project.image" :alt="project.name" 
+                         x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')"
+                         @error="$el.style.display='none'; $el.closest('.project-card').classList.add('no-image')">
+                    <div class="project-card-content" 
+                         :class="{ 'always-visible': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
                         <h3 x-text="project.name"></h3>
                         <p x-text="project.description || 'A web development project'"></p>
                         <div class="project-links">
@@ -2070,9 +2130,13 @@
             <div class="modal-body">
                 <div class="projects-grid">
                     <template x-for="project in projects" :key="project.id">
-                        <div class="project-card" @click="openProjectModal(project)">
-                            <img :src="project.image" :alt="project.name">
-                            <div class="project-card-content">
+                        <div class="project-card" @click="openProjectModal(project)" 
+                             :class="{ 'no-image': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
+                            <img :src="project.image" :alt="project.name" 
+                                 x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')"
+                                 @error="$el.style.display='none'; $el.closest('.project-card').classList.add('no-image')">
+                            <div class="project-card-content" 
+                                 :class="{ 'always-visible': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
                                 <h3 x-text="project.name"></h3>
                                 <p x-text="project.description || 'A web development project'"></p>
                                 <div class="project-links">
