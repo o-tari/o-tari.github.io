@@ -74,41 +74,7 @@
         }
 
         /* ---- stats.js ---- */
-        .count-particles {
-            background: var(--black-color);
-            position: absolute;
-            top: 48px;
-            left: 0;
-            width: 80px;
-            color: var(--neon-cyan);
-            font-size: .8em;
-            text-align: left;
-            text-indent: 4px;
-            line-height: 14px;
-            padding-bottom: 2px;
-            font-family: "Advent Pro", Helvetica, Arial, sans-serif;
-            font-weight: bold;
-            border: 1px solid var(--neon-cyan);
-        }
 
-        .js-count-particles {
-            font-size: 1.1em;
-        }
-
-        #stats, .count-particles {
-            -webkit-user-select: none;
-            margin-top: 5px;
-            margin-left: 5px;
-        }
-
-        #stats {
-            border-radius: 3px 3px 0 0;
-            overflow: hidden;
-        }
-
-        .count-particles {
-            border-radius: 0 0 3px 3px;
-        }
 
         body * {
             font-family: "Advent Pro", arial;
@@ -318,7 +284,7 @@
         
         .project-card {
             background: transparent;
-            border: 3px solid var(--neon-cyan);
+            border: 3px dashed var(--neon-cyan);
             padding: 20px;
             position: relative;
             transition: all 0.3s ease;
@@ -335,7 +301,7 @@
             height: 200px;
             object-fit: cover;
             margin-bottom: 15px;
-            border: 2px solid var(--neon-cyan);
+            border: 2px dashed var(--neon-cyan);
         }
 
         .project-card h3 {
@@ -1897,44 +1863,29 @@
         }
     },
 
-    openProjectsModal() {
-        this.currentModal = 'projects';
-        document.body.style.overflow = 'hidden';
-        // Focus management for accessibility
-        setTimeout(() => {
-            const modal = document.querySelector('.modal.active');
-            if (modal) {
-                modal.focus();
-            }
-        }, 100);
-    }
 }" x-init="checkMobile(); loadProjects()">
 
     <!-- particles.js container -->
     <div id="particles-js"></div>
     
     <!-- stats - count particles -->
-    <div class="count-particles">
-        <span class="js-count-particles">--</span> particles
-    </div>
 
-    <!-- Cyberpunk Header -->
-    <header style="background-color: #000; height: 50px; display: flex; align-items: center; padding: 0 20px; position: relative; z-index: 1;">
-        <a href="https://github.com/otokapanadze" style="color: #f9f002; font-size: 2rem; text-decoration: none;">Github</a>
-    </header>
-
-    <!-- Cyberpunk Navigation -->
-    <section class="cyberpunk" style="display: flex; justify-content: flex-end; align-items: center; position: relative; z-index: 1;">
-        <a class="cyberpunk" @click.prevent="openModal('skills')">Skills_</a>
-        <button class="cyberpunk green" @click.prevent="openModal('testimonials')">Testimonials_</button>
-        <a class="cyberpunk purple" @click.prevent="openModal('contact')">Contact_</a>
-        <button class="cyberpunk blue" @click.prevent="openModal('projects')">Projects_</button>
+    <!-- Header Section with Name/Title and Navigation -->
+    <section class="cyberpunk" style="display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
+        <div>
+            <h1 class="cyberpunk" style="margin: 0; font-size: 1.8rem;">Otar Kapanadze</h1>
+            <h2 class="cyberpunk" style="margin: 0; font-size: 1.2rem;">Full Stack Developer</h2>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <a class="cyberpunk" @click.prevent="openModal('skills')">Skills_</a>
+            <button class="cyberpunk green" @click.prevent="openModal('testimonials')">Testimonials_</button>
+            <a class="cyberpunk purple" @click.prevent="openModal('contact')">Contact_</a>
+            <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk" style="--background-color: var(--black-color);">GitHub_</a>
+        </div>
     </section>
 
     <!-- Hero Section -->
     <section class="cyberpunk black" style="position: relative; z-index: 1;">
-        <h1 class="cyberpunk">Otar Kapanadze</h1>
-        <h2 class="cyberpunk">Full Stack Developer</h2>
         <p class="cyberpunk">I'm a backend-focused developer with strong expertise in Laravel and the broader PHP ecosystem. I specialize in building scalable web applications, RESTful APIs, and modern backend solutions.</p>
     </section>
 
@@ -2060,25 +2011,6 @@
         </div>
     </div>
 
-    <!-- Projects Modal (if needed for additional project details) -->
-    <div class="modal" :class="{ active: currentModal === 'projects' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
-        <div class="modal-content" @click.stop>
-            <div class="modal-header">
-                <h2 class="modal-title">All Projects</h2>
-                <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="cyberpunk boxtree">
-                    <template x-for="project in projects.slice(0, 12)" :key="project.id">
-                        <div class="resolved children1 width1" @click="openProjectModal(project)" style="cursor: pointer;">
-                            <h2 x-text="project.name"></h2>
-                            <span x-text="project.description || 'A web development project'"></span>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Project Modal -->
     <div class="project-modal" :class="{ active: currentProjectModal }" @click.self="closeProjectModal()" @keydown.escape="closeProjectModal()" tabindex="-1">
@@ -2250,13 +2182,9 @@
         stats.domElement.style.top = '0px';
         document.body.appendChild(stats.domElement);
         
-        count_particles = document.querySelector('.js-count-particles');
         update = function() {
             stats.begin();
             stats.end();
-            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-            }
             requestAnimationFrame(update);
         };
         requestAnimationFrame(update);
