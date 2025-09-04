@@ -11,7 +11,7 @@
     "id": 2,
     "name": "Task Management App",
     "description": "Collaborative project management solution",
-    "image": "https://images.unsplash.com/photo-1484480974693-6ca2a3290bf8?w=400&h=300&fit=crop",
+    "image": null,
     "url": "https://taskmanager.example.com",
     "github_url": null
   },
@@ -571,7 +571,7 @@
     "id": 72,
     "name": "Pet Adoption Center",
     "description": "Animal shelter and pet adoption management",
-    "image": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop",
+    "image": null,
     "url": "https://pet-adoption.example.com",
     "github_url": "https://github.com/otokapanadze/pet-adoption-center"
   }
