@@ -308,17 +308,18 @@
             box-shadow: 0 10px 30px rgba(249, 240, 2, 0.3);
         }
 
-        .project-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            border: none;
-            transition: all 0.3s ease;
-            border-radius: 0;
+        .project-card-image {
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all 0.3s ease;
+            z-index: 1;
+            clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) calc(100% - 0px), 10px calc(100% - 0px), 0% calc(100% - 10px));
         }
 
         .project-card-content {
@@ -332,6 +333,7 @@
             transform: translateY(100%);
             transition: all 0.3s ease;
             border-top: none;
+            z-index: 2;
         }
 
         .project-card:hover .project-card-content {
@@ -436,8 +438,8 @@
             color: white !important;
         }
 
-        .project-card:hover img {
-            transform: scale(1.05);
+        .project-card:hover .project-card-image {
+            background-size: 110%;
         }
 
         .project-card h3 {
@@ -2040,9 +2042,10 @@
             <template x-for="project in displayedProjects" :key="project.id">
                 <div class="project-card" @click="openProjectModal(project)" 
                      :class="{ 'no-image': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
-                    <img :src="project.image" :alt="project.name" 
-                         x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')"
-                         @error="$el.style.display='none'; $el.closest('.project-card').classList.add('no-image')">
+                    <div class="project-card-image" 
+                         :style="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null') ? 'background-image: url(' + project.image + ')' : ''"
+                         x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')">
+                    </div>
                     <div class="project-card-content" 
                          :class="{ 'always-visible': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
                         <h3 x-text="project.name"></h3>
@@ -2174,9 +2177,10 @@
                     <template x-for="project in projects" :key="project.id">
                         <div class="project-card" @click="openProjectModal(project)" 
                              :class="{ 'no-image': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
-                            <img :src="project.image" :alt="project.name" 
-                                 x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')"
-                                 @error="$el.style.display='none'; $el.closest('.project-card').classList.add('no-image')">
+                            <div class="project-card-image" 
+                                 :style="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null') ? 'background-image: url(' + project.image + ')' : ''"
+                                 x-show="project.image && project.image !== '' && !project.image.includes('undefined') && !project.image.includes('null')">
+                            </div>
                             <div class="project-card-content" 
                                  :class="{ 'always-visible': !project.image || project.image === '' || project.image.includes('undefined') || project.image.includes('null') }">
                                 <h3 x-text="project.name"></h3>
