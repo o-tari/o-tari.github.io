@@ -1937,17 +1937,19 @@
     
     <!-- stats - count particles -->
 
-    <!-- Header Section with Name/Title and Navigation -->
-    <section class="cyberpunk" style="display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
-        <div>
-            <h1 class="cyberpunk" style="margin: 0; font-size: 1.8rem;">Otar Kapanadze</h1>
-            <h2 class="cyberpunk" style="margin: 0; font-size: 1.2rem;">Full Stack Developer</h2>
-        </div>
-        <div style="display: flex; gap: 10px;">
-            <a class="cyberpunk" @click.prevent="scrollToSection('contact')">Contact_</a>
-            <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk" style="--background-color: var(--black-color);">GitHub_</a>
-        </div>
-    </section>
+    <!-- Main Container -->
+    <div style="max-width: 1440px; margin: 0 auto; position: relative; z-index: 1;">
+        <!-- Header Section with Name/Title and Navigation -->
+        <section class="cyberpunk" style="display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
+            <div>
+                <h1 class="cyberpunk" style="margin: 0; font-size: 1.8rem;">Otar Kapanadze</h1>
+                <h2 class="cyberpunk" style="margin: 0; font-size: 1.2rem;">Full Stack Developer</h2>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <a class="cyberpunk" @click.prevent="scrollToSection('contact')">Contact_</a>
+                <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk" style="--background-color: var(--black-color);">GitHub_</a>
+            </div>
+        </section>
 
     <!-- Hero Section -->
     <section class="cyberpunk black" style="position: relative; z-index: 1;">
@@ -2054,6 +2056,7 @@
             </div>
         </div>
     </section>
+    </div>
 
     <!-- Cyberpunk Footer -->
     <footer style="background-color: #000; height: 50px; position: relative; z-index: 1;"></footer>
