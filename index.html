@@ -1832,6 +1832,8 @@
     loading: false,
     isMobile: false,
     hoveredProject: null,
+    showAllProjectsModal: false,
+    maxDisplayProjects: 9,
 
     checkMobile() {
         // Always show the cyberpunk layout
@@ -1897,6 +1899,24 @@
         }
     },
 
+    openAllProjectsModal() {
+        this.showAllProjectsModal = true;
+        document.body.style.overflow = 'hidden';
+    },
+
+    closeAllProjectsModal() {
+        this.showAllProjectsModal = false;
+        document.body.style.overflow = 'auto';
+    },
+
+    get displayedProjects() {
+        return this.projects.slice(0, this.maxDisplayProjects);
+    },
+
+    get hasMoreProjects() {
+        return this.projects.length > this.maxDisplayProjects;
+    },
+
 }" x-init="checkMobile(); loadProjects()">
 
     <!-- particles.js container -->
@@ -1930,7 +1950,7 @@
             <div class="spinner"></div>
         </div>
         <div class="projects-grid" x-show="!loading && projects.length">
-            <template x-for="project in projects" :key="project.id">
+            <template x-for="project in displayedProjects" :key="project.id">
                 <div class="project-card" @click="openProjectModal(project)">
                     <img :src="project.image" :alt="project.name">
                     <div class="project-card-content">
@@ -1943,6 +1963,11 @@
                     </div>
                 </div>
             </template>
+        </div>
+        
+        <!-- More Projects Button -->
+        <div x-show="!loading && hasMoreProjects" style="text-align: center; margin-top: 30px;">
+            <button class="cyberpunk blue" @click="openAllProjectsModal()">View All Projects_</button>
         </div>
     </section>
 
@@ -2066,6 +2091,33 @@
         </div>
     </div>
 
+    <!-- All Projects Modal -->
+    <div class="modal" :class="{ active: showAllProjectsModal }" @click.self="closeAllProjectsModal()" @keydown.escape="closeAllProjectsModal()" tabindex="-1">
+        <div class="modal-content" @click.stop style="max-width: 90vw; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h2 class="modal-title">All Projects</h2>
+                <button class="modal-close" @click.prevent="closeAllProjectsModal()" aria-label="Close modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="projects-grid">
+                    <template x-for="project in projects" :key="project.id">
+                        <div class="project-card" @click="openProjectModal(project)">
+                            <img :src="project.image" :alt="project.name">
+                            <div class="project-card-content">
+                                <h3 x-text="project.name"></h3>
+                                <p x-text="project.description || 'A web development project'"></p>
+                                <div class="project-links">
+                                    <a :href="project.url" target="_blank" class="cyberpunk" @click.stop>Visit_</a>
+                                    <a :href="project.github_url" target="_blank" class="cyberpunk green" x-show="project.github_url" @click.stop>Code_</a>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Mobile detection and resize handling
         document.addEventListener('DOMContentLoaded', function() {
@@ -2093,6 +2145,8 @@
                     const alpineComponent = alpineElement.__x.$data;
                     if (alpineComponent.currentProjectModal) {
                         alpineComponent.closeProjectModal();
+                    } else if (alpineComponent.showAllProjectsModal) {
+                        alpineComponent.closeAllProjectsModal();
                     } else {
                         alpineComponent.closeModal();
                     }
