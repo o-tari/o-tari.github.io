@@ -296,7 +296,6 @@
             max-width: calc(100% - 10px);
             background: linear-gradient(135deg, var(--yellow-color) 0%, rgba(249, 240, 2, 0.8) 100%);
             position: relative;
-            transition: all 0.3s ease;
             cursor: pointer;
             overflow: hidden;
             aspect-ratio: 2 / 1;
@@ -307,10 +306,6 @@
             align-items: stretch;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(249, 240, 2, 0.3);
-        }
 
         .project-card-image-container {
             position: absolute;
@@ -329,7 +324,6 @@
             height: calc(100% - 10px);
             object-fit: cover;
             object-position: center;
-            transition: all 0.3s ease;
             z-index: 1;
             clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) calc(100% - 0px), 10px calc(100% - 0px), 0% calc(100% - 10px));
         }
@@ -339,8 +333,7 @@
             background: transparent;
             backdrop-filter: none;
             padding: 30px 20px;
-            transform: translateY(0);
-            transition: all 0.3s ease;
+            transform: translateY(-15px);
             border-top: none;
             z-index: 2;
             height: 100%;
@@ -349,56 +342,6 @@
             justify-content: space-between;
         }
 
-        .project-card:hover .project-card-content {
-            transform: translateY(0);
-            position: relative !important;
-            background: transparent !important;
-            backdrop-filter: none !important;
-            padding: 30px 20px !important;
-            height: 100% !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
-        }
-
-        .project-card:hover .project-card-content h3 {
-            color: var(--black-color) !important;
-            font-size: 1.4rem !important;
-            margin-bottom: 15px !important;
-            text-align: center !important;
-        }
-
-        .project-card:hover .project-card-content p {
-            color: var(--black-color) !important;
-            font-size: 1rem !important;
-            line-height: 1.5 !important;
-            margin-bottom: 20px !important;
-            text-align: center !important;
-            flex-grow: 1 !important;
-        }
-
-        .project-card:hover .project-links {
-            display: flex !important;
-            gap: 10px !important;
-            justify-content: center !important;
-            margin-top: auto !important;
-        }
-
-        .project-card:hover .cyberpunk {
-            background-color: var(--black-color) !important;
-            color: var(--yellow-color) !important;
-            border-color: var(--black-color) !important;
-        }
-
-        .project-card:hover .cyberpunk.green {
-            background-color: var(--green-color) !important;
-            color: white !important;
-        }
-
-
-        .project-card:hover .project-card-image {
-            transform: scale(1.1);
-        }
 
         .project-card h3 {
             color: var(--black-color) !important;
