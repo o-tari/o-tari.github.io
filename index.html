@@ -53,6 +53,10 @@
             padding: 0px;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             background-color: transparent;
             padding: 0px;
@@ -1826,7 +1830,6 @@
     </style>
 </head>
 <body     x-data="{
-    currentModal: null,
     currentProjectModal: null,
     projects: [],
     loading: false,
@@ -1853,27 +1856,13 @@
         }
     },
 
-    openModal(modalName) {
-        console.log('Opening modal:', modalName);
-        this.currentModal = modalName;
-        document.body.style.overflow = 'hidden';
-        // Focus management for accessibility
-        setTimeout(() => {
-            const modal = document.querySelector('.modal.active');
-            if (modal) {
-                modal.focus();
-            }
-        }, 100);
-    },
-
-    closeModal() {
-        console.log('Closing modal');
-        this.currentModal = null;
-        document.body.style.overflow = 'auto';
-        // Return focus to the trigger element
-        const activeElement = document.activeElement;
-        if (activeElement && activeElement.blur) {
-            activeElement.blur();
+    scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     },
 
@@ -1931,9 +1920,9 @@
             <h2 class="cyberpunk" style="margin: 0; font-size: 1.2rem;">Full Stack Developer</h2>
         </div>
         <div style="display: flex; gap: 10px;">
-            <a class="cyberpunk" @click.prevent="openModal('skills')">Skills_</a>
-            <button class="cyberpunk green" @click.prevent="openModal('testimonials')">Testimonials_</button>
-            <a class="cyberpunk purple" @click.prevent="openModal('contact')">Contact_</a>
+            <a class="cyberpunk" @click.prevent="scrollToSection('skills')">Skills_</a>
+            <button class="cyberpunk green" @click.prevent="scrollToSection('testimonials')">Testimonials_</button>
+            <a class="cyberpunk purple" @click.prevent="scrollToSection('contact')">Contact_</a>
             <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk" style="--background-color: var(--black-color);">GitHub_</a>
         </div>
     </section>
@@ -1971,106 +1960,86 @@
         </div>
     </section>
 
+    <!-- Skills Section -->
+    <section id="skills" class="cyberpunk" style="position: relative; z-index: 1;">
+        <h2 class="cyberpunk">Skills & Expertise</h2>
+        <div class="cyberpunk boxtree">
+            <div class="resolved children1 width1">
+                <h2>🔥 Laravel</h2>
+                Building scalable web applications and APIs using Laravel's MVC architecture with focus on performance and maintainability.
+            </div>
+            <div class="resolved children1 width1">
+                <h2>🐘 PHP</h2>
+                Experienced with PHP frameworks including Laravel, Symfony, and WordPress development.
+            </div>
+            <div class="resolved children1 width1">
+                <h2>🗄️ Databases</h2>
+                Proficient with MySQL, PostgreSQL, and SQLite for web applications.
+            </div>
+            <div class="resolved children1 width1">
+                <h2>⚡ JavaScript</h2>
+                Skilled in Node.js, Vue.js, React, React Native, and Alpine.js for modern development.
+            </div>
+            <div class="resolved children1 width1">
+                <h2>🎨 Frontend</h2>
+                Proficient in HTML5, CSS3, Tailwind CSS, Bootstrap, and modern CSS frameworks.
+            </div>
+            <div class="resolved children1 width1">
+                <h2>🤖 AI & Tools</h2>
+                Experience with Large Language Models, AI integration, and Cursor AI for enhanced development.
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="cyberpunk black" style="position: relative; z-index: 1;">
+        <h2 class="cyberpunk">What Clients Say</h2>
+        <div class="cyberpunk boxtree">
+            <div class="resolved children1 width1">
+                <h2>Benjamin Bagehorn - Nuucap</h2>
+                "We are working with Oto for over a year now. In more than 870 hours he constantly proved his willing to get things done. He is a very kind and reliable person and always motivated to find the best solution."
+            </div>
+            <div class="resolved children1 width1">
+                <h2>Adrian St Vaughan - Ascendia LTD</h2>
+                "Working with Oto was a fantastic experience. He understood what we needed quickly, he delivered accurate, prompt work. We would recommend without hesitation."
+            </div>
+            <div class="resolved children1 width1">
+                <h2>Quincy Chapman - DewQ Finance</h2>
+                "Well, as always this is the best freelancer I have ever worked with for web development projects. I would hire Oto again immediately. This is the guy to do your job great!"
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="cyberpunk" style="position: relative; z-index: 1;">
+        <h2 class="cyberpunk">Get In Touch</h2>
+        <div class="cyberpunk boxtree">
+            <div class="resolved children1 width1">
+                <h2>📧 Email</h2>
+                I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together to bring your ideas to life.
+                <br><br>
+                <a href="mailto:oto.kapanadze.dev@gmail.com" class="cyberpunk">oto.kapanadze.dev@gmail.com_</a>
+            </div>
+            <div class="resolved children1 width1">
+                <h2>💼 Upwork</h2>
+                View my professional profile and work history on Upwork. Connect with me for freelance opportunities and project collaborations.
+                <br><br>
+                <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank" class="cyberpunk green">View Profile_</a>
+            </div>
+            <div class="resolved children1 width1">
+                <h2>🐙 GitHub</h2>
+                Check out my code repositories and open source contributions. See the quality and style of my development work.
+                <br><br>
+                <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk blue">View Code_</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Cyberpunk Footer -->
     <footer style="background-color: #000; height: 50px; position: relative; z-index: 1;"></footer>
 
 
 
-    <!-- Skills Modal -->
-    <div class="modal" :class="{ active: currentModal === 'skills' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
-        <div class="modal-content" @click.stop>
-            <div class="modal-header">
-                <h2 class="modal-title">Skills & Expertise</h2>
-                <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="cyberpunk boxtree">
-                    <div class="resolved children1 width1">
-                        <h2>🔥 Laravel</h2>
-                        Building scalable web applications and APIs using Laravel's MVC architecture with focus on performance and maintainability.
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>🐘 PHP</h2>
-                        Experienced with PHP frameworks including Laravel, Symfony, and WordPress development.
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>🗄️ Databases</h2>
-                        Proficient with MySQL, PostgreSQL, and SQLite for web applications.
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>⚡ JavaScript</h2>
-                        Skilled in Node.js, Vue.js, React, React Native, and Alpine.js for modern development.
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>🎨 Frontend</h2>
-                        Proficient in HTML5, CSS3, Tailwind CSS, Bootstrap, and modern CSS frameworks.
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>🤖 AI & Tools</h2>
-                        Experience with Large Language Models, AI integration, and Cursor AI for enhanced development.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Testimonials Modal -->
-    <div class="modal" :class="{ active: currentModal === 'testimonials' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
-        <div class="modal-content" @click.stop>
-            <div class="modal-header">
-                <h2 class="modal-title">What Clients Say</h2>
-                <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="cyberpunk boxtree">
-                    <div class="resolved children1 width1">
-                        <h2>Benjamin Bagehorn - Nuucap</h2>
-                        "We are working with Oto for over a year now. In more than 870 hours he constantly proved his willing to get things done. He is a very kind and reliable person and always motivated to find the best solution."
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>Adrian St Vaughan - Ascendia LTD</h2>
-                        "Working with Oto was a fantastic experience. He understood what we needed quickly, he delivered accurate, prompt work. We would recommend without hesitation."
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>Quincy Chapman - DewQ Finance</h2>
-                        "Well, as always this is the best freelancer I have ever worked with for web development projects. I would hire Oto again immediately. This is the guy to do your job great!"
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Modal -->
-    <div class="modal" :class="{ active: currentModal === 'contact' }" @click.self="closeModal()" @keydown.escape="closeModal()" tabindex="-1">
-        <div class="modal-content" @click.stop>
-            <div class="modal-header">
-                <h2 class="modal-title">Get In Touch</h2>
-                <button class="modal-close" @click.prevent="closeModal()" aria-label="Close modal">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="cyberpunk boxtree">
-                    <div class="resolved children1 width1">
-                        <h2>📧 Email</h2>
-                        I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together to bring your ideas to life.
-                        <br><br>
-                        <a href="mailto:oto.kapanadze.dev@gmail.com" class="cyberpunk">oto.kapanadze.dev@gmail.com_</a>
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>💼 Upwork</h2>
-                        View my professional profile and work history on Upwork. Connect with me for freelance opportunities and project collaborations.
-                        <br><br>
-                        <a href="https://www.upwork.com/freelancers/~0109a8f8ae8d4dc7d7" target="_blank" class="cyberpunk green">View Profile_</a>
-                    </div>
-                    <div class="resolved children1 width1">
-                        <h2>🐙 GitHub</h2>
-                        Check out my code repositories and open source contributions. See the quality and style of my development work.
-                        <br><br>
-                        <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk blue">View Code_</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- Project Modal -->
@@ -2147,8 +2116,6 @@
                         alpineComponent.closeProjectModal();
                     } else if (alpineComponent.showAllProjectsModal) {
                         alpineComponent.closeAllProjectsModal();
-                    } else {
-                        alpineComponent.closeModal();
                     }
                 }
             }
