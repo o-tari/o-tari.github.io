@@ -19,7 +19,6 @@
     <link href="//fonts.bunny.net/css?family=advent+pro:400,500,600,700&display=swap" rel="stylesheet">
     <script defer src="//cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
     <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/stats.js@0.17.0/build/stats.min.js"></script>
     
     <style>
         :root {
@@ -77,7 +76,6 @@
             z-index: -1;
         }
 
-        /* ---- stats.js ---- */
 
 
         body * {
@@ -2322,7 +2320,6 @@
     <!-- particles.js container -->
     <div id="particles-js"></div>
     
-    <!-- stats - count particles -->
 
     <!-- Main Container -->
     <div style="max-width: 1440px; margin: 0 auto; position: relative; z-index: 1;">
@@ -2638,29 +2635,6 @@
             "retina_detect": true
         });
 
-        // Stats and particle counter
-        var count_particles, stats, update;
-        
-        // Initialize Stats only if available
-        if (typeof Stats !== 'undefined') {
-            stats = new Stats();
-            stats.setMode(0);
-            stats.domElement.style.position = 'absolute';
-            stats.domElement.style.left = '0px';
-            stats.domElement.style.top = '0px';
-            document.body.appendChild(stats.domElement);
-            
-            update = function() {
-                if (stats) {
-                    stats.begin();
-                    stats.end();
-                }
-                requestAnimationFrame(update);
-            };
-            requestAnimationFrame(update);
-        } else {
-            console.warn('Stats.js library not loaded - performance monitoring disabled');
-        }
     </script>
 </body>
 </html>
