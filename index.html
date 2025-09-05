@@ -2481,7 +2481,7 @@
                 <h3 class="project-modal-title" x-text="currentProjectModal?.name"></h3>
                 <p class="project-modal-description" x-text="currentProjectModal?.description || 'A web development project'"></p>
                 <div class="project-modal-links">
-                    <a :href="currentProjectModal?.url" target="_blank" class="project-modal-link primary">Visit Project</a>
+                    <a :href="currentProjectModal?.url" target="_blank" class="project-modal-link primary" x-show="currentProjectModal?.url">Visit Project</a>
                     <a :href="currentProjectModal?.github_url" target="_blank" class="project-modal-link secondary" x-show="currentProjectModal?.github_url">View Code</a>
                 </div>
             </div>
