@@ -19,7 +19,7 @@
     <link href="//fonts.bunny.net/css?family=advent+pro:400,500,600,700&display=swap" rel="stylesheet">
     <script defer src="//cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
     <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="//threejs.org/examples/js/libs/stats.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
     
     <style>
         :root {
@@ -2640,19 +2640,27 @@
 
         // Stats and particle counter
         var count_particles, stats, update;
-        stats = new Stats();
-        stats.setMode(0);
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-        document.body.appendChild(stats.domElement);
         
-        update = function() {
-            stats.begin();
-            stats.end();
+        // Initialize Stats only if available
+        if (typeof Stats !== 'undefined') {
+            stats = new Stats();
+            stats.setMode(0);
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+            document.body.appendChild(stats.domElement);
+            
+            update = function() {
+                if (stats) {
+                    stats.begin();
+                    stats.end();
+                }
+                requestAnimationFrame(update);
+            };
             requestAnimationFrame(update);
-        };
-        requestAnimationFrame(update);
+        } else {
+            console.warn('Stats.js library not loaded - performance monitoring disabled');
+        }
     </script>
 </body>
 </html>
