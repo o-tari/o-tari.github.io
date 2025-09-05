@@ -25,5 +25,23 @@
     "url": "https://beatmaker.github.io",
     "github_url": "https://github.com/o-tari/beatmaker",
     "featured": true
+  },
+  {
+    "id": 4,
+    "name": "Trading Journal",
+    "description": "Comprehensive trading journal application built with Laravel and FilamentPHP for tracking trading performance across multiple accounts and strategies",
+    "image": null,
+    "url": null,
+    "github_url": "https://github.com/o-tari/trading-journal",
+    "featured": true
+  },
+  {
+    "id": 5,
+    "name": "Delivery Management",
+    "description": "Laravel application for managing deliveries, dispatchers, drivers, and orders with Shopify integration",
+    "image": null,
+    "url": null,
+    "github_url": "https://github.com/o-tari/delivery-management",
+    "featured": true
   }
 ]
