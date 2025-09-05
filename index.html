@@ -1725,123 +1725,165 @@
         }
 
         @media (max-width: 768px) {
-            .solar-system {
-                height: 600px;
-                max-width: 700px;
+            /* General tablet scaling */
+            body {
+                font-size: 18px;
             }
 
-            .orbit-1 { width: 120px; height: 120px; }
-            .orbit-2 { width: 180px; height: 180px; }
-            .orbit-3 { width: 240px; height: 240px; }
-            .orbit-4 { width: 300px; height: 300px; }
-            .orbit-5 { width: 360px; height: 360px; }
-            .orbit-6 { width: 420px; height: 420px; }
-            .orbit-7 { width: 480px; height: 480px; }
-            .orbit-8 { width: 540px; height: 540px; }
-
-            .project-planet {
-                width: 40px;
-                height: 40px;
+            .container {
+                padding: 0 15px;
             }
 
-            .hero {
-                padding: 35px 0;
+            /* Header scaling */
+            section.cyberpunk {
+                padding: 30px 15px;
             }
 
-            .hero-avatar {
-                width: 70px;
-                height: 70px;
+            h1.cyberpunk {
+                font-size: 1.6rem !important;
             }
 
-            .hero-title {
-                font-size: 1.6rem;
+            h2.cyberpunk {
+                font-size: 1.1rem !important;
             }
 
-            .hero-subtitle {
-                font-size: 0.9rem;
+            /* Navigation scaling */
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 0.35rem 0.7rem;
             }
 
-            .dashboard-title {
-                font-size: 1.3rem;
-                margin-bottom: 2rem;
-            }
-
-            .project-name-display {
-                bottom: 110px;
-            }
-
-            .project-name-text {
-                padding: 0.4rem 0.8rem;
-                font-size: 1.1rem;
-            }
-
-            .view-toggle {
-                bottom: 80px;
-            }
-
-            .view-toggle-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-                min-width: 100px;
-            }
-
-            .bottom-description {
-                bottom: 20px;
-            }
-
-            .bottom-description-text {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .solar-system {
-                height: 400px;
-                max-width: 500px;
-            }
-
-            .orbit-1 { width: 80px; height: 80px; }
-            .orbit-2 { width: 120px; height: 120px; }
-            .orbit-3 { width: 160px; height: 160px; }
-            .orbit-4 { width: 200px; height: 200px; }
-            .orbit-5 { width: 240px; height: 240px; }
-            .orbit-6 { width: 280px; height: 280px; }
-            .orbit-7 { width: 320px; height: 320px; }
-            .orbit-8 { width: 360px; height: 360px; }
-
-            .project-planet {
-                width: 30px;
-                height: 30px;
-            }
-
+            /* Hero section scaling */
             .hero {
                 padding: 30px 0;
             }
 
             .hero-avatar {
-                width: 60px;
-                height: 60px;
+                width: 65px;
+                height: 65px;
             }
 
             .hero-title {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
 
             .hero-subtitle {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+
+            /* Cyberpunk paragraph scaling */
+            p.cyberpunk {
+                font-size: 1rem !important;
+                padding: 4px !important;
+                border: 25px solid var(--black-color) !important;
+                border-right: 4px solid var(--black-color) !important;
+                border-left: 4px solid var(--black-color) !important;
+                border-bottom: 18px solid var(--black-color) !important;
+            }
+
+            section.cyberpunk.black p.cyberpunk {
+                border: 25px solid var(--neon-cyan) !important;
+                border-right: 4px solid var(--neon-cyan) !important;
+                border-left: 4px solid var(--neon-cyan) !important;
+                border-bottom: 18px solid var(--neon-cyan) !important;
+            }
+
+            /* Skills section scaling */
+            .cyberpunk .boxtree {
+                margin: 40px -30px;
+                gap: 20px;
+            }
+
+            .cyberpunk .boxtree > div {
+                width: calc(100% - 20px);
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+
+            .cyberpunk .boxtree h2 {
+                font-size: 1.1rem !important;
+                margin-bottom: 10px;
+            }
+
+            /* Projects grid scaling */
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 30px 0;
+            }
+
+            .project-card {
+                padding: 20px;
+                padding-left: 4px;
+                padding-right: 4px;
+                padding-bottom: 12px;
+                min-height: 180px;
+            }
+
+            .project-card h3 {
+                font-size: 1.1rem !important;
+                margin-bottom: 10px;
+            }
+
+            .project-card p {
+                font-size: 0.9rem !important;
+                margin-bottom: 12px;
+            }
+
+            /* Button scaling */
+            button.cyberpunk,
+            a.cyberpunk {
+                font-size: 0.85rem;
+                padding: 12px 25px;
+                margin: 4px 8px 4px 0px;
+            }
+
+            /* Solar system scaling */
+            .solar-system {
+                height: 500px;
+                max-width: 600px;
+            }
+
+            .orbit-1 { width: 100px; height: 100px; }
+            .orbit-2 { width: 150px; height: 150px; }
+            .orbit-3 { width: 200px; height: 200px; }
+            .orbit-4 { width: 250px; height: 250px; }
+            .orbit-5 { width: 300px; height: 300px; }
+            .orbit-6 { width: 350px; height: 350px; }
+            .orbit-7 { width: 400px; height: 400px; }
+            .orbit-8 { width: 450px; height: 450px; }
+
+            .project-planet {
+                width: 35px;
+                height: 35px;
             }
 
             .dashboard-title {
                 font-size: 1.2rem;
-                margin-bottom: 2rem;
+                margin-bottom: 1.8rem;
             }
 
-            .mobile-message-title {
-                font-size: 1.5rem;
+            .project-name-display {
+                bottom: 100px;
             }
 
-            .mobile-message-text {
+            .project-name-text {
+                padding: 0.35rem 0.7rem;
                 font-size: 1rem;
+            }
+
+            .view-toggle {
+                bottom: 70px;
+            }
+
+            .view-toggle-btn {
+                padding: 0.45rem 0.9rem;
+                font-size: 0.75rem;
+                min-width: 90px;
             }
 
             .bottom-description {
@@ -1850,6 +1892,350 @@
 
             .bottom-description-text {
                 font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* General mobile scaling */
+            body {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            /* Header scaling */
+            section.cyberpunk {
+                padding: 20px 10px;
+            }
+
+            h1.cyberpunk {
+                font-size: 1.4rem !important;
+            }
+
+            h2.cyberpunk {
+                font-size: 1rem !important;
+            }
+
+            /* Navigation scaling */
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            /* Hero section scaling */
+            .hero {
+                padding: 20px 0;
+            }
+
+            .hero-avatar {
+                width: 50px;
+                height: 50px;
+            }
+
+            .hero-title {
+                font-size: 1.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .hero-description {
+                font-size: 0.8rem;
+            }
+
+            /* Cyberpunk paragraph scaling */
+            p.cyberpunk {
+                font-size: 0.9rem !important;
+                padding: 3px !important;
+                border: 20px solid var(--black-color) !important;
+                border-right: 3px solid var(--black-color) !important;
+                border-left: 3px solid var(--black-color) !important;
+                border-bottom: 15px solid var(--black-color) !important;
+            }
+
+            section.cyberpunk.black p.cyberpunk {
+                border: 20px solid var(--neon-cyan) !important;
+                border-right: 3px solid var(--neon-cyan) !important;
+                border-left: 3px solid var(--neon-cyan) !important;
+                border-bottom: 15px solid var(--neon-cyan) !important;
+            }
+
+            /* Skills section scaling */
+            .cyberpunk .boxtree {
+                margin: 30px -20px;
+                gap: 15px;
+            }
+
+            .cyberpunk .boxtree > div {
+                width: calc(100% - 15px);
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+
+            .cyberpunk .boxtree h2 {
+                font-size: 1rem !important;
+                margin-bottom: 8px;
+            }
+
+            /* Projects grid scaling */
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 20px 0;
+            }
+
+            .project-card {
+                padding: 15px;
+                padding-left: 3px;
+                padding-right: 3px;
+                padding-bottom: 10px;
+                min-height: 150px;
+            }
+
+            .project-card h3 {
+                font-size: 1rem !important;
+                margin-bottom: 8px;
+            }
+
+            .project-card p {
+                font-size: 0.8rem !important;
+                margin-bottom: 10px;
+            }
+
+            /* Button scaling */
+            button.cyberpunk,
+            a.cyberpunk {
+                font-size: 0.8rem;
+                padding: 10px 20px;
+                margin: 3px 5px 3px 0px;
+            }
+
+            /* Modal scaling */
+            .modal-content {
+                max-width: 95%;
+                max-height: 90vh;
+            }
+
+            .modal-header {
+                padding: 0.5rem 1rem;
+            }
+
+            .modal-title {
+                font-size: 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .modal-close {
+                width: 25px;
+                height: 25px;
+                font-size: 0.9rem;
+            }
+
+            .project-modal-content {
+                max-width: 95%;
+            }
+
+            .project-modal-header {
+                padding: 0.75rem 1rem;
+            }
+
+            .project-modal-body {
+                padding: 1rem;
+            }
+
+            .project-modal-image {
+                height: 150px;
+            }
+
+            .project-modal-title {
+                font-size: 1.2rem;
+            }
+
+            .project-modal-description {
+                font-size: 0.85rem;
+            }
+
+            .project-modal-link {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            /* Solar system scaling */
+            .solar-system {
+                height: 300px;
+                max-width: 350px;
+            }
+
+            .orbit-1 { width: 60px; height: 60px; }
+            .orbit-2 { width: 90px; height: 90px; }
+            .orbit-3 { width: 120px; height: 120px; }
+            .orbit-4 { width: 150px; height: 150px; }
+            .orbit-5 { width: 180px; height: 180px; }
+            .orbit-6 { width: 210px; height: 210px; }
+            .orbit-7 { width: 240px; height: 240px; }
+            .orbit-8 { width: 270px; height: 270px; }
+
+            .project-planet {
+                width: 25px;
+                height: 25px;
+            }
+
+            .dashboard-title {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .mobile-message-title {
+                font-size: 1.3rem;
+            }
+
+            .mobile-message-text {
+                font-size: 0.9rem;
+            }
+
+            .bottom-description {
+                bottom: 10px;
+            }
+
+            .bottom-description-text {
+                font-size: 0.8rem;
+            }
+
+            .project-name-display {
+                bottom: 80px;
+            }
+
+            .project-name-text {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .view-toggle {
+                bottom: 60px;
+            }
+
+            .view-toggle-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+                min-width: 80px;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 360px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 0 5px;
+            }
+
+            section.cyberpunk {
+                padding: 15px 5px;
+            }
+
+            h1.cyberpunk {
+                font-size: 1.2rem !important;
+            }
+
+            h2.cyberpunk {
+                font-size: 0.9rem !important;
+            }
+
+            .hero-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .hero-title {
+                font-size: 1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.7rem;
+            }
+
+            p.cyberpunk {
+                font-size: 0.8rem !important;
+                padding: 2px !important;
+                border: 15px solid var(--black-color) !important;
+                border-right: 2px solid var(--black-color) !important;
+                border-left: 2px solid var(--black-color) !important;
+                border-bottom: 12px solid var(--black-color) !important;
+            }
+
+            section.cyberpunk.black p.cyberpunk {
+                border: 15px solid var(--neon-cyan) !important;
+                border-right: 2px solid var(--neon-cyan) !important;
+                border-left: 2px solid var(--neon-cyan) !important;
+                border-bottom: 12px solid var(--neon-cyan) !important;
+            }
+
+            .cyberpunk .boxtree {
+                margin: 20px -15px;
+                gap: 10px;
+            }
+
+            .cyberpunk .boxtree > div {
+                width: calc(100% - 10px);
+                padding: 8px;
+                font-size: 0.75rem;
+            }
+
+            .cyberpunk .boxtree h2 {
+                font-size: 0.9rem !important;
+                margin-bottom: 6px;
+            }
+
+            .project-card {
+                padding: 10px;
+                padding-left: 2px;
+                padding-right: 2px;
+                padding-bottom: 8px;
+                min-height: 120px;
+            }
+
+            .project-card h3 {
+                font-size: 0.9rem !important;
+                margin-bottom: 6px;
+            }
+
+            .project-card p {
+                font-size: 0.75rem !important;
+                margin-bottom: 8px;
+            }
+
+            button.cyberpunk,
+            a.cyberpunk {
+                font-size: 0.75rem;
+                padding: 8px 15px;
+                margin: 2px 3px 2px 0px;
+            }
+
+            .solar-system {
+                height: 250px;
+                max-width: 300px;
+            }
+
+            .orbit-1 { width: 50px; height: 50px; }
+            .orbit-2 { width: 75px; height: 75px; }
+            .orbit-3 { width: 100px; height: 100px; }
+            .orbit-4 { width: 125px; height: 125px; }
+            .orbit-5 { width: 150px; height: 150px; }
+            .orbit-6 { width: 175px; height: 175px; }
+            .orbit-7 { width: 200px; height: 200px; }
+            .orbit-8 { width: 225px; height: 225px; }
+
+            .project-planet {
+                width: 20px;
+                height: 20px;
             }
         }
     </style>
