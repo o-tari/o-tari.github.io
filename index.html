@@ -236,13 +236,13 @@
         button.cyberpunk.purple,
         input[type=submit].cyberpunk.purple,
         a.cyberpunk.purple {
-            --background-color: var(--purple-color);
+            --background-color: var(--yellow-color);
         }
 
         button.cyberpunk.blue,
         input[type=submit].cyberpunk.blue,
         a.cyberpunk.blue {
-            --background-color: var(--blue-color);
+            --background-color: var(--yellow-color);
         }
 
         button.cyberpunk:hover,
@@ -814,8 +814,8 @@
         }
 
         .project-modal-link.secondary {
-            background: var(--blue-color);
-            color: white;
+            background: var(--yellow-color);
+            color: var(--black-color);
             border-color: var(--border-color);
         }
 
@@ -1460,13 +1460,14 @@
         }
 
         .project-table-link.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: var(--yellow-color);
+            color: var(--black-color);
+            border-color: var(--border-color);
         }
 
         .project-table-link.secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--green-color);
+            color: white;
             transform: translateY(-1px);
         }
 
@@ -1860,7 +1861,7 @@
     isMobile: false,
     hoveredProject: null,
     showAllProjectsModal: false,
-    maxDisplayProjects: 9,
+    maxDisplayProjects: 8,
 
     checkMobile() {
         // Always show the cyberpunk layout
@@ -1978,7 +1979,7 @@
         
         <!-- More Projects Button -->
         <div x-show="!loading && hasMoreProjects" style="text-align: center; margin-top: 30px;">
-            <button class="cyberpunk blue" @click="openAllProjectsModal()">View All Projects_</button>
+            <button class="cyberpunk" @click="openAllProjectsModal()">View All Projects_</button>
         </div>
     </section>
 
@@ -2052,7 +2053,7 @@
                 <h2>🐙 GitHub</h2>
                 Check out my code repositories and open source contributions. See the quality and style of my development work.
                 <br><br>
-                <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk blue">View Code_</a>
+                <a href="https://github.com/otokapanadze" target="_blank" class="cyberpunk" style="--background-color: var(--black-color);">View Code_</a>
             </div>
         </div>
     </section>
