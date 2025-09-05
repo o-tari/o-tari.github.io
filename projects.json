@@ -43,5 +43,50 @@
     "url": null,
     "github_url": "https://github.com/o-tari/delivery-management",
     "featured": true
+  },
+  {
+    "id": 6,
+    "name": "Financial Analytics Consultants",
+    "description": "Professional financial consulting and analytics services website",
+    "image": null,
+    "url": "https://financialanalyticsconsultants.com",
+    "github_url": null,
+    "featured": true
+  },
+  {
+    "id": 7,
+    "name": "Budget with Quincy - Basic Budget Template",
+    "description": "Free basic budget template for personal finance management",
+    "image": null,
+    "url": "https://budgetwithquincy.com/basic-budget-template",
+    "github_url": null,
+    "featured": true
+  },
+  {
+    "id": 8,
+    "name": "Budget with Quincy - Debt Calculator",
+    "description": "Interactive debt calculator tool for financial planning and debt management",
+    "image": null,
+    "url": "https://budgetwithquincy.com/debt-calculator",
+    "github_url": null,
+    "featured": true
+  },
+  {
+    "id": 9,
+    "name": "Budget with Quincy",
+    "description": "Personal finance platform offering budgeting tools and financial education resources",
+    "image": null,
+    "url": "https://budgetwithquincy.com",
+    "github_url": null,
+    "featured": true
+  },
+  {
+    "id": 10,
+    "name": "SchoolWix",
+    "description": "Educational platform and school management solution",
+    "image": null,
+    "url": "https://schoolwix.com",
+    "github_url": null,
+    "featured": true
   }
 ]
