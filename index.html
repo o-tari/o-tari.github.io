@@ -756,13 +756,13 @@
             font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--black-color);
+            color: var(--neon-cyan);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .project-modal-description {
-            color: var(--black-color);
+            color: var(--neon-cyan);
             margin-bottom: 2rem;
             line-height: 1.7;
             font-size: 1rem;
@@ -2477,7 +2477,7 @@
                 <button class="project-modal-close" @click.prevent="closeProjectModal()" aria-label="Close modal">×</button>
             </div>
             <div class="project-modal-body">
-                <img :src="currentProjectModal?.image" :alt="currentProjectModal?.name" class="project-modal-image">
+                <img :src="currentProjectModal?.image" :alt="currentProjectModal?.name" class="project-modal-image" x-show="currentProjectModal?.image">
                 <h3 class="project-modal-title" x-text="currentProjectModal?.name"></h3>
                 <p class="project-modal-description" x-text="currentProjectModal?.description || 'A web development project'"></p>
                 <div class="project-modal-links">
