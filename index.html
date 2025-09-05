@@ -2308,11 +2308,12 @@
     },
 
     get displayedProjects() {
-        return this.projects.slice(0, this.maxDisplayProjects);
+        return this.projects.filter(project => project.featured === true).slice(0, this.maxDisplayProjects);
     },
 
     get hasMoreProjects() {
-        return this.projects.length > this.maxDisplayProjects;
+        const featuredProjects = this.projects.filter(project => project.featured === true);
+        return featuredProjects.length > this.maxDisplayProjects;
     },
 
 }" x-init="checkMobile(); loadProjects()">
