@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Oto Kapanadze Music",
-    "description": "Personal portfolio website showcasing full-stack development projects and skills",
+    "description": "Personal website showcasing my music",
     "image": null,
     "url": "https://otokapanadze.com",
     "github_url": null,
@@ -19,8 +19,8 @@
   },
   {
     "id": 3,
-    "name": "BeatMaker Studio",
-    "description": "Online music production and beat creation platform with real-time collaboration",
+    "name": "BeatMaker",
+    "description": "Online music production and beat creation platform",
     "image": null,
     "url": "https://beatmaker.github.io",
     "github_url": "https://github.com/o-tari/beatmaker",
