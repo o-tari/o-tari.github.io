@@ -1,11 +1,20 @@
 [
   {
-    "id": 11,
+    "id": 12,
     "name": "Ecommerce with TALL stack",
     "description": "Ecommerce platform made with Laravel TALL stack",
     "image": null,
     "url": null,
     "github_url": "https://github.com/o-tari/ecommerce",
+    "featured": true
+  },
+  {
+    "id": 11,
+    "name": "Banking System",
+    "description": "Mini-Bank application designed to simulate core banking functionalities.",
+    "image": null,
+    "url": null,
+    "github_url": "https://github.com/o-tari/mini-bank",
     "featured": true
   },
   {
