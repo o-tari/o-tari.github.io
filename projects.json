@@ -1,5 +1,14 @@
 [
   {
+    "id": 11,
+    "name": "Ecommerce with TALL stack",
+    "description": "Ecommerce platform made with Laravel TALL stack",
+    "image": null,
+    "url": null,
+    "github_url": "https://github.com/o-tari/ecommerce",
+    "featured": true
+  },
+  {
     "id": 1,
     "name": "Oto Kapanadze Music",
     "description": "Personal website showcasing my music",
@@ -24,7 +33,7 @@
     "image": null,
     "url": "https://o-tari.github.io/beatmaker/",
     "github_url": "https://github.com/o-tari/beatmaker",
-    "featured": true
+    "featured": false
   },
   {
     "id": 4,
@@ -51,7 +60,7 @@
     "image": null,
     "url": "https://financialanalyticsconsultants.com",
     "github_url": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": 7,
@@ -60,7 +69,7 @@
     "image": null,
     "url": "https://budgetwithquincy.com/basic-budget-template",
     "github_url": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": 8,
@@ -69,7 +78,7 @@
     "image": null,
     "url": "https://budgetwithquincy.com/debt-calculator",
     "github_url": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": 9,
@@ -78,7 +87,7 @@
     "image": null,
     "url": "https://budgetwithquincy.com",
     "github_url": null,
-    "featured": true
+    "featured": false
   },
   {
     "id": 10,
@@ -87,6 +96,6 @@
     "image": null,
     "url": "https://schoolwix.com",
     "github_url": null,
-    "featured": true
+    "featured": false
   }
 ]
