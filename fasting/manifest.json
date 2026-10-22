@@ -1,0 +1,30 @@
+{
+  "name": "Fasting Dial",
+  "short_name": "Fasting Dial",
+  "id": "/fasting/",
+  "description": "Track intermittent fasts with a live stage ring, history and streaks.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E7EBEF",
+  "theme_color": "#E7EBEF",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
