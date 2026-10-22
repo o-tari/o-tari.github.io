@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Plate by Plate</title>
-<meta name="description" content="A 30-day gym and nutrition coach: random full-body workouts with slow progression, desk mobility, fasting and food guidance, and progress tracking.">
+<meta name="description" content="A 30-day gym and nutrition coach: random full-body workouts with slow progression, desk mobility, food guidance and progress tracking.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#EDF0F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1114" media="(prefers-color-scheme: dark)">
@@ -318,14 +318,6 @@ details.how>.cues{padding:0 16px 16px}
 @keyframes slidein{from{transform:translateX(70px);opacity:0}to{transform:none;opacity:1}}
 
 /* fuel */
-.fast{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
-.fast .ring{width:150px;height:150px}
-.fast .clock{font-size:40px}
-.fast h3{font:800 24px/1.05 var(--font-display);text-transform:uppercase;margin:0 0 4px}
-.fastbars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;align-items:end;height:74px}
-.fb{display:grid;gap:3px;justify-items:center;align-self:end;font-size:11px;color:var(--muted)}
-.fb i{display:block;width:100%;max-width:26px;border-radius:4px 4px 2px 2px;background:var(--wk)}
-.fb i.short{background:var(--pad-2)}
 .tgts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .tgt{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);padding:10px 12px;min-width:0}
 .tgt b{display:block;font:900 26px/1 var(--font-display);font-variant-numeric:tabular-nums;margin-top:4px}
@@ -787,7 +779,7 @@ const MEALS = {
     { n: 'Greek yogurt and berries', items: ['300 g Greek yogurt', 'Handful of berries', 'Drizzle of honey'], p: 30, kcal: 300 },
   ],
 };
-const MEALSLOT = { first: 'Break the fast', main: 'Main meal', snack: 'Protein top-up' };
+const MEALSLOT = { first: 'First meal', main: 'Main meal', snack: 'Protein top-up' };
 const FOODS = [
   { n: 'Chicken 150 g', p: 45 }, { n: '3 eggs', p: 19 }, { n: 'Cottage cheese 200 g', p: 28 }, { n: 'Greek yogurt 250 g', p: 25 },
   { n: 'Tuna, 1 can', p: 27 }, { n: 'Whey scoop', p: 24 }, { n: 'Mtsvadi 200 g', p: 52 }, { n: 'Trout 200 g', p: 44 },
@@ -1251,11 +1243,11 @@ const ICONS = {
 const ic = (name, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ''}</svg>`;
 
 /* ========== state and saving ========== */
-const COLS = ['days', 'sessions', 'weights', 'fasts'];
-const DEFAULTS = { gymDays: [1, 3, 5], fastHours: 18, windowStart: '13:00', baseSteps: 4000, sound: true, age: null };
+const COLS = ['days', 'sessions', 'weights'];
+const DEFAULTS = { gymDays: [1, 3, 5], baseSteps: 4000, sound: true, age: null };
 const LS = 'plateByPlate.v1', LS_UI = 'plateByPlate.ui', LS_CHAT = 'plateByPlate.chat';
 const S = {
-  profile: null, days: {}, sessions: {}, weights: {}, fasts: {}, ready: false,
+  profile: null, days: {}, sessions: {}, weights: {}, ready: false,
   ui: { tab: 'today', seg: 'plan', overlay: null, sheet: null, meal: null, chat: [], draft: '', asking: null,
     roll: false, spun: false, anyway: false, confirmReset: false, timers: {} },
 };
@@ -1265,7 +1257,7 @@ const HOSTED = !!(window.claude && typeof window.claude.use === 'function');
 
 const P = () => (S.profile ? { ...DEFAULTS, ...S.profile } : null);
 function saveLocal() {
-  try { localStorage.setItem(LS, JSON.stringify({ profile: S.profile, days: S.days, sessions: S.sessions, weights: S.weights, fasts: S.fasts, dirty: [...sync.dirty] })); } catch (e) { /* storage unavailable */ }
+  try { localStorage.setItem(LS, JSON.stringify({ profile: S.profile, days: S.days, sessions: S.sessions, weights: S.weights, dirty: [...sync.dirty] })); } catch (e) { /* storage unavailable */ }
 }
 function loadLocal() {
   try {
@@ -1498,20 +1490,6 @@ function dayStatus(date) {
   if (date < today()) return 'missed';
   return date === today() ? 'pending' : 'future';
 }
-/* fasting */
-const activeFast = () => Object.values(S.fasts).filter(f => f && !f.end).sort((a, b) => b.start - a.start)[0] || null;
-const pastFasts = (n = 7) => Object.values(S.fasts).filter(f => f && f.end).sort((a, b) => b.start - a.start).slice(0, n).reverse();
-function windowTimes() { const p = P(); const [h, m] = String(p.windowStart || '13:00').split(':').map(Number); const startMin = h * 60 + (m || 0); return { startMin, endMin: startMin + (24 - p.fastHours) * 60 }; }
-const fmtMin = m => { m = ((m % 1440) + 1440) % 1440; return `${pad2(Math.floor(m / 60))}:${pad2(m % 60)}`; };
-function inWindowNow() { const { startMin, endMin } = windowTimes(); const n = new Date(); const mins = n.getHours() * 60 + n.getMinutes(); return endMin <= 1440 ? mins >= startMin && mins < endMin : mins >= startMin || mins < endMin - 1440; }
-function fastPhase(h) {
-  if (h < 4) return 'Digesting your last meal.';
-  if (h < 12) return 'Blood sugar settles. Your body runs on stored energy.';
-  if (h < 16) return 'Deeper into stored fat. Keep the water coming.';
-  if (h < P().fastHours) return 'Home stretch. A pinch of salt in water helps if you feel flat.';
-  if (h < P().fastHours + 2) return 'Goal reached. Break the fast with protein.';
-  return 'Past your goal. Time to eat, protein first.';
-}
 
 /* ========== shared pieces ========== */
 function plateSvg(wk, id = 'pp') {
@@ -1562,7 +1540,7 @@ function viewToday() {
   const spin = S.ui.spun ? '' : 'spin';
   S.ui.spun = true;
   return `<section class="hero ${spin}" aria-label="Today"><div class="herotop">${plateSvg(wk)}<div><span class="herolabel">${fmtDate(t)}</span><div class="dayno">${pad2(n)}<small>/30</small></div><span class="wkpill">Week ${wk} · ${W.name}</span></div></div>${mission}</section>` +
-    coachNote() + habitsHtml(t) + fastMini() + weekStrip(t) +
+    coachNote() + habitsHtml(t) + weekStrip(t) +
     `<section class="sec"><div class="tip"><span class="eyebrow">Tip ${pad2(n)} of 30</span><p>${esc(TIPS[(n - 1) % TIPS.length])}</p></div></section>`;
 }
 function viewPreStart(n) {
@@ -1577,11 +1555,9 @@ function viewComplete() {
 function coachNote() {
   const t = today(), n = dayNum(t), wk = weekOf(t), gym = isGymDay(t);
   const y = addDays(t, -1), trainedY = trainedOn(y);
-  const af = activeFast(), fh = af ? (Date.now() - af.start) / 36e5 : 0;
   let msg;
   if (activeSession()) msg = 'Your workout is paused. Pick it up where you left off; rest timers restart when you do.';
-  else if (doneOn(t)) msg = 'Session done. Eat protein in your window, take an easy walk later, and get to bed on time. That is when the work pays off.';
-  else if (gym && af && fh >= 15 && !inWindowNow()) msg = `You are ${Math.floor(fh)} hours into your fast. Train in the hour before your window opens and eat right after, or eat first if you feel shaky.`;
+  else if (doneOn(t)) msg = 'Session done. Eat a protein-rich meal, take an easy walk later, and get to bed on time. That is when the work pays off.';
   else if (gym && trainedY) msg = 'You trained yesterday. Be honest in the check-in: if you are still sore, the app switches you to Easy mode.';
   else if (gym) msg = WEEKS[wk].goal;
   else if (trainedY && n <= 2) {
@@ -1603,14 +1579,6 @@ function habitsHtml(t) {
     tile('drop', 'Water', vals[2], goals[2], ' L', `<button class="btn quiet" data-act="habit" data-k="water" data-v="-0.5" aria-label="Remove half a litre">−</button><button class="btn quiet" data-act="habit" data-k="water" data-v="0.5">+0.5 L</button>`, fmt1) +
     tile('desk', 'Desk resets', vals[3], goals[3], '', `<button class="btn quiet" data-act="flow" data-r="desk">${ic('play')}Do one</button>`) +
     `</div></section>`;
-}
-function fastMini() {
-  const p = P(), af = activeFast();
-  const { startMin, endMin } = windowTimes();
-  let txt;
-  if (af) { const h = (Date.now() - af.start) / 36e5; txt = `<b class="num" data-fastclock>${fmtDur(Date.now() - af.start)}</b> fasted · goal ${p.fastHours} h at ${fmtTime(af.start + p.fastHours * 36e5)}${h >= p.fastHours ? ' · goal reached' : ''}`; }
-  else txt = inWindowNow() ? `Eating window open until <b>${fmtMin(endMin)}</b>. Protein first.` : `Planned window ${fmtMin(startMin)}–${fmtMin(endMin)}. Not tracking a fast right now.`;
-  return `<section class="card row" style="justify-content:space-between"><div class="grow"><div class="habh">${ic('clock')}Fasting ${p.fastHours}:${24 - p.fastHours}</div><p style="margin-top:4px">${txt}</p></div><button class="btn quiet sm" data-act="tab" data-tab="fuel">${af ? 'Details' : 'Open'}</button></section>`;
 }
 function weekStrip(t) {
   const mon = addDays(t, -((parseYmd(t).getDay() + 6) % 7));
@@ -1685,25 +1653,7 @@ function trainLib() {
 function viewFuel() {
   const t = today(), tg = targets(t), d = S.days[t] || {};
   if (!S.ui.meal || S.ui.meal.day !== t) { const h = hash(t); S.ui.meal = { day: t, first: h % 6, main: (h >>> 4) % 6, snack: (h >>> 8) % 6 }; }
-  return fastCard() + targetsHtml(tg, t) + proteinHtml(d, tg) + waterHtml(d, tg) + mealsHtml() + geoHtml() +
-    `<section class="sec"><details class="guide"><summary>Fasting and training ${ic('chev')}</summary><div class="gbody">${GUIDES.find(g => g.id === 'fast').html}</div></details></section>`;
-}
-function fastCard() {
-  const p = P(), af = activeFast(), { startMin, endMin } = windowTimes();
-  const ws = fmtMin(startMin), we = fmtMin(endMin);
-  let ring, center, body;
-  if (af) {
-    const el = Date.now() - af.start, goal = p.fastHours * 36e5;
-    ring = ringSvg(el / goal); center = `<span class="clock num">${Math.floor(el / 36e5)}h</span><span class="ringlabel">of ${p.fastHours}</span>`;
-    body = `<span class="eyebrow">Fasting</span><h3 class="num" data-fastclock>${fmtDur(el)}</h3><p class="fine">${esc(fastPhase(el / 36e5))}</p><p class="fine">Started ${fmtTime(af.start)} · goal ${fmtTime(af.start + goal)}</p><div class="row" style="margin-top:10px"><button class="btn primary sm" data-act="endfast">I ate: end fast</button><button class="btn quiet sm" data-act="editfast">Edit start</button></div>`;
-  } else {
-    const open = inWindowNow();
-    ring = ringSvg(open ? 1 : 0); center = `<span class="ringlabel">${open ? 'Window' : 'Fast'}</span><span class="clock num" style="font-size:30px">${open ? 'Open' : 'Off'}</span>`;
-    body = `<span class="eyebrow">${open ? 'Eating window' : 'Not tracking'}</span><h3>${open ? `Open until ${we}` : 'Start your fast'}</h3><p class="fine">Your plan: eat ${ws}–${we}, fast ${p.fastHours} h. Tap start after your last meal.</p><div class="row" style="margin-top:10px"><button class="btn primary sm" data-act="startfast">Start fast now</button><button class="btn quiet sm" data-act="editfast" data-new="1">I started earlier</button></div>`;
-  }
-  const hist = pastFasts(7);
-  const bars = hist.length ? `<div><span class="eyebrow">Last ${hist.length} fasts</span><div class="fastbars" style="margin-top:8px">${hist.map(f => { const h = (f.end - f.start) / 36e5; return `<div class="fb"><i class="${h < p.fastHours - 0.5 ? 'short' : ''}" style="height:${clamp(h / 24 * 54, 4, 54)}px"></i><span class="num">${fmt1(h)}h</span></div>`; }).join('')}</div></div>` : '';
-  return `<section class="sec"><div class="sh"><h2>Fasting ${p.fastHours}:${24 - p.fastHours}</h2><span class="eyebrow">Coffee, water, tea</span></div><div class="card" style="display:grid;gap:16px"><div class="fast"><div class="ring">${ring}<div class="ringtxt">${center}</div></div><div style="min-width:0">${body}</div></div>${bars}</div></section>`;
+  return targetsHtml(tg, t) + proteinHtml(d, tg) + waterHtml(d, tg) + mealsHtml() + geoHtml();
 }
 function targetsHtml(tg, t) {
   const p = P();
@@ -1734,7 +1684,7 @@ function mealsHtml() {
   const keys = ['first', 'main', 'snack'];
   const ms = keys.map(k => MEALS[k][mealIdx(k)]);
   const tp = ms.reduce((a, m) => a + m.p, 0), tk = ms.reduce((a, m) => a + m.kcal, 0);
-  return `<section class="sec"><div class="sh"><h2>Meal ideas</h2><button class="btn quiet sm" data-act="mealall">${ic('dice')}Shuffle all</button></div><p class="fine">Three plates for your eating window, built from everyday ingredients.</p>` +
+  return `<section class="sec"><div class="sh"><h2>Meal ideas</h2><button class="btn quiet sm" data-act="mealall">${ic('dice')}Shuffle all</button></div><p class="fine">Three plates for the day, built from everyday ingredients.</p>` +
     `<div class="meals">${keys.map((k, i) => { const m = ms[i]; return `<div class="card meal"><div class="mealtop"><div style="min-width:0"><span class="eyebrow">${MEALSLOT[k]}</span><h3>${esc(m.n)}</h3></div><button class="ibtn sm" data-act="meal" data-k="${k}" aria-label="Another idea for ${MEALSLOT[k]}">${ic('dice')}</button></div><ul>${m.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="row"><span class="tag">≈ ${m.p} g protein</span><span class="tag">≈ ${fmtNum(m.kcal)} kcal</span><button class="btn quiet sm" data-act="atemeal" data-k="${k}">Ate this</button></div></div>`; }).join('')}</div>` +
     `<p class="fine">Together: about ${fmtNum(tk)} kcal and ${tp} g protein. Fill the rest of your target with vegetables, fruit, or a bigger carb portion after training.</p></section>`;
 }
@@ -1841,7 +1791,7 @@ const EQUIV = [[6000, 'a large elephant'], [2300, 'a rhino'], [1500, 'a hippo'],
 function equiv(v) { const e = EQUIV.find(([k]) => v >= k); return e ? `That is roughly the weight of ${e[1]}, moved one rep at a time.` : 'Every rep counts. These numbers climb fast from here.'; }
 
 /* ========== COACH ========== */
-const SUGG = ['The leg press is taken. What else?', 'My lower back feels tight', 'What should I eat at a supra?', 'I feel dizzy training while fasted', 'When do I add weight?'];
+const SUGG = ['The leg press is taken. What else?', 'My lower back feels tight', 'What should I eat at a supra?', 'What should I eat after training?', 'When do I add weight?'];
 function viewCoach() {
   return chatSec() +
     `<section class="sec"><div class="sh"><h2>Guides</h2></div><div>${GUIDES.map(g => `<details class="guide"><summary>${esc(g.t)} ${ic('chev')}</summary><div class="gbody">${g.html}${g.id === 'iphone' ? `<p class="fine">${HOSTED ? 'It opens from your Home Screen like an app. It needs an internet connection, and your progress is saved to your Claude account.' : 'It opens from your Home Screen like an app and works offline after the first visit. Your data stays on this phone, so copy a backup from Your data now and then.'}</p>` : ''}</div></details>`).join('')}</div></section>` +
@@ -1864,7 +1814,7 @@ function chatSec() {
   if (!sampleFn) return '';
   const msgs = S.ui.chat.length
     ? S.ui.chat.map((m, i) => `<div class="msg ${m.role === 'user' ? 'me' : 'co'}"${i === S.ui.chat.length - 1 ? ' id="lastmsg"' : ''}>${m.role === 'user' ? esc(m.text) : fmtCoach(m.text || (m.pending ? 'Thinking…' : ''))}</div>`).join('')
-    : `<div class="msg co"><p>Ask me about today's workout, a machine, soreness, food or fasting. I can see your plan and your logs.</p></div>`;
+    : `<div class="msg co"><p>Ask me about today's workout, a machine, soreness or food. I can see your plan and your logs.</p></div>`;
   return `<section class="sec"><div class="sh"><h2>Ask Coach</h2>${S.ui.chat.length && !S.ui.asking ? '<button class="link" data-act="clearchat">Clear chat</button>' : ''}</div><div class="chat" id="chat">${msgs}</div>` +
     `<div class="sugg">${SUGG.map(q => `<button class="chip" data-act="suggest" data-q="${esc(q)}">${esc(q)}</button>`).join('')}</div>` +
     `<form class="ask" data-form="ask"><label class="vh" for="ask-in">Message to Coach</label><textarea id="ask-in" rows="1" placeholder="Ask your coach…">${esc(S.ui.draft || '')}</textarea>${S.ui.asking ? `<button class="ibtn" type="button" data-act="stopask" aria-label="Stop answer">${ic('stop')}</button>` : `<button class="ibtn" type="submit" aria-label="Send">${ic('send')}</button>`}</form></section>`;
@@ -1872,7 +1822,7 @@ function chatSec() {
 function topSetText(it) { const d = (it.sets || []).filter(z => z.done); if (!d.length) return ' (skipped)'; const t = d.reduce((a, b) => ((b.kg || 0) > (a.kg || 0) ? b : a)); return ` ${t.kg ? fmtKg(t.kg) + ' kg × ' : ''}${t.reps || '?'}${t.feel ? ' (' + t.feel + ')' : ''}`; }
 function coachRules() {
   const p = P(), t = today(), n = dayNum(t), wk = weekOf(t), W = WEEKS[wk], tg = targets(t), D = S.days[t] || {};
-  const plan = isGymDay(t) ? genPlan(t) : null, af = activeFast(), wt = windowTimes();
+  const plan = isGymDay(t) ? genPlan(t) : null;
   const recent = doneSessions().slice(-4).map(s => `- ${s.date}: ${s.selfGuided ? 'his first workout, on his own' : (s.name || 'workout')}${s.mode === 'easy' ? ', easy mode' : ''}${s.rating ? ', felt ' + s.rating.toLowerCase() : ''}${(s.items || []).length ? ': ' + s.items.map(it => `${EX[it.ex] ? EX[it.ex].n : it.ex}${topSetText(it)}`).join('; ') : ''}`).join('\n') || '- none yet';
   const wts = Object.keys(S.weights).sort().slice(-5).map(k => `${k} ${S.weights[k].kg} kg${S.weights[k].waist ? `, waist ${S.weights[k].waist} cm` : ''}`).join('; ') || 'none logged yet';
   return [
@@ -1881,7 +1831,7 @@ function coachRules() {
     'CLIENT',
     `- Man, ${p.age ? p.age + ' years old' : 'age not given'}, ${p.heightCm} cm, ${fmtKg(latestWeight())} kg now (started at ${p.weightKg} kg).`,
     '- Desk job, sits a lot, out of shape, feels stiff. Wants slow, safe progress. Trains at a full commercial gym with machines, cables, dumbbells and cardio.',
-    `- Intermittent fasting ${p.fastHours}:${24 - p.fastHours}, black coffee only during the fast, eating window ${fmtMin(wt.startMin)}–${fmtMin(wt.endMin)}.${af ? ` Right now he is ${Math.floor((Date.now() - af.start) / 36e5)} hours into a fast.` : ''}`,
+    '- Does intermittent fasting, which he tracks in a separate app. Coffee during the fast.',
     '',
     'PLAN',
     `- Today is ${fmtDate(t)}, day ${n} of 30, week ${wk} (${W.name}). Effort rule: leave ${W.rir} reps in the tank, never train to failure.`,
@@ -1889,7 +1839,7 @@ function coachRules() {
     plan ? `- Today's workout (${plan.name}): ${plan.items.map(it => EX[it.ex].n).join(', ')}. Warm-up on the ${CARDIO[plan.warm].n}, finisher ${plan.finMin} min on the ${CARDIO[plan.fin].n}.` : `- Today is a move day: walk ${WALK[wk]} minutes plus the Recovery Flow.`,
     activeSession() ? '- He has a workout in progress right now.' : '',
     `- Daily targets: about ${tg.kcal} kcal, ${tg.protein} g protein, ${tg.water} L water, ${tg.steps} steps. Logged today: ${D.protein || 0} g protein, ${D.water || 0} L water, ${D.steps || 0} steps, ${D.desk || 0} desk resets.`,
-    D.ready ? `- Check-in today: soreness ${['none', 'a little', 'sore', 'very sore'][D.ready.sore] || 'unknown'}, sleep ${['good', 'OK', 'poor'][D.ready.sleep] || 'unknown'}.` : '',
+    D.ready ? `- Check-in today: soreness ${['none', 'a little', 'sore', 'very sore'][D.ready.sore] || 'unknown'}, sleep ${['good', 'OK', 'poor'][D.ready.sleep] || 'unknown'}, energy ${['good', 'low', 'lightheaded'][D.ready.energy] || 'unknown'}.` : '',
     'Recent sessions:', recent,
     `Weigh-ins: ${wts}.`,
     '',
@@ -1898,7 +1848,7 @@ function coachRules() {
     '- Metric units. When something hurts or a machine is busy, name a specific swap using normal gym equipment.',
     '- Sharp, joint or nerve pain, chest pain, dizziness or fainting: tell him to stop and get checked by a doctor or physiotherapist. Do not diagnose.',
     '- No extreme advice: no longer fasts, no very low calories, no training to failure, no supplements beyond protein powder and optional creatine.',
-    '- Food questions: practical meals that fit his eating window. Georgian dishes are fine to use when they help.',
+    '- Food questions: practical, protein-first meals. Georgian dishes are fine to use when they help.',
   ].filter(Boolean).join('\n');
 }
 async function askCoach(text) {
@@ -1935,19 +1885,17 @@ function settingsSec() {
     `<div class="f2"><div class="field"><label for="s-h">Height, cm</label><input id="s-h" type="number" inputmode="numeric" min="120" max="230" value="${p.heightCm}"></div><div class="field"><label for="s-w">Start weight, kg</label><input id="s-w" type="number" inputmode="decimal" step="0.1" min="30" max="350" value="${p.weightKg}"></div></div>` +
     `<div class="f2"><div class="field"><label for="s-age">Age</label><input id="s-age" type="number" inputmode="numeric" min="14" max="90" value="${p.age ?? ''}" placeholder="Not set"></div><div class="field"><label for="s-steps">Daily steps now</label><input id="s-steps" type="number" inputmode="numeric" step="500" min="0" max="30000" value="${p.baseSteps}"></div></div>` +
     `<div class="field"><span class="flabel">Gym days</span><div class="chips" id="s-days">${[1, 2, 3, 4, 5, 6, 0].map(dw => `<button type="button" class="chip" data-act="gday" data-dw="${dw}" aria-pressed="${p.gymDays.includes(dw)}">${DOW[dw]}</button>`).join('')}</div><span class="fine">Three days with a rest day between is right for this month.</span></div>` +
-    `<div class="f2"><div class="field"><label for="s-ws">Eating window opens</label><input id="s-ws" type="time" value="${esc(p.windowStart)}"></div><div class="field"><label for="s-fh">Fast</label><select id="s-fh">${[14, 16, 18].map(h => `<option value="${h}" ${p.fastHours === h ? 'selected' : ''}>${h}:${24 - h}</option>`).join('')}</select></div></div>` +
     `<div class="field"><label for="s-start">Plan start date</label><input id="s-start" type="date" value="${esc(p.startDate)}"><span class="fine">Changing this moves the whole 30-day plan.</span></div>` +
     `<div class="row"><button type="button" class="chip" id="s-sound" data-act="soundchip" aria-pressed="${!!p.sound}">Timer sounds</button></div>` +
     `<button class="btn primary" type="submit">Save settings</button></form></section>`;
 }
 function viewSetup() {
   const t = today();
-  return `<section class="hero spin wk1"><div class="herotop">${plateSvg(1)}<div><span class="herolabel">30-day plan</span><div class="dayno" style="font-size:54px">Plate<br>by plate</div></div></div><div class="mission"><p>Random full-body gym workouts that get a little heavier each week, mobility for desk stiffness, fasting and food guidance, and a tracker for all of it.</p></div></section>` +
+  return `<section class="hero spin wk1"><div class="herotop">${plateSvg(1)}<div><span class="herolabel">30-day plan</span><div class="dayno" style="font-size:54px">Plate<br>by plate</div></div></div><div class="mission"><p>Random full-body gym workouts that get a little heavier each week, mobility for desk stiffness, food guidance, and a tracker for all of it.</p></div></section>` +
     `<form class="form card" data-form="setup"><div class="sh"><h2>Set up your plan</h2></div>` +
     `<div class="f2"><div class="field"><label for="o-h">Height, cm</label><input id="o-h" type="number" inputmode="numeric" min="120" max="230" required></div><div class="field"><label for="o-w">Weight, kg</label><input id="o-w" type="number" inputmode="decimal" step="0.1" min="30" max="350" required></div></div>` +
     `<div class="f2"><div class="field"><label for="o-age">Age</label><input id="o-age" type="number" inputmode="numeric" min="14" max="90"></div><div class="field"><label for="o-steps">Daily steps now</label><input id="o-steps" type="number" inputmode="numeric" step="500" value="4000"></div></div>` +
     `<div class="field"><span class="flabel">Gym days</span><div class="chips" id="o-days">${[1, 2, 3, 4, 5, 6, 0].map(dw => `<button type="button" class="chip" data-act="gday" data-dw="${dw}" aria-pressed="${[1, 3, 5].includes(dw)}">${DOW[dw]}</button>`).join('')}</div></div>` +
-    `<div class="f2"><div class="field"><label for="o-ws">Eating window opens</label><input id="o-ws" type="time" value="13:00"></div><div class="field"><label for="o-fh">Fast</label><select id="o-fh"><option value="16">16:8</option><option value="18" selected>18:6</option></select></div></div>` +
     `<div class="field"><label for="o-start">Start date</label><input id="o-start" type="date" value="${t}"></div>` +
     `<div class="field"><span class="flabel">Already started?</span><div class="chips"><button type="button" class="chip" id="o-day0" data-act="toggle" aria-pressed="false">I trained on my own the day before</button></div></div>` +
     `<button class="btn go block" type="submit">Build my plan</button></form>` +
@@ -2114,17 +2062,6 @@ function sheetHtml(sh) {
     const d = S.days[today()] || {};
     return `<h2>Steps today</h2><p class="fine">Copy the number from the Health app.</p><form class="form" data-form="steps"><div class="field"><label for="st-in">Steps</label><input id="st-in" type="number" inputmode="numeric" min="0" max="80000" value="${d.steps || ''}" placeholder="0"></div><button class="btn primary block" type="submit">Save steps</button></form>`;
   }
-  if (sh.type === 'fast') {
-    const af = activeFast(), base = af && !sh.isNew ? af.start : Date.now() - 2 * 36e5, dt = new Date(base);
-    const v = `${ymd(dt)}T${pad2(dt.getHours())}:${pad2(dt.getMinutes())}`;
-    return `<h2>${sh.isNew ? 'When did you stop eating?' : 'Edit fast start'}</h2><form class="form" data-form="fast"><div class="field"><label for="fs-in">Last meal finished at</label><input id="fs-in" type="datetime-local" value="${v}"></div><button class="btn primary block" type="submit">Save</button></form>`;
-  }
-  if (sh.type === 'backup') {
-    return `<h2>Your backup</h2><p class="fine">Select all of this text, copy it, and keep it somewhere safe, like Notes.</p><label class="vh" for="bk-out">Backup text</label><textarea id="bk-out" rows="8" readonly style="width:100%;border:1.5px solid var(--line);border-radius:var(--r-m);padding:12px;background:var(--surface-2);font-size:13px">${esc(backupJson())}</textarea><button class="btn quiet block" data-act="closesheet">Done</button>`;
-  }
-  if (sh.type === 'restore') {
-    return `<h2>Restore a backup</h2><p class="fine">Paste the backup text or choose a backup file. This replaces everything currently in the app.</p><form class="form" data-form="restore"><div class="field"><label for="rs-in">Backup text</label><textarea id="rs-in" rows="5" style="width:100%;border:1.5px solid var(--line);border-radius:var(--r-m);padding:12px;background:var(--surface);font-size:14px" placeholder='{"app":"plate-by-plate", …}'></textarea></div><div class="field"><label for="rs-file">Or choose a file</label><input id="rs-file" type="file" accept="application/json,.json,text/plain"></div><button class="btn primary block" type="submit">Replace my data with this backup</button></form><button class="btn quiet block" data-act="closesheet">Cancel</button>`;
-  }
   if (sh.type === 'quit') {
     return `<h2>Leave the workout?</h2><p>Your sets are saved. Pick it up from Today whenever you are ready.</p><button class="btn primary block" data-act="qpause">Pause and exit</button><button class="btn quiet block" data-act="closesheet">Keep going</button><button class="btn quiet block" data-act="qdiscard" style="color:var(--warn);border-color:var(--warn)">${sh.confirm ? 'Tap again to delete this workout' : 'Delete this workout'}</button>`;
   }
@@ -2134,11 +2071,10 @@ function sheetHtml(sh) {
   return '';
 }
 function readySheet(sh) {
-  const af = activeFast(), fh = af ? (Date.now() - af.start) / 36e5 : 0;
   const q = (key, label, opts) => `<div class="qrow"><span class="flabel">${esc(label)}</span><div class="chips">${opts.map((o, v) => `<button class="chip" data-act="rq" data-k="${key}" data-v="${v}" aria-pressed="${sh[key] === v}">${o}</button>`).join('')}</div></div>`;
   let h = `<h2>Quick check-in</h2><p class="fine">Ten seconds. It sets today's effort.</p>` + q('sore', 'How sore are you?', ['Not sore', 'A little', 'Sore', 'Very sore']) + q('sleep', 'Sleep last night?', ['Good', 'OK', 'Poor']) +
-    (fh >= 10 ? q('fuel', `You are ${Math.floor(fh)} hours into your fast. How do you feel?`, ['Fine', 'Hungry', 'Lightheaded']) : '');
-  if (sh.sore != null && sh.sleep != null && (fh < 10 || sh.fuel != null)) {
+    q('energy', 'Energy right now?', ['Good', 'Low', 'Lightheaded']);
+  if (sh.sore != null && sh.sleep != null && sh.energy != null) {
     const r = readiness(sh);
     h += `<div class="advice ${r.mode === 'recovery' ? 'warn' : ''}">${ic('info')}<span>${esc(r.msg)}</span></div>`;
     if (r.mode === 'recovery') h += `<div class="row"><button class="btn go" data-act="readygo" data-m="recovery">${ic('play')}Recovery Flow</button><button class="btn quiet" data-act="readygo" data-m="easy">Train easy anyway</button></div>`;
@@ -2149,9 +2085,9 @@ function readySheet(sh) {
 }
 function readiness(sh) {
   const trainedY = trainedOn(addDays(sh.date, -1)), wk = weekOf(sh.date);
-  if (sh.fuel === 2) return { mode: 'recovery', msg: 'Lightheaded means eat first. Have a protein meal with some salt, wait 45–60 minutes, then train. Or do the Recovery Flow today.' };
+  if (sh.energy === 2) return { mode: 'recovery', msg: 'Lightheaded means eat first. Have a meal with protein and a pinch of salt, wait 45–60 minutes, then train. Or do the Recovery Flow today.' };
   if (sh.sore === 3) return { mode: 'recovery', msg: 'Very sore means your muscles are still repairing. Walk and do the Recovery Flow today, lift on your next gym day.' };
-  if (sh.sore === 2 || sh.sleep === 2 || (trainedY && sh.sore >= 1)) return { mode: 'easy', msg: 'Easy mode: one set fewer per exercise and more reps left in the tank. You keep the habit without digging a hole.' };
+  if (sh.sore === 2 || sh.sleep === 2 || sh.energy === 1 || (trainedY && sh.sore >= 1)) return { mode: 'easy', msg: 'Easy mode: one set fewer per exercise and more reps left in the tank. You keep the habit without digging a hole.' };
   return { mode: 'normal', msg: `Good to go. Week ${wk} rule: leave ${WEEKS[wk].rir} reps in the tank on every set.` };
 }
 function restSheet(sh) {
@@ -2205,8 +2141,6 @@ function tick() {
     else if (T.running && left > 0 && left <= 3000) { const sec = Math.ceil(left / 1000); if (T.lb !== sec) { T.lb = sec; beep(1, 660); } }
   }
   $$('[data-elapsed]').forEach(el => { el.textContent = mmss((now - Number(el.dataset.elapsed)) / 1000); });
-  const af = activeFast();
-  if (af) $$('[data-fastclock]').forEach(el => { const v = fmtDur(now - af.start); if (el.textContent !== v) el.textContent = v; });
 }
 function onTimerDone(key) {
   beep(2, 990); buzz();
@@ -2301,11 +2235,11 @@ const ACT = {
   togglemove: () => { let on; updDay(today(), d => { d.move = !d.move; on = d.move; }); render(true); if (on) toast('Walk logged'); },
   daymove: a => { updDay(a.dataset.date, d => { d.move = !d.move; }); S.ui.sheet = null; render(true); },
   flow: a => openFlow(a.dataset.r),
-  startgym: a => openSheet({ type: 'ready', date: a.dataset.date || today(), sore: null, sleep: null, fuel: null }),
+  startgym: a => openSheet({ type: 'ready', date: a.dataset.date || today(), sore: null, sleep: null, energy: null }),
   rq: a => { S.ui.sheet[a.dataset.k] = Number(a.dataset.v); renderLayer(); },
   readygo: a => {
     const sh = S.ui.sheet, m = a.dataset.m;
-    updDay(sh.date, d => { d.ready = { sore: sh.sore, sleep: sh.sleep, fuel: sh.fuel ?? null }; });
+    updDay(sh.date, d => { d.ready = { sore: sh.sore, sleep: sh.sleep, energy: sh.energy }; });
     S.ui.sheet = null;
     if (m === 'recovery') openFlow('recovery'); else startSession(sh.date, m);
   },
@@ -2394,9 +2328,6 @@ const ACT = {
   fclose: () => closeOverlay(),
   ffinish: () => { const r = S.ui.overlay.r; updDay(today(), d => { if (r === 'desk') d.desk = (d.desk || 0) + 1; else d.mob = true; }); closeOverlay(); toast(r === 'desk' ? 'Desk Reset logged' : 'Mobility logged'); },
   /* fuel */
-  startfast: () => { const id = uid(); put('fasts', id, { id, start: Date.now(), end: null }); render(true); toast(`Fast started. Goal at ${fmtTime(Date.now() + P().fastHours * 36e5)}`); },
-  endfast: () => { const af = activeFast(); if (!af) return; put('fasts', af.id, { ...af, end: Date.now() }); render(true); toast(`Fasted ${fmtDur(Date.now() - af.start)}. Protein first.`); },
-  editfast: a => openSheet({ type: 'fast', isNew: !!a.dataset.new || !activeFast() }),
   addfood: a => { const f = FOODS[Number(a.dataset.i)]; addProtein(f.p); render(true); toast(`+${f.p} g protein`); },
   meal: a => { const k = a.dataset.k; S.ui.meal[k] = (S.ui.meal[k] + 1 + Math.floor(Math.random() * 4)) % MEALS[k].length; render(true); },
   mealall: () => { ['first', 'main', 'snack'].forEach(k => { S.ui.meal[k] = (S.ui.meal[k] + 1 + Math.floor(Math.random() * 4)) % MEALS[k].length; }); render(true); },
@@ -2439,7 +2370,7 @@ const FORMS = {
     const h = numOrNull($('#o-h').value), w = numOrNull($('#o-w').value);
     if (!h || h < 120 || h > 230 || !w || w < 30 || w > 350) { toast('Enter height in cm and weight in kg'); return; }
     const days = $$('#o-days .chip').filter(c => c.getAttribute('aria-pressed') === 'true').map(c => Number(c.dataset.dw));
-    put('profile', 'main', { heightCm: h, weightKg: w, age: numOrNull($('#o-age').value), baseSteps: numOrNull($('#o-steps').value) || 4000, gymDays: days.length ? days : [1, 3, 5], windowStart: $('#o-ws').value || '13:00', fastHours: Number($('#o-fh').value) || 18, startDate: $('#o-start').value || today(), sound: true, createdAt: Date.now() });
+    put('profile', 'main', { heightCm: h, weightKg: w, age: numOrNull($('#o-age').value), baseSteps: numOrNull($('#o-steps').value) || 4000, gymDays: days.length ? days : [1, 3, 5], startDate: $('#o-start').value || today(), sound: true, createdAt: Date.now() });
     if (!S.weights[today()]) put('weights', today(), { kg: w, waist: null });
     if ($('#o-day0') && $('#o-day0').getAttribute('aria-pressed') === 'true') { const d0 = addDays($('#o-start').value || today(), -1); put('sessions', d0, { id: d0, date: d0, status: 'done', selfGuided: true, name: 'First workout (on your own)', items: [] }); }
     askPersist();
@@ -2454,7 +2385,6 @@ const FORMS = {
     const st = numOrNull($('#s-steps').value); if (st != null) p.baseSteps = clamp(Math.round(st), 0, 30000);
     const days = $$('#s-days .chip').filter(c => c.getAttribute('aria-pressed') === 'true').map(c => Number(c.dataset.dw));
     if (days.length) p.gymDays = days;
-    p.windowStart = $('#s-ws').value || p.windowStart; p.fastHours = Number($('#s-fh').value) || p.fastHours;
     if ($('#s-start').value) p.startDate = $('#s-start').value;
     p.sound = $('#s-sound').getAttribute('aria-pressed') === 'true';
     put('profile', 'main', p); render(true); toast('Settings saved');
@@ -2466,14 +2396,6 @@ const FORMS = {
     $('#w-kg').blur(); render(true); toast('Weigh-in saved');
   },
   steps: () => { const v = numOrNull($('#st-in').value); updDay(today(), d => { d.steps = clamp(Math.round(v || 0), 0, 80000); }); S.ui.sheet = null; render(true); toast('Steps saved'); },
-  fast: () => {
-    const v = $('#fs-in').value; const ms = v ? new Date(v).getTime() : NaN;
-    if (!Number.isFinite(ms) || ms > Date.now()) { toast('Pick a time in the past'); return; }
-    const af = activeFast();
-    if (af && !S.ui.sheet.isNew) put('fasts', af.id, { ...af, start: ms });
-    else { if (af) put('fasts', af.id, { ...af, end: ms }); const id = uid(); put('fasts', id, { id, start: ms, end: null }); }
-    S.ui.sheet = null; render(true); toast('Fast updated');
-  },
   restore: () => {
     const raw = (($('#rs-in') || {}).value || '').trim();
     let d = null; try { d = JSON.parse(raw); } catch (e) { d = null; }
@@ -2511,7 +2433,7 @@ document.addEventListener('input', e => {
 });
 
 /* ========== backup ========== */
-const backupJson = () => JSON.stringify({ app: 'plate-by-plate', v: 1, exportedAt: new Date().toISOString(), profile: S.profile, days: S.days, sessions: S.sessions, weights: S.weights, fasts: S.fasts });
+const backupJson = () => JSON.stringify({ app: 'plate-by-plate', v: 1, exportedAt: new Date().toISOString(), profile: S.profile, days: S.days, sessions: S.sessions, weights: S.weights });
 function askPersist() { try { if (!HOSTED && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch (e) { /* ignore */ } }
 
 /* ========== boot ========== */
