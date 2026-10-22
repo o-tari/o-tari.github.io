@@ -1,5 +1,5 @@
 // Plate by Plate offline support. The cache name changes with every build so phones pick up updates.
-const CACHE = 'plate-by-plate-3cb2b7b1a7';
+const CACHE = 'plate-by-plate-f0e0b72eda';
 const ASSETS = ["./", "index.html", "manifest.json", "icons/apple-touch-icon.png", "icons/icon-192.png", "icons/icon-512.png", "icons/favicon-64.png", "fonts/atkinson-hyperlegible-latin-400-normal.woff2", "fonts/atkinson-hyperlegible-latin-700-normal.woff2", "fonts/big-shoulders-display-latin-600-normal.woff2", "fonts/big-shoulders-display-latin-700-normal.woff2", "fonts/big-shoulders-display-latin-800-normal.woff2", "fonts/big-shoulders-display-latin-900-normal.woff2"];
 
 self.addEventListener('install', event => {

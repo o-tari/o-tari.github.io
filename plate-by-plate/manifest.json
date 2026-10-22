@@ -2,7 +2,7 @@
   "name": "Plate by Plate",
   "short_name": "Plate by Plate",
   "id": "/plate-by-plate/",
-  "description": "A 30-day gym and nutrition coach: random full-body workouts with slow progression, desk mobility, fasting and food guidance.",
+  "description": "A 30-day gym and nutrition coach: random full-body workouts with slow progression, desk mobility and food guidance.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
