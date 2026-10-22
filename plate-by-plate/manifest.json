@@ -1,0 +1,30 @@
+{
+  "name": "Plate by Plate",
+  "short_name": "Plate by Plate",
+  "id": "/plate-by-plate/",
+  "description": "A 30-day gym and nutrition coach: random full-body workouts with slow progression, desk mobility, fasting and food guidance.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EDF0F2",
+  "theme_color": "#EDF0F2",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
